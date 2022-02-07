@@ -18,7 +18,7 @@
         #boss {
             height: 730px;
         }
-        
+
         #one {
             width: 504px;
             height: 670px;
@@ -26,7 +26,7 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
             overflow: auto;
         }
-        
+
         #two {
             width: 503px;
             height: 670px;
@@ -34,7 +34,7 @@
             display: inline-block;
             overflow: auto;
         }
-        
+
         #three {
             width: 504px;
             height: 670px;
@@ -42,62 +42,86 @@
             display: inline-block;
             overflow: auto;
         }
-        
+
         .mm {
             width: 480px;
             height: 80px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
-        
+
+        .mm:hover {
+            width: 480px;
+            height: 80px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        }
+
+
         table {
             table-layout: fixed;
             width: 100%;
             border: 5px solid rgb(0, 92, 128);
         }
-        
+
         td {
             border: 15px solid rgb(0, 92, 128);
             margin: 10px;
         }
-        
+
         h4 {
-            text-align: center;
+            text-align: left;
         }
-        
+
         #ac {
             border-radius: 12px;
             width: 100px;
             background-color: rgb(11, 223, 82);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
-        
+
         #rj {
             border-radius: 12px;
             width: 100px;
             background-color: rgb(190, 76, 48);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
-        
+
         #ch {
             border-radius: 12px;
             width: 100px;
             background-color: rgb(9, 204, 218);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
-        
+
         #un {
             border-radius: 12px;
             width: 100px;
             background-color: rgb(190, 76, 48);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
-        
+
         #cn {
             border-radius: 12px;
             width: 100px;
             background-color: rgb(190, 76, 48);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
         }
+
+        .flist-profile-photo {
+            border: 2px solid rgb(105, 105, 105);
+            border-radius: 50%;
+            float: left;
+            margin: 2%;
+        }
+        
+        .flist-profile-name {
+            margin-top: 2%;
+        }
+
+        .unformatted-link {
+            text-decoration: none;
+            color: black;
+        }
+
     </style>
 
 
@@ -106,30 +130,24 @@
 
 <body>
 
-    <div id="boss" contenteditable="true">
+    <div id="boss" contenteditable="false">
         <h3 align="center" style="color: rgb(243, 140, 4);">Friend List</h3>
 
         <div class="fif" id="one" data-mdb-perfect-scrollbar="true">
 
             <h3 align="center">Recived Request</h3>
-            <div class="mm">
 
+            <div class="mm">
                 <div class="content">
-                    <h4>Arnob</h4>
-
-
+                    <img class="flist-profile-photo" src="files/images/arnabxero_profile.jpg" height="10%" width="10%">
+                    <label class="flist-profile-name">Iftekhar Ahmed Arnob</label>
+                    <br>
+                    <a class="unformatted-link" href="subdir/friendop.php"><button name="accept" id="ac">Accept</button></a>
+                    <a class="unformatted-link" href="subdir/friendop.php"><button name="reject" id="rj">Reject</button></a>
                 </div>
-
-                <form action="POST" align="center">
-                    <input type="submit" name="accept" id="ac" value="Accept">
-                    <input type="submit" name="reject" id="rj" value="Reject">
-                </form>
-
-
-
             </div>
-            <div class="mm">
 
+            <div class="mm">
                 <div class="content">
                     <h4>Farzana</h4>
                 </div>
@@ -139,8 +157,8 @@
                     <input type="submit" name="reject" id="rj" value="Reject">
                 </form>
             </div>
-            <div class="mm">
 
+            <div class="mm">
                 <div class="content">
                     <h4>Farzana</h4>
                 </div>
