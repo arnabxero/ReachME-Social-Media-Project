@@ -1,17 +1,42 @@
 .unformatted-link {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
-.home-profile-shortcut {
-    margin-top: 2%;
-    border-radius: 25px;
-    width: 50%;
-    background-color: #d6d6d6;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-    border: 2px solid black;
+.profile-btn {
+  padding: 1px 15px 3px 2px;
+  border-radius: 50px;
+  margin-top: 2%;
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-.home-profile-shortcut:hover {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+.btn-rounded {
+  border-radius: 50%;
+}
+
+.home-rbtn {
+  margin-top: 2%;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94bdff #dbe9ff;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid orange;
 }

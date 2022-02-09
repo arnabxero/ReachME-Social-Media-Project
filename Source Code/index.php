@@ -1,28 +1,25 @@
-<?php 
+<?php
 
-    $home_type = 'all';
+$home_type = 'all';
 
-    $all_active = '';
-    $text_active = '';
-    $photo_active = '';
-    $video_active = '';
+$all_active = '';
+$text_active = '';
+$photo_active = '';
+$video_active = '';
 
-    if(isset($_GET['type'])) {
-        $home_type = $_GET['type'];
-    }
+if (isset($_GET['type'])) {
+    $home_type = $_GET['type'];
+}
 
-    if($home_type=='text'){
-        $text_active = 'active';
-    }
-    else if($home_type=='photo'){
-        $photo_active = 'active';
-    }
-    else if($home_type=='video'){
-        $video_active = 'active';
-    }
-    else{
-        $all_active = 'active';
-    }
+if ($home_type == 'text') {
+    $text_active = 'active';
+} else if ($home_type == 'photo') {
+    $photo_active = 'active';
+} else if ($home_type == 'video') {
+    $video_active = 'active';
+} else {
+    $all_active = 'active';
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,19 +31,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/fontawesome/css/all.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <script src='assets/bootstrap/js/bootstrap.min.js'></script>
-    <script src="assets/bootstrap/js/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
     <title>Header</title>
 
 
     <style>
-        
+        /* Works on Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #94bdff #dbe9ff;
+        }
 
+        /* Works on Chrome, Edge, and Safari */
+        *::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: orange;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: blue;
+            border-radius: 20px;
+            border: 3px solid orange;
+        }
     </style>
 </head>
 
 <body>
+
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <div style="background-color: rgb(214, 214, 214);">
 
@@ -54,11 +70,11 @@
             <!--Search Bar Start-->
             <div class="col-sm-4">
 
-            <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
+                <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
 
                 <form method="GET" action="subdir/searchnow.php">
                     <div class="form-group" style="float:left;">
-                        <div class="input-group" style="padding: 2%; margin-top:1%">
+                        <div class="input-group" style="padding: 2%; margin-top:2%;">
                             <input type="search" name="q" class="form-control" placeholder="Search..." />
                             <button type="submit" class="btn btn-primary" style="background-color: green;">
                                 <i class="fas fa-search"></i>
@@ -85,24 +101,92 @@
 
 
             <!--Profile, User Menu, Message, Logout Start-->
-            <div class="col-sm-4">
-                <a class="unformatted-link" href="profile.php">
-                    <div class="home-profile-shortcut">
-                        <img style="margin:2%; border-radius:50%; float:left;" src="files/images/arnabxero_profile.jpg" height="65%" width="10%" >
-                        <label style="float:left; margin:auto;">Iftekhar Ahmed Arnab</label>
+            <div class="col-sm-4 userpane">
+                <div style="float:right; margin-top: 2%; margin-right: 10%;">
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat.php">
+                        <i class="fas fa-comment"></i>
+                    </a>
+
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notification.php">
+                        <i class="fas fa-bell"></i>
+                    </a>
+
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="logout.php">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
+                <div style="margin-top: 3%;">
+                    <div class="btn-group">
+                        <a href="profile.php" class="btn btn-secondary btn-sm home-profile-shortcut" type="button">
+                            <img src="files/images/arnabxero_profile.jpg" height="20px" width="20px" style="border-radius: 50%;">
+                            Iftekhar Ahmed Arnab
+                        </a>
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Disable Account</a></li>
+                        </ul>
                     </div>
-                </a>
+                </div>
             </div>
             <!--Profile, User Menu, Message, Logout End-->
         </div>
     </div>
 
 
-    <div class="home-profile-shortcut">
-        <img src="files/images/arnabxero_profile.jpg" height="65%" width="10%">
-        <label>Arnab</label>
-</div>
+    <!-- Homepage Content pane start -->
+    <div class="row" style="background-color:aliceblue;">
 
+        <!-- Promotional Content -->
+        <div class="col-sm-4 home1" style="background-color: rgb(255, 231, 185); overflow-y:scroll;" id="home1">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        </div>
+
+        <!-- Personalized Content -->
+        <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        </div>
+
+        <!-- Alert Type Content -->
+        <div class="col-sm-4" style="background-color: rgb(243, 98, 98); overflow-y:scroll;" id="home3">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        </div>
+
+        <script>
+            let h = (screen.height) - 190;
+            let hh = h.toString();
+            let pp = "px";
+
+            document.getElementById("home1").style.height = hh.concat(pp);
+            document.getElementById("home2").style.height = hh.concat(pp);
+            document.getElementById("home3").style.height = hh.concat(pp);
+        </script>
+
+    </div>
 </body>
 
 </html>
