@@ -19,48 +19,12 @@ if ($home_type == 'text') {
     $photo_active = 'active';
 } else if ($home_type == 'video') {
     $video_active = 'active';
-} else if ($home_type == 'sell') {
-    $sell_active = 'active';
 } else {
     $all_active = 'active';
 }
 
 
 
-
-class post_card_creation
-{
-    public $class_con;
-
-    function get_con($con)
-    {
-        $this->class_con = $con;
-    }
-
-    /*check the post type and generate card for that*/
-    function generate_card()
-    {
-        $sql = "SELECT * FROM posts";
-
-        $res = mysqli_query($this->class_con, $sql);
-        $type = "none";
-
-        while ($class_row = mysqli_fetch_assoc($res)) {
-            $type = $class_row['category'];
-            $id = $class_row['id'];
-
-            if ($type == 'Dummy') {
-                echo '<div class="card-main">';
-                echo '<p>' . $class_row['title'] . '</p>';
-                echo '</div>';
-            } else {
-                echo '<div class="card-main">';
-                echo '<p>' . $class_row['title'] . '</p>';
-                echo '</div>';
-            }
-        }
-    }
-}
 
 ?>
 
@@ -77,7 +41,7 @@ class post_card_creation
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
-    <title>ReachMe - Home</title>
+    <title>Header</title>
 
 
     <style>
@@ -119,7 +83,6 @@ class post_card_creation
                         <a title="Text" class="nav-link <?= $text_active ?>" href="index.php?type=text"><i class="fas fa-text-height"></i></a>
                         <a title="Photos" class="nav-link <?= $photo_active ?>" href="index.php?type=photo"><i class="fas fa-images"></i></a>
                         <a title="Videos" class="nav-link <?= $video_active ?>" href="index.php?type=video"><i class="fas fa-play-circle"></i></a>
-                        <a title="Sell" class="nav-link <?= $sell_active ?>" href="index.php?type=sell"><i class="fas fa-store-alt"></i></a>
                     </nav>
                 </div>
             </div>
@@ -152,8 +115,8 @@ class post_card_creation
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="update_profile.php">Update Profile</a></li>
-                            <li><a class="dropdown-item" href="delete_account.php">Disable Account</a></li>
+                            <li><a class="dropdown-item" href="#">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Disable Account</a></li>
                         </ul>
                     </div>
                 </div>
@@ -167,43 +130,49 @@ class post_card_creation
     <div class="row" style="background-color:aliceblue;">
 
         <!-- Promotional Content -->
-        <div class="col-sm-4 home1" style="overflow-y:scroll;" id="home1">
-            <h3 style="text-align:center;">Promoted Content</h3>
-            <?php
-            $gen_post_list = new post_card_creation();
-            $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
-            ?>
+        <div class="col-sm-4 home1" style="background-color: rgb(255, 231, 185); overflow-y:scroll;" id="home1">
+        <?php
+        for($i=0; $i<20; $i++){
+            echo '<div class="card-main">';
+            echo '<p>Hello World</p>';
+            echo '</div>';
+        }
+        ?>
         </div>
 
-        <!-- Personalized Content -->
-        <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
-            <?php
-            $gen_post_list = new post_card_creation();
-            $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
-            ?>
-        </div>
+    <!-- Personalized Content -->
+    <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+    </div>
 
-        <!-- Alert Type Content -->
-        <div class="col-sm-4" style="overflow-y:scroll;" id="home3">
-            <h3 style="text-align:center;">Alerts</h3>
-            <?php
-            $gen_post_list = new post_card_creation();
-            $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
-            ?>
-        </div>
+    <!-- Alert Type Content -->
+    <div class="col-sm-4" style="background-color: rgb(243, 98, 98); overflow-y:scroll;" id="home3">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+    </div>
 
-        <script>
-            let h = (screen.height) - 190;
-            let hh = h.toString();
-            let pp = "px";
+    <script>
+        let h = (screen.height) - 190;
+        let hh = h.toString();
+        let pp = "px";
 
-            document.getElementById("home1").style.height = hh.concat(pp);
-            document.getElementById("home2").style.height = hh.concat(pp);
-            document.getElementById("home3").style.height = hh.concat(pp);
-        </script>
+        document.getElementById("home1").style.height = hh.concat(pp);
+        document.getElementById("home2").style.height = hh.concat(pp);
+        document.getElementById("home3").style.height = hh.concat(pp);
+    </script>
 
     </div>
 </body>
