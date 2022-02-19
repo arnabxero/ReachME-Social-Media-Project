@@ -131,48 +131,142 @@ if ($home_type == 'text') {
 
         <!-- Promotional Content -->
         <div class="col-sm-4 home1" style="background-color: rgb(255, 231, 185); overflow-y:scroll;" id="home1">
-        <?php
-        for($i=0; $i<20; $i++){
-            echo '<div class="card-main">';
-            echo '<p>Hello World</p>';
-            echo '</div>';
-        }
-        ?>
+            <?php
+            for ($i = 0; $i < 20; $i++) {
+                echo '<div class="card-main">';
+                echo '<p>Hello World</p>';
+                echo '</div>';
+            }
+            ?>
         </div>
 
-    <!-- Personalized Content -->
-    <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-    </div>
+        <!-- Personalized Content -->
+        <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
 
-    <!-- Alert Type Content -->
-    <div class="col-sm-4" style="background-color: rgb(243, 98, 98); overflow-y:scroll;" id="home3">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
-    </div>
 
-    <script>
-        let h = (screen.height) - 190;
-        let hh = h.toString();
-        let pp = "px";
+            <div class="card-main">
 
-        document.getElementById("home1").style.height = hh.concat(pp);
-        document.getElementById("home2").style.height = hh.concat(pp);
-        document.getElementById("home3").style.height = hh.concat(pp);
-    </script>
+                <a title="View User Profile" class="unformatted-link" href="#"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+
+                <div class="post-text">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</span>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <img src="ext-files/photo/1.jpg" height="auto" width="100%">
+                </div>
+
+                <a class="unformatted-link" href="view_post.php" title="See More">
+                    <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                </a>
+
+                <a href="like.php" title="Upvote">
+                    <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                </a>
+                <a href="like.php" title="Downvote">
+                    <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                </a>
+                <a href="like.php" title="Comment">
+                    <div class="card-button"><i class="fas fa-comment"></i></div>
+                </a>
+                <a href="like.php" title="Share">
+                    <div class="card-button"><i class="fas fa-share-square"></i></div>
+                </a>
+
+            </div>
+
+            <div class="card-main">
+
+                <a title="View User Profile" class="unformatted-link" href="#"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+
+                <div class="post-text">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</span>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <img src="ext-files/photo/1.jpg" height="auto" width="100%">
+                </div>
+
+                <a class="unformatted-link" href="view_post.php" title="See More">
+                    <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                </a>
+
+                <a href="like.php" title="Upvote">
+                    <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                </a>
+                <a href="like.php" title="Downvote">
+                    <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                </a>
+                <a href="like.php" title="Comment">
+                    <div class="card-button"><i class="fas fa-comment"></i></div>
+                </a>
+                <a href="like.php" title="Share">
+                    <div class="card-button"><i class="fas fa-share-square"></i></div>
+                </a>
+
+            </div>
+
+            <div class="card-main">
+
+                <a title="View User Profile" class="unformatted-link" href="#"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+
+                <div class="post-text">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?
+                        ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</span>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <img src="ext-files/photo/1.jpg" height="auto" width="100%">
+                </div>
+
+                <a class="unformatted-link" href="view_post.php" title="See More">
+                    <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                </a>
+
+                <a href="like.php" title="Upvote">
+                    <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                </a>
+                <a href="like.php" title="Downvote">
+                    <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                </a>
+                <a href="like.php" title="Comment">
+                    <div class="card-button"><i class="fas fa-comment"></i></div>
+                </a>
+                <a href="like.php" title="Share">
+                    <div class="card-button"><i class="fas fa-share-square"></i></div>
+                </a>
+
+            </div>
+
+
+        </div>
+
+        <!-- Alert Type Content -->
+        <div class="col-sm-4" style="background-color: rgb(243, 98, 98); overflow-y:scroll;" id="home3">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
+        </div>
+
+        <script>
+            let h = (screen.height) - 190;
+            let hh = h.toString();
+            let pp = "px";
+
+            document.getElementById("home1").style.height = hh.concat(pp);
+            document.getElementById("home2").style.height = hh.concat(pp);
+            document.getElementById("home3").style.height = hh.concat(pp);
+        </script>
 
     </div>
 </body>

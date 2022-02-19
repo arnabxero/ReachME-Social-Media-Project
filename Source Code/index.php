@@ -26,8 +26,6 @@ if ($home_type == 'text') {
 }
 
 
-
-
 class post_card_creation
 {
     public $class_con;
@@ -37,9 +35,10 @@ class post_card_creation
         $this->class_con = $con;
     }
 
-    /*check the post type and generate card for that*/
-    function generate_card()
+    function generate_card($htype)
     {
+        $class_home_type = $htype;
+
         $sql = "SELECT * FROM posts";
 
         $res = mysqli_query($this->class_con, $sql);
@@ -48,15 +47,86 @@ class post_card_creation
         while ($class_row = mysqli_fetch_assoc($res)) {
             $type = $class_row['category'];
             $id = $class_row['id'];
+            $media_tag = 'img';
 
-            if ($type == 'Dummy') {
-                echo '<div class="card-main">';
-                echo '<p>' . $class_row['title'] . '</p>';
-                echo '</div>';
+            if ($class_home_type == 'all') {
+                if($type=='photo'){
+                    $media_tag = 'img';
+                }
+                else if($type=='video'){
+                    $media_tag = 'iframe';
+                }
+                
+                echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+    
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <'.$media_tag.' src="' . $class_row['media_link'] . '" height="auto" width="100%"></'.$media_tag.'>
+                    </div>
+    
+                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="like.php" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="like.php" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="like.php" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment"></i></div>
+                    </a>
+                    <a href="like.php" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
             } else {
-                echo '<div class="card-main">';
-                echo '<p>' . $class_row['title'] . '</p>';
-                echo '</div>';
+                if ($type == $class_home_type) {
+                    if($type=='photo'){
+                        $media_tag = 'img';
+                    }
+                    else if($type=='video'){
+                        $media_tag = 'iframe';
+                    }
+
+                    echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+    
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <'.$media_tag.' src="' . $class_row['media_link'] . '" height="auto" width="100%"></'.$media_tag.'>
+                    </div>
+    
+                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="like.php" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="like.php" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="like.php" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment"></i></div>
+                    </a>
+                    <a href="like.php" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+                }
             }
         }
     }
@@ -172,7 +242,7 @@ class post_card_creation
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
+            $gen_post_list->generate_card($home_type);
             ?>
         </div>
 
@@ -181,7 +251,7 @@ class post_card_creation
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
+            $gen_post_list->generate_card($home_type);
             ?>
         </div>
 
@@ -191,7 +261,7 @@ class post_card_creation
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card();
+            $gen_post_list->generate_card($home_type);
             ?>
         </div>
 
