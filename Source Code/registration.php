@@ -1,6 +1,6 @@
 
 <?php
-    include("db.php");
+    include("database.php");
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
     $fullname = mysqli_real_escape_string($obj->conn,$_POST['fname']);
