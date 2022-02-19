@@ -153,7 +153,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <div class="reg">
         <h3> Welcome </h3>
-        <form name="myform" align="center" method="POST" action='login.php' onsubmit="return checkPass()">
+        <form name="myform" align="center" method="POST" action='login.php' onsubmit="return checkForm()">
 
 
 
@@ -170,42 +170,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <script>
         function checkForm() {
-            let x = document.forms["myform"]["uname"].value;
+           
 
-            let y = document.forms["myform"]["pass"].value;
-
-            let z = document.forms["myform"]["mobile"].value;
-
-            let w = document.forms["myform"]["uemail"].value;
+            let x = document.forms["myform"]["pass"].value;
+     
+            let y = document.forms["myform"]["emailusername"].value;
 
             if (x == "") {
-                alert("Please Fill The Name Field!");
+                alert("Please Fill The Name or Email Field!");
                 return false;
             } else if (y == "") {
                 alert("Please Fill The Password Field!");
                 return false;
-            } else if (z == "") {
-                alert("Please Fill The Password Field!");
-                return false;
-            } else if (w == "") {
-                alert("Please Fill The Password Field!");
-                return false;
-            }
+            } 
             return true;
         }
 
-        function checkPass() {
-            let x = document.forms["myform"]["password"].value;
-
-            let y = document.forms["myform"]["pass"].value;
-
-            if (x != y) {
-                alert("Please confirm Your Password");
-                return false;
-            }
-            return true;
-
-        }
+        
     </script>
 
 </body>
