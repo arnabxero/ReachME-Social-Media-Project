@@ -258,6 +258,16 @@ if ($home_type == 'text') {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fuga dolore recusandae vel tenetur excepturi cum neque obcaecati ipsa voluptatibus corporis, expedita ex vitae. Et voluptatum dicta sed deleniti facere?</p>
         </div>
 
+
+
+
+        <div class="login-dialog">
+            <br>
+            <br>
+            <a class="home-dg-bt" href="login.php">Log In</a>
+            <a class="home-dg-bt" href="registration.php">Sign Up</a>
+        </div>
+
         <script>
             let h = (screen.height) - 190;
             let hh = h.toString();

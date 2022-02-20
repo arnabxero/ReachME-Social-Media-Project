@@ -1,39 +1,8 @@
-
-<?php
-    include("database.php");
-    if ($_SERVER["REQUEST_METHOD"] == "POST") 
-{
-    $fullname = mysqli_real_escape_string($obj->conn,$_POST['fname']);
-    $lastname = mysqli_real_escape_string($obj->conn,$_POST['lname']);
-    $username = mysqli_real_escape_string($obj->conn,$_POST['uname']);
-	$email = mysqli_real_escape_string($obj->conn,$_POST['uemail']);
-	$phone = mysqli_real_escape_string($obj->conn,$_POST['mobile']);
-    $job = mysqli_real_escape_string($obj->conn,$_POST['job']);
-    $about = mysqli_real_escape_string($obj->conn,$_POST['about']);
-	$pass = mysqli_real_escape_string($obj->conn,$_POST['pass']);
-
-    if(isset($_POST['submit'])){
-        $sql = "INSERT INTO `users` (`fname`, `lname`, `uname`,`email`, `phone`, `job`, `about`, `pass`) VALUES ('$fullname', '$lastname', '$username', '$email', '$phone', '$job', '$about', '$pass')";
-	    $result = mysqli_query($obj->conn, $sql);
-	    if($result){
-		    echo "Registration Successfull!";
-            header('Location: login.php');
-	    } else {
-		    echo "Registration Failed.";
-	    }
-	
-    }
-	
-}	
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/fontawesome/css/all.css">
@@ -41,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
 
-    <title> Form Validation </title>
+    <title> Registration - ReachMe </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <style>
         * {
@@ -51,24 +20,25 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
+
         .logo {
             align-items: center;
             color: #202f49;
             padding: 20px 10px 20px 900px;
         }
-        
+
         body {
             background-color: #d7da31;
         }
-        
+
         .reg {
             width: 800px;
             background-color: #ffffff;
             box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
             margin: 100px auto;
+            margin-top: 20px;
         }
-        
+
         .reg h3 {
             text-align: center;
             color: #0e1116;
@@ -76,14 +46,14 @@
             padding: 20px 0 20px 0;
             border-bottom: 1px solid #080803;
         }
-        
+
         .reg form {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding-top: 20px;
         }
-        
+
         .reg form label {
             display: flex;
             justify-content: center;
@@ -93,7 +63,7 @@
             background-color: #1760be;
             color: #fcfafa;
         }
-        
+
         .reg form input[type="password"],
         .reg form input[type="text"],
         .reg form input[type="email"],
@@ -107,7 +77,8 @@
             margin-left: 10px;
             padding: 0 15px;
         }
-        #pass{
+
+        #pass {
             width: 310px;
             height: 50px;
             justify-content: center;
@@ -117,7 +88,7 @@
             margin-left: 10px;
             padding-left: 80px;
         }
-        
+
         .reg form input[type="submit"] {
             width: 100%;
             padding: 15px;
@@ -129,7 +100,7 @@
             color: #ffffff;
             transition: background-color 0.2s;
         }
-        
+
         .reg form input[type="submit"]:hover {
             background-color: #2868c7;
             transition: background-color 0.2s;
@@ -140,14 +111,15 @@
 
 </head>
 
-<body>
-    <div class="logo">
-        <img src="icon/rm.png" height="70px" width="70px" style="float:left; margin-top:5px;margin-left:20px;">
-    </div>
+<body style="text-align: center;">
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <a href="index.php">
+        <img src="files/logo/rm.png" height="70px" width="70px" style="margin-top: 30px;">
+    </a>
     <div class="reg">
         <h3> Welcome </h3>
-        <form name="myform" align="center" method="POST" action='registration.php' onsubmit="return checkPass()">
+        <form name="myform" align="center" method="POST" action='subdir/regsub.php' onsubmit="return checkPass()">
 
 
             <input type="text" name="fname" placeholder="Full Name" id="fname" required>
@@ -203,6 +175,7 @@
             }
             return true;
         }
+
         function checkPass() {
             let x = document.forms["myform"]["password"].value;
 
@@ -213,7 +186,7 @@
                 return false;
             }
             return true;
-        
+
         }
     </script>
 

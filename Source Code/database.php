@@ -22,7 +22,5 @@ class dbConfig
     $obj->host = 'localhost';
     $obj->username = 'root';
     $obj->password = '';
-    $obj->dbName = 'reachme';
+    $obj->dbName = 'pw2';
     $obj->dbConnect();
-
-?>

@@ -2,6 +2,16 @@
 
 include('include/connection.php');
 
+$username = "Guest";
+$display = " ";
+
+session_start();
+
+if (isset($_SESSION["logid"])) {
+    $username = $_SESSION['logname'];
+    $display = "display:none;";
+}
+
 $home_type = 'all';
 
 $all_active = '';
@@ -48,25 +58,26 @@ class post_card_creation
             $type = $class_row['category'];
             $id = $class_row['id'];
             $media_tag = 'img';
+            $authorname = $class_row['authorname'];
+            $time = $class_row['time'];
 
             if ($class_home_type == 'all') {
-                if($type=='photo'){
+                if ($type == 'photo') {
                     $media_tag = 'img';
-                }
-                else if($type=='video'){
+                } else if ($type == 'video') {
                     $media_tag = 'iframe';
                 }
-                
+
                 echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <'.$media_tag.' src="' . $class_row['media_link'] . '" height="auto" width="100%"></'.$media_tag.'>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -80,7 +91,7 @@ class post_card_creation
                         <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
                     </a>
                     <a href="like.php" title="Comment">
-                        <div class="card-button"><i class="fas fa-comment"></i></div>
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
                     </a>
                     <a href="like.php" title="Share">
                         <div class="card-button"><i class="fas fa-share-square"></i></div>
@@ -89,23 +100,22 @@ class post_card_creation
                 </div>';
             } else {
                 if ($type == $class_home_type) {
-                    if($type=='photo'){
+                    if ($type == 'photo') {
                         $media_tag = 'img';
-                    }
-                    else if($type=='video'){
+                    } else if ($type == 'video') {
                         $media_tag = 'iframe';
                     }
 
                     echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbspIftekhar Ahmed Arnab</a>
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <'.$media_tag.' src="' . $class_row['media_link'] . '" height="auto" width="100%"></'.$media_tag.'>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -119,7 +129,7 @@ class post_card_creation
                         <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
                     </a>
                     <a href="like.php" title="Comment">
-                        <div class="card-button"><i class="fas fa-comment"></i></div>
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
                     </a>
                     <a href="like.php" title="Share">
                         <div class="card-button"><i class="fas fa-share-square"></i></div>
@@ -159,7 +169,7 @@ class post_card_creation
 
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <div style="background-color: rgb(214, 214, 214);">
+    <div style="background-color: rgb(214, 214, 214); width: 99.9%;">
 
         <div class="row">
             <!--Search Bar Start-->
@@ -207,7 +217,7 @@ class post_card_creation
                         <i class="fas fa-bell"></i>
                     </a>
 
-                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="logout.php">
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="subdir/logout.php">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
@@ -216,7 +226,7 @@ class post_card_creation
                     <div class="btn-group">
                         <a href="profile.php" class="btn btn-secondary btn-sm home-profile-shortcut" type="button">
                             <img src="files/images/arnabxero_profile.jpg" height="20px" width="20px" style="border-radius: 50%;">
-                            Iftekhar Ahmed Arnab
+                            <?= $username ?>
                         </a>
                         <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
@@ -237,17 +247,17 @@ class post_card_creation
     <div class="row" style="background-color:aliceblue;">
 
         <!-- Promotional Content -->
-        <div class="col-sm-4 home1" style="overflow-y:scroll;" id="home1">
+        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promoted Content</h3>
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card($home_type);
+            $gen_post_list->generate_card('promoted');
             ?>
         </div>
 
         <!-- Personalized Content -->
-        <div class="col-sm-4" style="overflow-y:scroll;" id="home2">
+        <div class="col-sm-6" style="overflow-y:scroll;" id="home2">
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
@@ -256,15 +266,27 @@ class post_card_creation
         </div>
 
         <!-- Alert Type Content -->
-        <div class="col-sm-4" style="overflow-y:scroll;" id="home3">
+        <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
             <h3 style="text-align:center;">Alerts</h3>
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card($home_type);
+            $gen_post_list->generate_card('alert');
             ?>
         </div>
 
+
+        <!-- For the login reg dialog box -->
+        <div class="login-dialog" style="<?= $display ?>">
+            <br>
+            <br>
+            <a class="home-dg-bt" href="login.php">Log In</a>
+            <a class="home-dg-bt" href="registration.php">Sign Up</a>
+        </div>
+
+
+
+        
         <script>
             let h = (screen.height) - 190;
             let hh = h.toString();

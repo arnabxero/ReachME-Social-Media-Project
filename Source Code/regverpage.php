@@ -14,9 +14,16 @@
 
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <h1>Waiting for verification, Please check your email address for the verification link of ReachMe user registration and click the link to verify your email address.<br>After verifying the email address you will be able to login to your reistered account.</h1>
+    <h3>Waiting for verification, Please check your email address for the verification link of ReachMe user registration and click the link to verify your email address.<br>After verifying the email address you will be able to login to your reistered account.</h3>
 
+    <a href="login.php">Login</a>
+    <br>
+    <a href="registration.php">Register Again</a>
 
 
 </body>
