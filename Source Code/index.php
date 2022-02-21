@@ -286,7 +286,7 @@ class post_card_creation
 
 
 
-        
+
         <script>
             let h = (screen.height) - 190;
             let hh = h.toString();
