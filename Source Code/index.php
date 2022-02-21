@@ -36,111 +36,7 @@ if ($home_type == 'text') {
 }
 
 
-class post_card_creation
-{
-    public $class_con;
-
-    function get_con($con)
-    {
-        $this->class_con = $con;
-    }
-
-    function generate_card($htype)
-    {
-        $class_home_type = $htype;
-
-        $sql = "SELECT * FROM posts";
-
-        $res = mysqli_query($this->class_con, $sql);
-        $type = "none";
-
-        while ($class_row = mysqli_fetch_assoc($res)) {
-            $type = $class_row['category'];
-            $id = $class_row['id'];
-            $media_tag = 'img';
-            $authorname = $class_row['authorname'];
-            $time = $class_row['time'];
-
-            if ($class_home_type == 'all') {
-                if ($type == 'photo') {
-                    $media_tag = 'img';
-                } else if ($type == 'video') {
-                    $media_tag = 'iframe';
-                }
-
-                echo '<div class="card-main">
-    
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
-    
-                    <div class="post-text">
-                        <span>' . $class_row['content'] . '</span>
-                    </div>
-    
-                    <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
-                    </div>
-    
-                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
-                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
-                    </a>
-    
-                    <a href="like.php" title="Upvote">
-                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
-                    </a>
-                    <a href="like.php" title="Downvote">
-                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
-                    </a>
-                    <a href="like.php" title="Comment">
-                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
-                    </a>
-                    <a href="like.php" title="Share">
-                        <div class="card-button"><i class="fas fa-share-square"></i></div>
-                    </a>
-    
-                </div>';
-            } else {
-                if ($type == $class_home_type) {
-                    if ($type == 'photo') {
-                        $media_tag = 'img';
-                    } else if ($type == 'video') {
-                        $media_tag = 'iframe';
-                    }
-
-                    echo '<div class="card-main">
-    
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
-    
-                    <div class="post-text">
-                        <span>' . $class_row['content'] . '</span>
-                    </div>
-    
-                    <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
-                    </div>
-    
-                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
-                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
-                    </a>
-    
-                    <a href="like.php" title="Upvote">
-                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
-                    </a>
-                    <a href="like.php" title="Downvote">
-                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
-                    </a>
-                    <a href="like.php" title="Comment">
-                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
-                    </a>
-                    <a href="like.php" title="Share">
-                        <div class="card-button"><i class="fas fa-share-square"></i></div>
-                    </a>
-    
-                </div>';
-                }
-            }
-        }
-    }
-}
+include('phpClasses/allclass.php');
 
 ?>
 
@@ -158,6 +54,8 @@ class post_card_creation
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
     <title>ReachMe - Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
+
 
 
     <style>
