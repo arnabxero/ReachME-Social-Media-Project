@@ -36,7 +36,111 @@ if ($home_type == 'text') {
 }
 
 
-include('phpClasses/allclass.php');
+class post_card_creation
+{
+    public $class_con;
+
+    function get_con($con)
+    {
+        $this->class_con = $con;
+    }
+
+    function generate_card($htype)
+    {
+        $class_home_type = $htype;
+
+        $sql = "SELECT * FROM posts";
+
+        $res = mysqli_query($this->class_con, $sql);
+        $type = "none";
+
+        while ($class_row = mysqli_fetch_assoc($res)) {
+            $type = $class_row['category'];
+            $id = $class_row['id'];
+            $media_tag = 'img';
+            $authorname = $class_row['authorname'];
+            $time = $class_row['time'];
+
+            if ($class_home_type == 'all') {
+                if ($type == 'photo') {
+                    $media_tag = 'img';
+                } else if ($type == 'video') {
+                    $media_tag = 'iframe';
+                }
+
+                echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
+    
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                    </div>
+    
+                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="like.php" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="like.php" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="like.php" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                    </a>
+                    <a href="like.php" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+            } else {
+                if ($type == $class_home_type) {
+                    if ($type == 'photo') {
+                        $media_tag = 'img';
+                    } else if ($type == 'video') {
+                        $media_tag = 'iframe';
+                    }
+
+                    echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
+    
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                    </div>
+    
+                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="like.php" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="like.php" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="like.php" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                    </a>
+                    <a href="like.php" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+                }
+            }
+        }
+    }
+}
 
 ?>
 
@@ -67,7 +171,7 @@ include('phpClasses/allclass.php');
 
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <div style="background-color: rgb(214, 214, 214); width: 99.9%;">
+    <div style="background-color: rgb(214, 214, 214);">
 
         <div class="row">
             <!--Search Bar Start-->
@@ -75,9 +179,10 @@ include('phpClasses/allclass.php');
 
                 <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
 
-                <form method="GET" action="subdir/searchnow.php">
+                <form method="GET" action="search.php">
                     <div class="form-group" style="float:left;">
                         <div class="input-group" style="padding: 2%; margin-top:2%;">
+                            <input type="hidden" value="all" name="type" />
                             <input type="search" name="q" class="form-control" placeholder="Search..." />
                             <button type="submit" class="btn btn-primary" style="background-color: green;">
                                 <i class="fas fa-search"></i>
@@ -142,7 +247,7 @@ include('phpClasses/allclass.php');
 
 
     <!-- Homepage Content pane start -->
-    <div class="row" style="background-color:aliceblue;">
+    <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
         <!-- Promotional Content -->
         <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">

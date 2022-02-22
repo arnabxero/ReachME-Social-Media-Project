@@ -1,3 +1,124 @@
+<?php
+include('include/connection.php');
+session_start();
+
+
+class search_result_generation
+{
+    public $class_search_string;
+    public $class_type = "none";
+    public $class_con;
+
+    function get_con($con)
+    {
+        $this->class_con = $con;
+    }
+
+    function get_string_type($s_string, $s_type)
+    {
+        $this->class_search_string = $s_string;
+        $this->class_type = $s_type;
+    }
+
+
+    function generate_result()
+    {
+        $class_sql = "SELECT * FROM posts WHERE content LIKE '%" . $this->class_search_string . "%' OR authorname LIKE '%" . $this->class_search_string . "%'";
+
+        if ($this->class_type != 'all') {
+            $class_sql = "SELECT * FROM posts WHERE (content LIKE '%" . $this->class_search_string . "%' AND category = '" . $this->class_type . "') OR (authorname LIKE '%" . $this->class_search_string . "%' AND category = '" . $this->class_type . "')";
+        }
+
+        $class_result = mysqli_query($this->class_con, $class_sql);
+
+        while ($class_row = mysqli_fetch_assoc($class_result)) {
+            $media_tag = 'img';
+
+            if ($class_row['category'] == 'video') {
+                $media_tag = 'iframe';
+            }
+
+            echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $class_row['authorname'] . '<p class="timestamp-home" title="Timestamp">' . $class_row['time'] . '</p></a>
+    
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                    </div>
+    
+                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="like.php" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="like.php" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="like.php" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                    </a>
+                    <a href="like.php" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+        }
+    }
+}
+
+
+$search_string = '';
+$type = 'all';
+
+$all_active = "";
+$text_active = "";
+$photo_active = "";
+$video_active = "";
+$sell_active = "";
+
+$search_object = new search_result_generation();
+$search_object->get_con($con);
+
+if (isset($type)) {
+    $type = $_GET['type'];
+
+    if ($type == "text") {
+        $text_active = "selected";
+    } else if ($type == "photo") {
+        $photo_active = "selected";
+    } else if ($type == "video") {
+        $video_active = "selected";
+    } else if ($type == "sell") {
+        $sell_active = "selected";
+    } else {
+        $all_active = "selected";
+    }
+} else {
+    $all_active = "selected";
+}
+
+
+if (isset($_GET['q'])) {
+    $search_string = $_GET['q'];
+}
+
+if (isset($_SESSION["logid"])) {
+
+    if ($search_string != '') {
+        $search_object->get_string_type($search_string, $type);
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,226 +128,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/fontawesome/css/all.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <script src='assets/bootstrap/js/bootstrap.min.js'></script>
-    <script src="assets/bootstrap/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
+    <title> Search - ReachMe</title>
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
-    <title>Search Results</title>
+
+
+    <style>
+
+    </style>
 </head>
 
-<style>
-    .nav{
-        height: 60px;
-        background-color: rgba(0, 17, 255, 0.877);
-        color: white;
-        font-family: tahoma;
-        text-align: center;
-    }
-    .nav-items{
-        width: 800px;
-        margin: 0 auto;   
-        font-size: 30px;
-    }
-    #searchbox{
-        width: 400px;
-        height: 25px;
-        border-radius: 5px;
-        font-size: 15px;
-        border: none;
-        padding: 4px;
-   
-    }
-    .img{
-        width: 80px;
-        border-radius: 50%; 
-        padding: 5px;
-    }
-    
-    .clear{
-        clear: both;
-    }
-
-    .center{
-        text-align: center;
-    }
-
-    #main{
-        height: 720px;
-    }
-
-    #div1{
-        width: 670px;
-        height: 670px;
-        display: inline-block;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-        overflow: auto;
-    }
-
-    #div2{
-        width: 670px;
-        height: 670px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-        display: inline-block;
-        overflow: auto;
-    }
-    .div1{
-        float: left;  
-        padding: 5px;
-      
-    }
-    h3{
-        margin: 10px;
-        padding: 10px;
-    }
-
-    #af{
-            border-radius: 12px;
-            width: 100px;
-            background-color: rgb(11, 223, 82);
-            color: white;
-            padding: 2px;
-            border: 1px solid black;
-        }
-
-    #vp{
-            border-radius: 12px;
-            width: 100px;
-            background-color: rgb(190, 76, 48);
-            color: white;
-            padding: 2px;
-            border: 1px solid black;
-    }
-    .sp{
-        padding: 20px;
-        margin-left: 50px;
-    }
-</style>
-
 <body>
-    <div class="nav"> 
-        <div class="nav-items">
-            ReachMe &nbsp <input type="text" id="searchbox" placeholder="Search....">
-            <i class="fas fa-search fa-xs"></i> 
+
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <div class="row" style="background-color:bisque;">
+        <!--Search Bar Start-->
+        <div class="col-sm-12">
+
+            <a href="index.php">
+                <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
+            </a>
+            <form method="GET" action="search.php">
+                <div class="form-group" style="float:left;">
+                    <div class="input-group" style="padding: 2%; margin-left:300px; width: 650px;">
+                        <input type="search" name="q" class="form-control" placeholder="Search..." value="<?= $search_string ?>" />
+                        <button type="submit" class="btn btn-primary" style="background-color: #6c6d30;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <label for="type">Filter Category</label><br>
+                <select id="type" name="type">
+                    <option value="all" <?= $all_active ?>>ALL TYPE</option>
+                    <option value="text" <?= $text_active ?>>TEXT</option>
+                    <option value="photo" <?= $photo_active ?>>PHOTO</option>
+                    <option value="video" <?= $video_active ?>>VIDEO</option>
+                    <option value="sell" <?= $sell_active ?>>SELL</option>
+                </select>
+            </form>
         </div>
     </div>
 
-    <div id="main" contenteditable="false">
+    <!--Search Bar End-->
 
 
-        <div  id="div1" data-mdb-perfect-scrollbar="true">
 
-            <h3 class="center">Contents</h3>
-            <hr>
+    <!-- Homepage Content pane start -->
+    <div class="row" style="background-color:aliceblue;">
 
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <h6> 18:33 AM</h6>
-                <p class="sp">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
-                but also the leap into electronic typesetting, remaining essentially unchanged. <a href="">Read more..</a></p>
-                
-            </div>
+        <!-- Promotional Content -->
+        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
+            <h3 style="text-align:center;">Promotional</h3>
             <hr>
 
         </div>
 
-        <div  id="div2" data-mdb-perfect-scrollbar="true">
-
-            <h3 class="center">Profiles</h3>
+        <!-- Personalized Content -->
+        <div class="col-sm-6" style="overflow-y:scroll;" id="home2">
+            <h3 style="text-align:center;">Search Results</h3>
             <hr>
 
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-            
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <form action="POST">
-                    <input type="submit" name="Add Friend" id="af" value="Add Friend">
-                    <input type="submit" name="View Profile" id="vp" value="View Profile">
-                </form>
-                <hr>
-                
-                
-            </div>
-
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <form action="POST">
-                    <input type="submit" name="Add Friend" id="af" value="Add Friend">
-                    <input type="submit" name="View Profile" id="vp" value="View Profile">
-                </form>
-                <hr>
-                
-                
-            </div>
-
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <form action="POST">
-                    <input type="submit" name="Add Friend" id="af" value="Add Friend">
-                    <input type="submit" name="View Profile" id="vp" value="View Profile">
-                </form>
-                <hr>
-                
-                
-            </div>
-
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <form action="POST">
-                    <input type="submit" name="Add Friend" id="af" value="Add Friend">
-                    <input type="submit" name="View Profile" id="vp" value="View Profile">
-                </form>
-                <hr>
-                
-                
-            </div>
-
-            <div class="div1">
-                <img class="img" src="files/images/arnabxero_profile.jpg" alt="profile"><br>
-            </div>
-            <div class="div2" >
-         
-                <h3> Iftekhar Ahmed Arnab </h3>
-                <form action="POST">
-                    <input type="submit" name="Add Friend" id="af" value="Add Friend">
-                    <input type="submit" name="View Profile" id="vp" value="View Profile">
-                </form>
-                <hr>
-                
-                
-            </div>
-
-
-        </div>
-        
-
-
+            <?php
+            $search_object->generate_result();
+            ?>
 
         </div>
 
+        <!-- Alert Type Content -->
+        <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
+            <h3 style="text-align:center;">Alerts</h3>
+            <hr>
+        </div>
+
+
+        <script>
+            let h = (screen.height) - 190;
+            let hh = h.toString();
+            let pp = "px";
+
+            document.getElementById("home1").style.height = hh.concat(pp);
+            document.getElementById("home2").style.height = hh.concat(pp);
+            document.getElementById("home3").style.height = hh.concat(pp);
+        </script>
 
     </div>
-    
-
 </body>
 
 </html>
