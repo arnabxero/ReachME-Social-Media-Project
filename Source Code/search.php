@@ -70,6 +70,23 @@ class search_result_generation
                 </div>';
         }
     }
+
+
+    function generate_result_users()
+    {
+        $slq_pro = "SELECT * FROM users WHERE fname LIKE '%" . $this->class_search_string . "%' OR lname LIKE '%" . $this->class_search_string . "%'";
+
+        $class_result_pro = mysqli_query($this->class_con, $slq_pro);
+
+        while ($class_row_pro = mysqli_fetch_assoc($class_result_pro)) {
+
+            echo '<div class="card-main">
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row_pro['id'] . '">
+                        <img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">
+                    &nbsp' . $class_row_pro['fname'] . ' ' . $class_row_pro['lname'] . '</a>
+                </div>';
+        }
+    }
 }
 
 
@@ -198,10 +215,13 @@ if (isset($_SESSION["logid"])) {
 
         </div>
 
-        <!-- Alert Type Content -->
+        <!-- User Profile result-->
         <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
-            <h3 style="text-align:center;">Alerts</h3>
+            <h3 style="text-align:center;">Profiles</h3>
             <hr>
+            <?php
+            $search_object->generate_result_users();
+            ?>
         </div>
 
 

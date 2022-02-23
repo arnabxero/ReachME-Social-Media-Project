@@ -52,7 +52,7 @@ class uregister
             //mail verification email to user email address --start
             $codegen = rand(0000, 9999);
             $vercode = $codegen . $this->class_uid;
-            $this->class_link = "<a href='" . $verifymail_website . "subdir/verify_email.php?vcode=" . $vercode . "&id=" . $this->class_uid . "&email=" . $email . "'>Click and Verify Your Email On ReachMe</a>";
+            $this->class_link = "<h3><a href='" . $verifymail_website . "subdir/verify_email.php?vcode=" . $vercode . "&id=" . $this->class_uid . "&email=" . $email . "'>Click and Verify Your Email On ReachMe</a></h3>";
 
             //verification status insert --start
             $sql4 = "UPDATE nonver_users SET verified = '" . $vercode . "' WHERE id = " . $this->class_uid;

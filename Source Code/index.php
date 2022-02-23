@@ -5,11 +5,14 @@ include('include/connection.php');
 $username = "Guest";
 $display = " ";
 
+$own_profile_link = "logreg.php";
+
 session_start();
 
 if (isset($_SESSION["logid"])) {
     $username = $_SESSION['logname'];
     $display = "display:none;";
+    $own_profile_link = "profile.php";
 }
 
 $home_type = 'all';
@@ -61,11 +64,14 @@ class post_card_creation
             $authorname = $class_row['authorname'];
             $time = $class_row['time'];
 
+            $height = "auto";
+
             if ($class_home_type == 'all') {
                 if ($type == 'photo') {
                     $media_tag = 'img';
                 } else if ($type == 'video') {
                     $media_tag = 'iframe';
+                    $height = "400";
                 }
 
                 echo '<div class="card-main">
@@ -77,7 +83,7 @@ class post_card_creation
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -104,6 +110,7 @@ class post_card_creation
                         $media_tag = 'img';
                     } else if ($type == 'video') {
                         $media_tag = 'iframe';
+                        $height = "400";
                     }
 
                     echo '<div class="card-main">
@@ -115,7 +122,7 @@ class post_card_creation
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="'.$height.'" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -227,7 +234,7 @@ class post_card_creation
 
                 <div style="margin-top: 3%;">
                     <div class="btn-group">
-                        <a href="profile.php" class="btn btn-secondary btn-sm home-profile-shortcut" type="button">
+                        <a href="<?= $own_profile_link ?>" class="btn btn-secondary btn-sm home-profile-shortcut" type="button">
                             <img src="files/images/arnabxero_profile.jpg" height="20px" width="20px" style="border-radius: 50%;">
                             <?= $username ?>
                         </a>
