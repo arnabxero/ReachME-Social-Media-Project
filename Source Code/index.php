@@ -7,12 +7,15 @@ $display = " ";
 
 $own_profile_link = "logreg.php";
 
+$ulogid = -99;
+
 session_start();
 
 if (isset($_SESSION["logid"])) {
     $username = $_SESSION['logname'];
     $display = "display:none;";
     $own_profile_link = "profile.php";
+    $ulogid = $_SESSION["logid"];
 }
 
 $home_type = 'all';
@@ -48,11 +51,54 @@ class post_card_creation
         $this->class_con = $con;
     }
 
-    function generate_card($htype)
+    function get_authorname($aid){
+        $aname = "Undefined";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            $aname = $class_arow['fname']. " " .$class_arow['lname'];
+        }
+
+        return $aname;
+    }
+
+    //Function to check logged in user is in post author's friendlist in the case of a friends only post
+    function check_friendlist($lid, $pid)
     {
+        $return_value = false;
+
+        $fsql = "SELECT * FROM friend_list WHERE sid = '$lid' AND rid = '$pid' AND stat = 'a'";
+        $fresult = mysqli_query($this->class_con, $fsql);
+        $fcount = mysqli_num_rows($fresult);
+        if ($fcount > 0) {
+            $return_value = true;
+        }
+
+
+        $f2sql = "SELECT * FROM friend_list WHERE sid = '$pid' AND rid = '$lid' AND stat = 'a'";
+        $f2result = mysqli_query($this->class_con, $f2sql);
+        $f2count = mysqli_num_rows($f2result);
+        if ($f2count > 0) {
+            $return_value = true;
+        }
+
+        return $return_value;
+    }
+
+    function generate_card($htype, $ulogid)
+    {
+        $class_logid = $ulogid;
+
         $class_home_type = $htype;
 
-        $sql = "SELECT * FROM posts";
+        $sql = "SELECT * FROM posts WHERE privacy = 'p'";
+
+        if ($class_logid != -99) {
+            $sql = "SELECT * FROM posts";
+        }
 
         $res = mysqli_query($this->class_con, $sql);
         $type = "none";
@@ -61,22 +107,39 @@ class post_card_creation
             $type = $class_row['category'];
             $id = $class_row['id'];
             $media_tag = 'img';
-            $authorname = $class_row['authorname'];
             $time = $class_row['time'];
-
+            $privacy_show = "Undefined";
             $height = "auto";
 
-            if ($class_home_type == 'all') {
-                if ($type == 'photo') {
-                    $media_tag = 'img';
-                } else if ($type == 'video') {
-                    $media_tag = 'iframe';
-                    $height = "400";
-                }
+            $authorname = $this->get_authorname($class_row['authorid']);
+            $show_or_not = false;
 
-                echo '<div class="card-main">
+            $priv = $class_row['privacy'];
+
+            if ($priv == 'p') {
+                $privacy_show = '<i class="fas fa-globe-americas"></i> Public';
+                $show_or_not = true;
+            } else {
+                $privacy_show = '<i class="fas fa-user-friends"></i> Friends';
+                if ($this->check_friendlist($id, $class_logid)) {
+                    $show_or_not = true;
+                }
+            }
+
+            if ($show_or_not == true) {
+
+
+                if ($class_home_type == 'all') {
+                    if ($type == 'photo') {
+                        $media_tag = 'img';
+                    } else if ($type == 'video') {
+                        $media_tag = 'iframe';
+                        $height = "400";
+                    }
+
+                    echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
@@ -104,25 +167,25 @@ class post_card_creation
                     </a>
     
                 </div>';
-            } else {
-                if ($type == $class_home_type) {
-                    if ($type == 'photo') {
-                        $media_tag = 'img';
-                    } else if ($type == 'video') {
-                        $media_tag = 'iframe';
-                        $height = "400";
-                    }
+                } else {
+                    if ($type == $class_home_type) {
+                        if ($type == 'photo') {
+                            $media_tag = 'img';
+                        } else if ($type == 'video') {
+                            $media_tag = 'iframe';
+                            $height = "400";
+                        }
 
-                    echo '<div class="card-main">
+                        echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp">' . $time . '</p></a>
+                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="'.$height.'" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -143,6 +206,7 @@ class post_card_creation
                     </a>
     
                 </div>';
+                    }
                 }
             }
         }
@@ -260,9 +324,9 @@ class post_card_creation
         <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promoted Content</h3>
             <?php
-            $gen_post_list = new post_card_creation();
-            $gen_post_list->get_con($con);
-            $gen_post_list->generate_card('promoted');
+            // $gen_post_list = new post_card_creation();
+            // $gen_post_list->get_con($con);
+            // $gen_post_list->generate_card('promoted');
             ?>
         </div>
 
@@ -271,7 +335,7 @@ class post_card_creation
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
-            $gen_post_list->generate_card($home_type);
+            $gen_post_list->generate_card($home_type, $ulogid);
             ?>
         </div>
 
@@ -279,9 +343,9 @@ class post_card_creation
         <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
             <h3 style="text-align:center;">Alerts</h3>
             <?php
-            $gen_post_list = new post_card_creation();
-            $gen_post_list->get_con($con);
-            $gen_post_list->generate_card('alert');
+            // $gen_post_list = new post_card_creation();
+            // $gen_post_list->get_con($con);
+            // $gen_post_list->generate_card('alert');
             ?>
         </div>
 
