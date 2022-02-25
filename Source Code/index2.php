@@ -129,7 +129,6 @@ class post_card_creation
         while ($class_row = mysqli_fetch_assoc($res)) {
             $type = $class_row['category'];
             $id = $class_row['id'];
-            $auth_id = $class_row['authorid'];
             $media_tag = 'img';
             $time = $class_row['time'];
             $privacy_show = "Undefined";
@@ -146,7 +145,7 @@ class post_card_creation
                 $show_or_not = true;
             } else {
                 $privacy_show = '<i class="fas fa-user-friends"></i> Friends';
-                if ($this->check_friendlist($auth_id, $class_logid)) {
+                if ($this->check_friendlist($id, $class_logid)) {
                     $show_or_not = true;
                 }
             }

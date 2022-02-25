@@ -25,12 +25,20 @@ class ulogin
         $count = mysqli_num_rows($result);
 
         if ($count == 1) {
-            $_SESSION["logid"] = $row['id'];
-            $_SESSION["logname"] = $row['fname'] . ' ' . $row['lname'];
-            echo "<h1> Login Successful<br>Loading Your Profile</h1>";
-            header('Location: ../index.php');
+
+            if ($row['temp_id'] == 1 || is_null($row['temp_id'])) {
+                $_SESSION["logid"] = $row['id'];
+                $_SESSION["logname"] = $row['fname'] . ' ' . $row['lname'];
+                $_SESSION["logUname"] = $row['uname'];
+                $_SESSION["propic_link"] = $row['pro_pic'];
+                echo "<h1> Login Successful<br>Loading Your Profile</h1>";
+                header('Location: ../index.php');
+            } else {
+                echo "<h2>You Have Not Verified Your New Email Address Yet, Please check inbox and click verification link to verify email.<br><a href='../login.php'>Login After Verification</a></h2>";
+            }
         } else {
             echo "<h1> Login failed<br>Invalid username or password<br>Please Try Again</h1>";
+            echo "<h1><a href='../login.php'>Login Again</a></h1>";
         }
     }
 }
@@ -43,5 +51,3 @@ if (isset($_POST['submit'])) {
 
     $ulogsub->login_user($primemailusername, $primpassword);
 }
-
-?>

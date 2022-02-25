@@ -20,6 +20,60 @@ class search_result_generation
         $this->class_type = $s_type;
     }
 
+    function get_author_propic($aid)
+    {
+        $apic = "ext-files/user/default.jpg";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            if (!(empty($class_arow['pro_pic']))) {
+                $apic = "ext-files/user/" . $class_arow['pro_pic'];
+            }
+        }
+
+        return $apic;
+    }
+
+    function get_authorname($aid)
+    {
+        $aname = "Undefined";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            $aname = $class_arow['fname'] . " " . $class_arow['lname'];
+        }
+
+        return $aname;
+    }
+
+    //Function to check logged in user is in post author's friendlist in the case of a friends only post
+    function check_friendlist($lid, $pid)
+    {
+        $return_value = false;
+
+        $fsql = "SELECT * FROM friend_list WHERE sid = '$lid' AND rid = '$pid' AND stat = 'a'";
+        $fresult = mysqli_query($this->class_con, $fsql);
+        $fcount = mysqli_num_rows($fresult);
+        if ($fcount > 0) {
+            $return_value = true;
+        }
+
+
+        $f2sql = "SELECT * FROM friend_list WHERE sid = '$pid' AND rid = '$lid' AND stat = 'a'";
+        $f2result = mysqli_query($this->class_con, $f2sql);
+        $f2count = mysqli_num_rows($f2result);
+        if ($f2count > 0) {
+            $return_value = true;
+        }
+
+        return $return_value;
+    }
 
     function generate_result()
     {
@@ -33,14 +87,38 @@ class search_result_generation
 
         while ($class_row = mysqli_fetch_assoc($class_result)) {
             $media_tag = 'img';
+            $show_or_not = false;
+            $auth_id = $class_row['authorid'];
+            $class_logid = $_SESSION['logid'];
+            $time = $class_row['time'];
+            $privacy_show = "Undefined";
+
+
+            $propic_link = $this->get_author_propic($class_row['authorid']);
+
+            $authorname = $this->get_authorname($class_row['authorid']);
+
 
             if ($class_row['category'] == 'video') {
                 $media_tag = 'iframe';
             }
 
-            echo '<div class="card-main">
+            if ($class_row['privacy'] == 'p') {
+                $show_or_not = true;
+                $privacy_show = '<i class="fas fa-globe-americas"></i> Public';
+            } else {
+                $privacy_show = '<i class="fas fa-user-friends"></i> Friends';
+                if ($this->check_friendlist($auth_id, $class_logid)) {
+                    $show_or_not = true;
+                }
+            }
+
+
+            if ($show_or_not) {
+
+                echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $class_row['authorname'] . '<p class="timestamp-home" title="Timestamp">' . $class_row['time'] . '</p></a>
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
@@ -68,6 +146,7 @@ class search_result_generation
                     </a>
     
                 </div>';
+            }
         }
     }
 
@@ -80,9 +159,13 @@ class search_result_generation
 
         while ($class_row_pro = mysqli_fetch_assoc($class_result_pro)) {
 
+            $propicid = $class_row_pro['id'];
+
+            $propic_link_prores = $this->get_author_propic($propicid);
+
             echo '<div class="card-main">
                     <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row_pro['id'] . '">
-                        <img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">
+                        <img class="profile-pic-home-post" src="' . $propic_link_prores . '">
                     &nbsp' . $class_row_pro['fname'] . ' ' . $class_row_pro['lname'] . '</a>
                 </div>';
         }

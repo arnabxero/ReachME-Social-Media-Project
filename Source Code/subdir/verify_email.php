@@ -46,6 +46,6 @@ class verifymail
 
 $veruser = new verifymail();
 $veruser->check_vercode_and_transfer_user();
-
+header('Location: logout.php?to=login');
 
 ?>
