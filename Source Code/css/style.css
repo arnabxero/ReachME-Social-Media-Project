@@ -156,3 +156,40 @@ span {
   color: black;
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
+
+.profile-picture {
+  border-radius: 60%;
+  height: 200px;
+  width: 200px;
+}
+
+.profile-details-param {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.profile-details {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.pro-btn {
+  border: 3px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color: rgb(82, 44, 0);
+  padding: 10px;
+}
+
+.pro-btn:hover {
+  border: 3px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 170, 73);
+  padding: 10px;
+}

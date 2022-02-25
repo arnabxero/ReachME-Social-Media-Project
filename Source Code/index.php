@@ -51,7 +51,25 @@ class post_card_creation
         $this->class_con = $con;
     }
 
-    function get_authorname($aid){
+    function get_author_propic($aid)
+    {
+        $apic = "ext-files/user/default.jpg";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            if (!(empty($class_arow['pro_pic']))) {
+                $apic = "ext-files/user/" . $class_arow['pro_pic'];
+            }
+        }
+
+        return $apic;
+    }
+
+    function get_authorname($aid)
+    {
         $aname = "Undefined";
 
         $asql = "SELECT * FROM users WHERE id = '$aid'";
@@ -59,7 +77,7 @@ class post_card_creation
         $ares = mysqli_query($this->class_con, $asql);
 
         while ($class_arow = mysqli_fetch_assoc($ares)) {
-            $aname = $class_arow['fname']. " " .$class_arow['lname'];
+            $aname = $class_arow['fname'] . " " . $class_arow['lname'];
         }
 
         return $aname;
@@ -110,6 +128,7 @@ class post_card_creation
             $time = $class_row['time'];
             $privacy_show = "Undefined";
             $height = "auto";
+            $propic_link = $this->get_author_propic($class_row['authorid']);
 
             $authorname = $this->get_authorname($class_row['authorid']);
             $show_or_not = false;
@@ -139,7 +158,7 @@ class post_card_creation
 
                     echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
