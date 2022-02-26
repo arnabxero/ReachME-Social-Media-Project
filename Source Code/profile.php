@@ -197,7 +197,23 @@ if (isset($_SESSION['logid'])) {
                 <a class="pro-btn" href="friendlist.php">Friend List</a>
             </div>
             <div class="col-sm-2" style="text-align:center;">
-                <a class="pro-btn" href="update_profile.php">Update Your Profile</a>
+
+
+
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split pro-btn-dropup" data-bs-toggle="dropdown" aria-expanded="false">
+                        Update Profile
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="edit_profile.php">Edit Profile Details</a></li>
+                        <li><a class="dropdown-item" href="change_email.php">Change Email Address</a></li>
+                        <li><a class="dropdown-item" href="change_pass.php">Change Password</a></li>
+                    </ul>
+                </div>
+
+
+
+
             </div>
 
             <div class="col-sm-5" style="text-align:left;">
