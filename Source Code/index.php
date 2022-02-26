@@ -17,9 +17,9 @@ if (isset($_SESSION["logid"])) {
     $display = "display:none;";
     $own_profile_link = "profile.php";
     $ulogid = $_SESSION["logid"];
-    
-    if (!(empty($_SESSION["propic_link"]))){
-        $loguser_propic = 'ext-files/user/'.$_SESSION["propic_link"];
+
+    if (!(empty($_SESSION["propic_link"]))) {
+        $loguser_propic = 'ext-files/user/' . $_SESSION["propic_link"];
     }
 }
 
@@ -174,20 +174,20 @@ class post_card_creation
                         <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
-                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
                         <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
                     </a>
     
-                    <a href="like.php" title="Upvote">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
                         <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
                     </a>
-                    <a href="like.php" title="Downvote">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
                         <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
                     </a>
-                    <a href="like.php" title="Comment">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
                         <div class="card-button"><i class="fas fa-comment-alt"></i></div>
                     </a>
-                    <a href="like.php" title="Share">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=share" title="Share">
                         <div class="card-button"><i class="fas fa-share-square"></i></div>
                     </a>
     
@@ -203,7 +203,7 @@ class post_card_creation
 
                         echo '<div class="card-main">
     
-                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="files/images/arnabxero_profile.jpg">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
+                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
@@ -213,20 +213,20 @@ class post_card_creation
                         <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
-                    <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
                         <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
                     </a>
     
-                    <a href="like.php" title="Upvote">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
                         <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
                     </a>
-                    <a href="like.php" title="Downvote">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
                         <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
                     </a>
-                    <a href="like.php" title="Comment">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
                         <div class="card-button"><i class="fas fa-comment-alt"></i></div>
                     </a>
-                    <a href="like.php" title="Share">
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=share" title="Share">
                         <div class="card-button"><i class="fas fa-share-square"></i></div>
                     </a>
     
@@ -332,7 +332,7 @@ class post_card_creation
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><a class="dropdown-item" href="update_profile.php">Update Profile</a></li>
-                            <li><a class="dropdown-item" href="delete_account.php">Disable Account</a></li>
+                            <li><a class="dropdown-item" href="delete_acc.php">Disable Account</a></li>
                         </ul>
                     </div>
                 </div>

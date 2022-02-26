@@ -12,7 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
 
-    <title> Registration - ReachMe </title>
+    <title> Change Password - ReachMe </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <style>
         * {

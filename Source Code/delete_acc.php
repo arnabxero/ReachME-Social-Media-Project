@@ -1,3 +1,35 @@
+<?php
+
+include('include/connection.php');
+session_start();
+
+$dialog = "";
+
+if (isset($_SESSION['logid'])) {
+    if (isset($_POST['submit'])) {
+        $pass = $_POST['pass'];
+        $id = $_SESSION['logid'];
+
+        $csql = "SELECT * FROM users WHERE id = '$id' AND pass = '$pass'";
+        $cresult = mysqli_query($con, $csql);
+        $ccount = mysqli_num_rows($cresult);
+
+        if ($ccount < 1) {
+            $dialog = "<h2 style='color: red;'><strong>Password Wrong</strong></h2>";
+        } else {
+            $sql = "DELETE FROM users WHERE id = '$id' AND pass = '$pass'";
+            $result = mysqli_query($con, $sql);
+            header('Location: subdir/logout.php');
+        }
+    }
+} else {
+    header('Location: logreg.php');
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +44,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
 
-    <title> Change Email - ReachMe </title>
+    <title> Change Password - ReachMe </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <style>
         * {
@@ -22,17 +54,17 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
+
         .logo {
             align-items: center;
             color: #202f49;
             padding: 20px 10px 20px 900px;
         }
-        
+
         body {
-            background-color: #d7da31;
+            background-color: #a30000;
         }
-        
+
         .reg {
             width: 500px;
             border-radius: 30px;
@@ -41,7 +73,7 @@
             margin: 100px auto;
             margin-top: 20px;
         }
-        
+
         .reg h3 {
             text-align: center;
             color: #0e1116;
@@ -49,14 +81,14 @@
             padding: 20px 0 20px 0;
             border-bottom: 1px solid #080803;
         }
-        
+
         .reg form {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding-top: 20px;
         }
-        
+
         .reg form input[type="password"],
         .reg form input[type="text"],
         .reg form input[type="email"],
@@ -70,7 +102,7 @@
             margin-left: 10px;
             padding: 0 15px;
         }
-        
+
         .reg form input[type="submit"] {
             width: 100%;
             padding: 15px;
@@ -84,7 +116,7 @@
             color: #ffffff;
             transition: background-color 0.2s;
         }
-        
+
         .reg form input[type="submit"]:hover {
             background-color: #2868c7;
             transition: background-color 0.2s;
@@ -102,13 +134,19 @@
         <img src="files/logo/rm.png" height="70px" width="70px" style="margin-top: 30px;">
     </a>
     <div class="reg">
-        <h3> Welcome </h3>
-        <form name="myform" align="center" method="POST" action='subdir/chngmail.php' onsubmit="return checkForm()">
+        <h3> Delete Your Account Parmanently </h3>
+        <?= $dialog ?>
+        <form name="myform" align="center" method="POST" action='delete_acc.php' onsubmit="return checkForm()">
 
-            <input type="email" name="old_mail" placeholder="Old Email" id="oldmail">
+            <input type="password" name="pass" placeholder="Password" id="mainpass">
 
-            <input type="submit" name="submit" value="Change">
+            <input type="password" name="con_pass" placeholder="Confirm Password" id="cmainpass">
 
+            <label style="margin-top: 10px; margin-bottom: 5px;"><strong>Please Type "Confirm" To Continue</strong></label>
+
+            <input type="text" name="con_pass" placeholder="Type Confirm" id="conf">
+
+            <input type="submit" name="submit" value="Delete Parmanently">
 
         </form>
     </div>
@@ -116,16 +154,30 @@
 
     <script>
         function checkForm() {
-            let x = document.forms["myform"]["oldmail"].value;
-
-           
-
+            let x = document.forms["myform"]["mainpass"].value;
+            let y = document.forms["myform"]["cmainpass"].value;
+            let z = document.forms["myform"]["conf"].value;
 
             if (x == "") {
-                alert("Please Enter Your old email!");
+                alert("Please Enter Password!");
                 return false;
-            } 
-            return true;
+            } else if (y == "") {
+                alert("Please Confirm Password!");
+                return false;
+            } else if (z == "") {
+                alert("Please Type Confirm!");
+                return false;
+            } else if (x != y) {
+                alert("Confirm Password Does Not Match!");
+                return false;
+            } else {
+                if (z != "Confirm") {
+                    alert("Please Type Confirm!");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         }
     </script>
 

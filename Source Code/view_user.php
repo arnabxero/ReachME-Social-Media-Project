@@ -25,7 +25,7 @@ $id = -99;
 
 
 if (isset($_SESSION['logid'])) {
-    $id = $_SESSION['logid'];
+    $id = $_GET['uid'];
 
     $sql = "SELECT * FROM users WHERE id = '$id'";
 
@@ -193,16 +193,14 @@ if (isset($_SESSION['logid'])) {
         <br>
         <div class="row">
             <div class="col-sm-5" style="text-align:right;">
-                <a class="pro-btn" href="your_contents.php">Your Contents</a>
-                <a class="pro-btn" href="friendlist.php">Friend List</a>
+                <a class="pro-btn" href="addfriend.php">Add Friend</a>
             </div>
             <div class="col-sm-2" style="text-align:center;">
-                <a class="pro-btn" href="update_profile.php">Update Your Profile</a>
+                <a class="pro-btn" href="msg.php">Send Message</a>
             </div>
 
             <div class="col-sm-5" style="text-align:left;">
                 <a class="pro-btn" href="subdir/logout.php">Log Out</a>
-                <a class="pro-btn" href="delete_acc.php">Delete Account</a>
             </div>
         </div>
         <br>
