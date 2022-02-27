@@ -3,6 +3,7 @@
 include('include/connection.php');
 session_start();
 
+$dp_dialog = "";
 
 $name = "Undefined";
 $username = "Undefined";
@@ -39,7 +40,10 @@ if (isset($_SESSION['logid'])) {
         $job = $row['job'];
         $about = $row['about'];
         $flags = $row['flag'];
-        $propic = "ext-files/user/" . $row['pro_pic'];
+
+        if (!(empty($row['pro_pic'])) || !is_null($row['pro_pic'])) {
+            $propic = "ext-files/user/" . $row['pro_pic'];
+        }
 
 
         $dob = $row['date_of_birth'];
@@ -49,6 +53,57 @@ if (isset($_SESSION['logid'])) {
         $bg = $row['blood'];
         $nat = $row['nation'];
         $addr = $row['address'];
+    }
+
+
+    function push_profile_photo_string_to_db($get_id, $get_id_str)
+    {
+        include('include/connection.php');
+
+        $psql = "UPDATE users SET pro_pic = '$get_id_str' WHERE id = '$get_id'";
+
+        $res = mysqli_query($con, $psql);
+
+        if ($res) {
+            $dp_dialog = "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
+        } else {
+            $dp_dialog = "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
+        }
+    }
+
+    if (isset($_FILES['image'])) {
+
+        $errors = array();
+        $file_name = $_FILES['image']['name'];
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $file_type = $_FILES['image']['type'];
+
+        $new_file_name = $_SESSION['logid'] . '.jpg';
+
+        $hold_tmp = explode('.', $_FILES['image']['name']);
+
+        $file_ext = strtolower(end($hold_tmp));
+
+        $extensions = array("jpeg", "jpg", "png");
+
+        if (in_array($file_ext, $extensions) === false) {
+            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+            $dp_dialog = "<p style='Color: red; font-weight: bold;'>extension not allowed, please choose a JPEG or PNG file.</p>";
+        }
+
+        if ($file_size > 2097152) {
+            $errors[] = 'File size must be excately 2 MB';
+            $dp_dialog = '<p style="Color: red; font-weight: bold;">File size must be excately 2 MB</p>';
+        }
+
+        if (empty($errors) == true) {
+            move_uploaded_file($file_tmp, "ext-files/user/" . $new_file_name);
+            $dp_dialog = "<p style='Color: green; font-weight: bold;'>Profile Picture Updated</p>";
+            push_profile_photo_string_to_db($id, $new_file_name);
+        } else {
+            $dp_dialog = $dp_dialog . "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
+        }
     }
 } else {
     header('Location: logreg.php');
@@ -100,7 +155,29 @@ if (isset($_SESSION['logid'])) {
                 <img class="profile-picture" src="<?= $propic ?>"></img>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="text-align: left;">
+                <?= $dp_dialog ?>
+
+                <div id="upl" style="display: none;">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="image" />
+                        <input type="submit" value="Change Profile Photo" />
+                    </form>
+                </div>
+                <br>
+                <button id="toggle">Change DP</button>
+
+                <script>
+                    const targetDiv = document.getElementById("upl");
+                    const btn = document.getElementById("toggle");
+                    btn.onclick = function() {
+                        if (targetDiv.style.display !== "none") {
+                            targetDiv.style.display = "none";
+                        } else {
+                            targetDiv.style.display = "block";
+                        }
+                    };
+                </script>
             </div>
         </div>
 
@@ -194,7 +271,7 @@ if (isset($_SESSION['logid'])) {
         <div class="row">
             <div class="col-sm-5" style="text-align:right;">
                 <a class="pro-btn" href="your_contents.php">Your Contents</a>
-                <a class="pro-btn" href="friendlist.php">Friend List</a>
+                <a class="pro-btn" href="friend_list.php">Friend List</a>
             </div>
             <div class="col-sm-2" style="text-align:center;">
 

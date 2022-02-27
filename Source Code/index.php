@@ -12,15 +12,46 @@ $ulogid = -99;
 
 session_start();
 
+
+function get_propic($aid)
+{
+    include('include/connection.php');
+    $apic = "ext-files/user/default.jpg";
+    $asql = "SELECT * FROM users WHERE id = '$aid'";
+    $ares = mysqli_query($con, $asql);
+
+    while ($class_arow = mysqli_fetch_assoc($ares)) {
+        if (!(empty($class_arow['pro_pic']))) {
+            $apic = "ext-files/user/" . $class_arow['pro_pic'];
+        }
+    }
+
+    return $apic;
+}
+
+
+function get_uname($aid)
+{
+    include('include/connection.php');
+    $rt_val = "Guest";
+    $asql = "SELECT * FROM users WHERE id = '$aid'";
+    $ares = mysqli_query($con, $asql);
+
+    while ($class_arow = mysqli_fetch_assoc($ares)) {
+        $rt_val = $class_arow['fname'].' '.$class_arow['lname'];
+    }
+
+    return $rt_val;
+}
+
+
 if (isset($_SESSION["logid"])) {
-    $username = $_SESSION['logname'];
     $display = "display:none;";
     $own_profile_link = "profile.php";
     $ulogid = $_SESSION["logid"];
 
-    if (!(empty($_SESSION["propic_link"]))) {
-        $loguser_propic = 'ext-files/user/' . $_SESSION["propic_link"];
-    }
+    $username = get_uname($ulogid);
+    $loguser_propic = get_propic($ulogid);
 }
 
 $home_type = 'all';

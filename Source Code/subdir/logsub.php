@@ -30,6 +30,7 @@ class ulogin
                 $_SESSION["logid"] = $row['id'];
                 $_SESSION["logname"] = $row['fname'] . ' ' . $row['lname'];
                 $_SESSION["logUname"] = $row['uname'];
+                $_SESSION["logEmail"] = $row['email'];
                 $_SESSION["propic_link"] = $row['pro_pic'];
                 echo "<h1> Login Successful<br>Loading Your Profile</h1>";
                 header('Location: ../index.php');

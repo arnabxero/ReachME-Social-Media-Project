@@ -14,7 +14,7 @@
 
 </head>
 
-<body style="text-align: center;">
+<body style="text-align: center; background-color: #f7ffd2;">
 
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 

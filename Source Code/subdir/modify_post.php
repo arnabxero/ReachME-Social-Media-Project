@@ -13,11 +13,14 @@ if (isset($_SESSION["logid"])) {
 
     $edlnk = 'Location: ../edit_post.php?pid=' . $pid;
     $dlink = 'Location: ../delete_post.php?pid=' . $pid;
+    $tlink = 'Location: ../tag.php?pid=' . $pid;
 
     if ($oper == 'edit') {
         header($edlnk);
     } else if ($oper == 'del') {
         header($dlink);
+    } else if ($oper == 'tag') {
+        header($tlink);
     } else {
         $sql = "SELECT * FROM posts WHERE id = '$pid' AND authorid = '$uid'";
 

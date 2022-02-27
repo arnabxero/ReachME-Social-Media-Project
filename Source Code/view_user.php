@@ -33,6 +33,7 @@ if (isset($_SESSION['logid'])) {
 
     while ($row = mysqli_fetch_assoc($result)) {
         $name = $row['fname'] . ' ' . $row['lname'];
+        $ulname = $row['fname'];
         $username = $row['uname'];
         $email = $row['email'];
         $phone = $row['phone'];
@@ -88,7 +89,7 @@ if (isset($_SESSION['logid'])) {
         <img src="files/logo/rm.png" height="70px" width="70px">
     </a>
 
-    <h2 style="text-align:center; font-weight:bold;">Your Profile</h2>
+    <h2 style="text-align:center; font-weight:bold;"><?= $ulname ?>'s Profile</h2>
     <hr>
 
     <div class="container">

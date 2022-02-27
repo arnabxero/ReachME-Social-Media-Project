@@ -8,6 +8,8 @@ $uid = -99;
 
 if (isset($_SESSION["logid"])) {
     $uid = $_SESSION['logid'];
+} else {
+    header('Location: logreg.php');
 }
 
 
@@ -95,6 +97,7 @@ class post_card_creation
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="'.$menulink.'&operation=edit"><i class="fas fa-edit"></i> Edit Post</a></li>
                     <li><a class="dropdown-item" href="'.$menulink.'&operation=cpriv">Change Privacy to '.$cpriv.'</a></li>
+                    <li><a class="dropdown-item" href="'.$menulink.'&operation=tag"><i class="fas fa-user-tag"></i> Tag Friends</a></li>
                     <li><a class="dropdown-item" href="'.$menulink.'&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
                 </ul>
             </div>
