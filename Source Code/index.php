@@ -362,7 +362,7 @@ class post_card_creation
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="update_profile.php">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="edit_profile.php">Update Profile</a></li>
                             <li><a class="dropdown-item" href="delete_acc.php">Disable Account</a></li>
                         </ul>
                     </div>

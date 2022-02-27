@@ -53,6 +53,11 @@ if (isset($_SESSION['logid'])) {
         $bg = $row['blood'];
         $nat = $row['nation'];
         $addr = $row['address'];
+
+        $gen = $row['gender'];
+        $pol = $row['politics'];
+        $spo = $row['sports'];
+        $hobb = $row['hobby'];
     }
 
 
@@ -158,14 +163,17 @@ if (isset($_SESSION['logid'])) {
             <div class="col-sm-4" style="text-align: left;">
                 <?= $dp_dialog ?>
 
-                <div id="upl" style="display: none;">
+                <button class="cdp-btn" id="toggle">Change DP <i class="fas fa-caret-square-down"></i></button>
+
+                <span><a href="#"></a></span>
+
+                <div class="cdp-form" id="upl" style="display: none;">
                     <form action="" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="image" />
-                        <input type="submit" value="Change Profile Photo" />
+                        <input class="up-file-dp" type="file" name="image" />
+                        <input class="up-file-btn" type="submit" value="Change Profile Photo" />
                     </form>
                 </div>
                 <br>
-                <button id="toggle">Change DP</button>
 
                 <script>
                     const targetDiv = document.getElementById("upl");
@@ -235,6 +243,10 @@ if (isset($_SESSION['logid'])) {
                 <span class="profile-details-param"><i class="fas fa-ambulance"></i> Blood Group : </span>
                 <span class="profile-details-param"><i class="fas fa-globe"></i> Nationality : </span>
                 <span class="profile-details-param"><i class="fas fa-map-marker-alt"></i> Address : </span>
+                <span class="profile-details-param"><i class="fas fa-venus-mars"></i> Gender : </span>
+                <span class="profile-details-param"><i class="fas fa-landmark"></i> Political View : </span>
+                <span class="profile-details-param"><i class="fas fa-running"></i> Sports : </span>
+                <span class="profile-details-param"><i class="fas fa-code"></i> Hobby : </span>
 
             </div>
 
@@ -250,6 +262,10 @@ if (isset($_SESSION['logid'])) {
                 <span class="profile-details"><?= $bg ?></span>
                 <span class="profile-details"><?= $nat ?></span>
                 <span class="profile-details"><?= $addr ?></span>
+                <span class="profile-details"><?= $gen ?></span>
+                <span class="profile-details"><?= $pol ?></span>
+                <span class="profile-details"><?= $spo ?></span>
+                <span class="profile-details"><?= $hobb ?></span>
 
             </div>
         </div>
