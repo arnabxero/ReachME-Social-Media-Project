@@ -291,3 +291,22 @@ span {
   padding: 5px;
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
+
+.tag-btn {
+  float: right;
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: var(--transition-speed);
+  color: black;
+  background-color: rgb(163, 255, 160);
+  padding: 10px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tag-btn:hover {
+  border: 2px solid rgb(99, 214, 243);
+  color: rgb(255, 255, 255);
+  background-color: rgb(3, 82, 0);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}

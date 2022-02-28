@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2022 at 09:50 AM
+-- Generation Time: Feb 28, 2022 at 11:44 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -68,6 +68,13 @@ CREATE TABLE `nonver_users` (
   `email` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nonver_users`
+--
+
+INSERT INTO `nonver_users` (`fname`, `lname`, `job`, `about`, `pass`, `id`, `verified`, `flag`, `content_count`, `verification_code`, `uname`, `phone`, `email`) VALUES
+('FakeReg', 'Fakename', 'fakeperson', 'it is fake', 'xero', 24, '413024', 0, 0, 0, 'fakereg', '123454321141', 'x3r0.br0@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -118,14 +125,26 @@ INSERT INTO `posts` (`id`, `authorid`, `title`, `content`, `time`, `category`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taglist`
+-- Table structure for table `tag_list`
 --
 
-CREATE TABLE `taglist` (
+CREATE TABLE `tag_list` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tag_list`
+--
+
+INSERT INTO `tag_list` (`id`, `post_id`, `tag_id`) VALUES
+(30, 2, 5),
+(33, 2, 3),
+(34, 2, 4),
+(35, 2, 6),
+(36, 2, 7),
+(37, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +185,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`fname`, `lname`, `uname`, `email`, `phone`, `job`, `about`, `pass`, `id`, `verified`, `flag`, `content_count`, `pro_pic`, `temp_id`, `date_of_birth`, `religion`, `language`, `relation`, `blood`, `nation`, `address`, `gender`, `politics`, `sports`, `hobby`) VALUES
-('Iftekhar Ahmed', 'Arnab', 'arnabxero', 'arnab.xero@gmail.com', '01926496967', 'Software Engineer', 'Hello, I am a passionate programmer and robotics nerd.I am Iftekhar Ahmed Arnab & I am currently studying B.Sc. (Engineering) in Computer Science and Engineering (CSE) at North East University Bangladesh (NEUB). ', 'arnab', 2, 'Y', 0, 0, '2.jpg', NULL, '20 October, 1999', 'Islam', 'Bangla & English', 'Single', 'B+', 'Bangladeshi', 'Nikli, Kishoreganj, Dhaka', 'Male', 'Awameleague', 'Football, Cricket, Badminton', 'Programming, Gaming'),
+('Iftekhar Ahmed', 'Arnab', 'arnabxero', 'arnab.xero@gmail.com', '01926496967', 'Software Engineer', 'Hello, I am a passionate programmer and robotics nerd.I am Iftekhar Ahmed Arnab & I am currently studying B.Sc. (Engineering) in Computer Science and Engineering (CSE) at North East University Bangladesh (NEUB). ', 'arnab', 2, 'Y', 0, 0, '2.jpg', NULL, '20 October, 1999', 'Islam', 'Bangla & English', 'Single', 'B+', 'Bangladeshi', 'Nikli, Kishoreganj, Dhaka', 'Male', 'Neutral', 'Football, Cricket, Badminton', 'Programming, Gaming'),
 ('Ehtimum Rashed', 'Chy', 'ehtimumrashed', 'ehtimum.r@gmail.com', '01922837421', 'Web Developer', 'Welcome to my profile. I am a passionate web developer, graphics designer and gamer.', 'ehtimum', 3, 'Y', 0, 0, '3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('Farjana', 'Rahman', 'farjanarah', 'farjana.rah@gmail.com', '01372637427', 'Front End Developer', 'Hello I am a front end developer and software tester.', 'farjana', 4, 'Y', 0, 0, '4.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('Swdhin', 'Ghosh', 'sghosh', 'sadhin.g@gmail.com', '01637474723', 'Cyber Security Specialist', 'I am a cyber security specialist.', 'swadhin', 5, 'Y', 0, 0, '5.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -176,7 +195,7 @@ INSERT INTO `users` (`fname`, `lname`, `uname`, `email`, `phone`, `job`, `about`
 ('Nusrat', 'Amy', 'nusratamy', 'nusrat.amy@gmail.com', '01594332175', 'Student', 'Hello I am an SSC student.', 'nusrat', 9, 'Y', 0, 0, '9.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('Nipa', 'Talukder', 'nipatk', 'nipa.tk@gmail.com', '01202354563', 'Student', 'Hello I am an High School Student.', 'nipatk', 10, 'Y', 0, 0, '10.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('abcd', 'efgh', 'arnab1234', 'arnab.haxor@gmail.com', '123456765432', 'asdfddsa', 'sadreqwc sd de qde', 'arnab', 19, '1', 0, 0, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('xerobro', 'xerolname', 'xero', 'xero@gmail.com', '12345', 'abcdefg', 'abcdefg', 'xero', 23, NULL, 0, 0, '23.jpg', NULL, 'abcdefg', 'naiga', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg');
+('xerobro', 'xerolname', 'xero', 'xero@gmail.com', '12345', 'abcdefg', 'abcdefg', 'xero', 23, NULL, 0, 0, '23.jpg', NULL, 'abcdefg', 'asdfgh', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg', 'abcdefg');
 
 --
 -- Indexes for dumped tables
@@ -201,9 +220,9 @@ ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `taglist`
+-- Indexes for table `tag_list`
 --
-ALTER TABLE `taglist`
+ALTER TABLE `tag_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -229,7 +248,7 @@ ALTER TABLE `friend_list`
 -- AUTO_INCREMENT for table `nonver_users`
 --
 ALTER TABLE `nonver_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -238,16 +257,16 @@ ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `taglist`
+-- AUTO_INCREMENT for table `tag_list`
 --
-ALTER TABLE `taglist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tag_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

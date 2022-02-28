@@ -5,6 +5,7 @@ include('include/connection.php');
 session_start();
 
 $uid = -99;
+$pid = -99;
 
 if (isset($_SESSION["logid"])) {
     $uid = $_SESSION['logid'];
@@ -13,7 +14,7 @@ if (isset($_SESSION["logid"])) {
 }
 
 
-class create_friendlist
+class create_taglist
 {
     public $class_con;
 
@@ -23,26 +24,19 @@ class create_friendlist
         $this->class_con = $con;
     }
 
-    function check_friendlist($lid, $pid)
+    function check_taglist($pid, $tid)
     {
-        $return_value = false;
+        $rt = false;
+        $ctsql = "SELECT * FROM tag_list WHERE post_id = '$pid' AND tag_id = '$tid'";
 
-        $fsql = "SELECT * FROM friend_list WHERE sid = '$lid' AND rid = '$pid' AND stat = 'a'";
-        $fresult = mysqli_query($this->class_con, $fsql);
-        $fcount = mysqli_num_rows($fresult);
-        if ($fcount > 0) {
-            $return_value = true;
+        $ctres = mysqli_query($this->class_con, $ctsql);
+
+        $ctcount = mysqli_num_rows($ctres);
+
+        if ($ctcount > 0) {
+            $rt = true;
         }
-
-
-        $f2sql = "SELECT * FROM friend_list WHERE sid = '$pid' AND rid = '$lid' AND stat = 'a'";
-        $f2result = mysqli_query($this->class_con, $f2sql);
-        $f2count = mysqli_num_rows($f2result);
-        if ($f2count > 0) {
-            $return_value = true;
-        }
-
-        return $return_value;
+        return $rt;
     }
 
     function get_author_propic($aid)
@@ -62,20 +56,6 @@ class create_friendlist
         return $apic;
     }
 
-    function istagged($pid, $tid){
-        $rt = false;
-
-        $tsql = "SELECT * FROM tag_list WHERE post_id = '$pid' AND tag_id = '$tid'";
-        $res = mysqli_query($this->class_con, $tsql);
-
-        $count = mysqli_num_rows($res);
-
-        if($count>0){
-            $rt = true;
-        }
-        return $rt;
-    }
-
     function generate($uid)
     {
         $slq_pro = "SELECT * FROM users";
@@ -84,30 +64,21 @@ class create_friendlist
 
             $propicid = $class_row_pro['id'];
 
-            $show_or_not = $this->check_friendlist($uid, $propicid);
-
-            $propic_link_prores = $this->get_author_propic($propicid);
-
             $pid = -99;
-            $op = "tag";
-            $tg = '<i class="fas fa-tag"></i> Tag';
 
-            if(isset($_GET['pid'])){
+            if (isset($_GET['pid'])) {
                 $pid = $_GET['pid'];
             }
 
-            if($this->istagged($pid, $class_row_pro['id'])){
-                $tg = '<i class="fas fa-user-tag"></i> Tagged';
-                $op = 'untag';
-            }
+            $show_or_not = $this->check_taglist($pid, $propicid);
+
+            $propic_link_prores = $this->get_author_propic($propicid);
 
             if ($show_or_not) {
                 echo '<div class="card-main">
                 <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row_pro['id'] . '">
                     <img class="profile-pic-home-post" src="' . $propic_link_prores . '">
                 &nbsp' . $class_row_pro['fname'] . ' ' . $class_row_pro['lname'] . '</a>
-
-                <a class="tag-btn" href="subdir/tagadd.php?pid='.$pid.'&tid='.$class_row_pro['id'].'&op='.$op.'">'.$tg.'</a>
             </div>';
             }
         }
@@ -131,7 +102,7 @@ class create_friendlist
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
-    <title>ReachMe - Friend List</title>
+    <title>ReachMe - Tag List</title>
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
 
@@ -150,7 +121,7 @@ class create_friendlist
         <div class="row">
 
             <div class="col-sm-12" style="text-align:center;">
-                <h2><a href="index.php"><img src="files/logo/rm.png" height="50px" width="50px"></a>Tag A Friend</h2>
+                <h2><a href="index.php"><img src="files/logo/rm.png" height="50px" width="50px"></a>Post Tag List</h2>
             </div>
 
 
@@ -169,8 +140,8 @@ class create_friendlist
     <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
         <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
-            <a href="your_contents.php">
-                <h3 style="text-align:center;">Go To Your Content</h3>
+            <a href="index.php">
+                <h3 style="text-align:center;">Go To Home</h3>
             </a>
         </div>
 
@@ -178,7 +149,7 @@ class create_friendlist
             <div class="find-friend" style="text-align: center; margin-top: 10px;">
                 <form id=f1 name="f1" action="" onSubmit="if(this.t1.value!=null && this.t1.value!='')findString(this.t1.value);return false">
                     <input type="text" id="t1" name="t1" value="" size=40>
-                    <input type="submit" name="b1" value="Find a Friend">
+                    <input type="submit" name="b1" value="Find a User">
                 </form>
 
                 <script language="JavaScript">
@@ -202,15 +173,15 @@ class create_friendlist
             </div>
 
             <?php
-            $gen = new create_friendlist();
+            $gen = new create_taglist();
             $gen->get_con();
             $gen->generate($uid);
             ?>
         </div>
 
         <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
-            <a href="profile.php">
-                <h3 style="text-align:center;">Go To Profile</h3>
+            <a href="view_post.php?pid=<?= $_GET['pid'] ?>">
+                <h3 style="text-align:center;">Go To The Post</h3>
             </a>
         </div>
 

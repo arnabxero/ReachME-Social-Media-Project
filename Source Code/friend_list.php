@@ -148,10 +148,29 @@ class create_friendlist
 
         <div class="col-sm-6" style="overflow-y:scroll;" id="home2">
             <div class="find-friend" style="text-align: center; margin-top: 10px;">
-                <form>
-                    <input type="text">
-                    <input type="submit" name="submit" value="Find">
+                <form id=f1 name="f1" action="" onSubmit="if(this.t1.value!=null && this.t1.value!='')findString(this.t1.value);return false">
+                    <input type="text" id="t1" name="t1" value="" size=40>
+                    <input type="submit" name="b1" value="Find a Friend">
                 </form>
+
+                <script language="JavaScript">
+                    var TRange = null;
+
+                    function findString(str) {
+
+                        var strFound;
+
+                        if (window.find) {
+                            strFound = self.find(str);
+
+                            if (!strFound) {
+                                strFound = self.find(str, 0, 1);
+                                while (self.find(str, 0, 1)) continue;
+                            }
+                        }
+                        return true;
+                    }
+                </script>
             </div>
 
             <?php

@@ -126,9 +126,9 @@
 
             <input type="text" name="fname" placeholder="Full Name" id="fname" required>
 
-            <input type="text" name="lname" placeholder="Last Name" id="lname">
+            <input type="text" name="lname" placeholder="Last Name" id="lname" required>
 
-            <input type="text" name="uname" placeholder="User Name" id="uname">
+            <input type="text" name="uname" placeholder="User Name" id="uname" required>
 
             <input type="number" name="mobile" placeholder="Phone No" id="phone" required>
 
@@ -145,7 +145,7 @@
 
 
 
-            <input type="submit" name="submit" value="sign in">
+            <input type="submit" name="submit" value="Sign Up">
 
 
         </form>

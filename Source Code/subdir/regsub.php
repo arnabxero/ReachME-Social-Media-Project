@@ -29,36 +29,28 @@ class uregister
         $job = mysqli_real_escape_string($con, $job);
         $about = mysqli_real_escape_string($con, $about);
 
-        $sql3 = "SELECT * FROM users WHERE uname = '$uname' OR email = '$email'";
 
-        $res3 = mysqli_query($con, $sql3);
-        $row3 = mysqli_fetch_array($res3, MYSQLI_ASSOC);
-        $count = mysqli_num_rows($res3);
+        //insert user into database table --start
+        $sql = "INSERT INTO `nonver_users` (`fname`, `lname`, `uname`, `job`, `pass`, `email`, `phone`, `about`) VALUES ('$fname', '$lname', '$uname', '$job', '$pass', '$email', '$phone', '$about')";
+        $rs = mysqli_query($con, $sql);
+        //insert user into database table --end
 
-        if ($count > 0) {
-            return true;
-        } else {
-            //insert user into database table --start
-            $sql = "INSERT INTO `nonver_users` (`fname`, `lname`, `uname`, `job`, `pass`, `email`, `phone`, `about`) VALUES ('$fname', '$lname', '$uname', '$job', '$pass', '$email', '$phone', '$about')";
-            $rs = mysqli_query($con, $sql);
-            //insert user into database table --end
+        //create a row for that user in database --start
+        $sql2 = "SELECT * FROM nonver_users WHERE uname = '$uname' AND email = '$email' AND pass = '$pass'";
+        $res2 = mysqli_query($con, $sql2);
+        $row = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+        $this->class_uid = $row['id'];
 
-            //create a row for that user in database --start
-            $sql2 = "SELECT * FROM nonver_users WHERE uname = '$uname' AND email = '$email' AND pass = '$pass'";
-            $res2 = mysqli_query($con, $sql2);
-            $row = mysqli_fetch_array($res2, MYSQLI_ASSOC);
-            $this->class_uid = $row['id'];
+        //mail verification email to user email address --start
+        $codegen = rand(0000, 9999);
+        $vercode = $codegen . $this->class_uid;
+        $this->class_link = "<h3><a href='" . $verifymail_website . "subdir/verify_email.php?vcode=" . $vercode . "&id=" . $this->class_uid . "&email=" . $email . "'>Click and Verify Your Email On ReachMe</a></h3>";
 
-            //mail verification email to user email address --start
-            $codegen = rand(0000, 9999);
-            $vercode = $codegen . $this->class_uid;
-            $this->class_link = "<h3><a href='" . $verifymail_website . "subdir/verify_email.php?vcode=" . $vercode . "&id=" . $this->class_uid . "&email=" . $email . "'>Click and Verify Your Email On ReachMe</a></h3>";
+        //verification status insert --start
+        $sql4 = "UPDATE nonver_users SET verified = '" . $vercode . "' WHERE id = " . $this->class_uid;
+        $rs4 = mysqli_query($con, $sql4);
+        //verification status insert --end
 
-            //verification status insert --start
-            $sql4 = "UPDATE nonver_users SET verified = '" . $vercode . "' WHERE id = " . $this->class_uid;
-            $rs4 = mysqli_query($con, $sql4);
-            //verification status insert --end
-        }
     }
 
     function mail_the_code()
@@ -122,6 +114,3 @@ if ($register_user->mail_the_code()) {
 } else {
     echo "Registration Failed";
 }
-
-
-?>

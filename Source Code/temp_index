@@ -38,7 +38,7 @@ function get_uname($aid)
     $ares = mysqli_query($con, $asql);
 
     while ($class_arow = mysqli_fetch_assoc($ares)) {
-        $rt_val = $class_arow['fname'] . ' ' . $class_arow['lname'];
+        $rt_val = $class_arow['fname'].' '.$class_arow['lname'];
     }
 
     return $rt_val;
@@ -197,15 +197,6 @@ class post_card_creation
     
                     <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
     
-                    <div class="dropdown" style="float: right; margin-top: -60px;">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
-                    </ul>
-                    </div>
-            
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
@@ -244,16 +235,7 @@ class post_card_creation
                         echo '<div class="card-main">
     
                         <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
-                        
-                        <div class="dropdown" style="float: right; margin-top: -60px;">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
-                    </ul>
-                    </div>
-
+    
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
