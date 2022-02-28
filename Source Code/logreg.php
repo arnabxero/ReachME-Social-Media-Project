@@ -24,23 +24,40 @@
         <img src="files/logo/rm.png" height="70px" width="70px" style="margin-top: 30px;">
     </a>
 
-    <hr>
-    <br>
-    <h2>Login to Your Account</h2>
-    <br><br>
-    <a class="home-dg-bt" href="login.php">Log In</a>
-    <br>
-    <br>
-    <hr>
-    <hr>
-    <br>
-    <h2>Don't have an account? Create one now!</h2>
-    <br><br>
-    <a class="home-dg-bt" href="registration.php">Sign Up</a>
-    <br>
-    <br>
-    <hr>
+    <div class="container">
+        <div class="row">
 
+            <div class="col-sm-2">
+            </div>
+
+            <div class="col-sm-8">
+                <hr>
+                <h2>Login to Your Account</h2>
+                <br><br>
+                <a class="home-dg-bt" href="login.php">Log In</a>
+                <br>
+                <br>
+                <hr>
+                <h2>Don't have an account? Create one now!</h2>
+                <br><br>
+                <a class="home-dg-bt" href="registration.php">Sign Up</a>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <h3>Forgot Password?</h3>
+                <br><br>
+                <a class="home-dg-bt" style="padding: 10px; font-size:16px; color:black; background-color:#f7ffd2;" href="forgot_pass.php">Recover Your Account!</a>
+                <br>
+                <br>
+                <hr>
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+        </div>
+    </div>
 
 </body>
 

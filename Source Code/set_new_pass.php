@@ -1,5 +1,28 @@
+<?php
+include('include/connection.php');
+
+$dialog = "";
+
+$disp = "";
+
+if (isset($_POST['submit'])) {
+    $uid = $_POST['id'];
+    $vercode = $_POST['vcode'];
+    $pass = $_POST['pass'];
+
+    $sql = "UPDATE users SET pass = '$pass' WHERE id = '$uid' && temp_id2 = '$vercode'";
+    $res = mysqli_query($con, $sql);
+
+    if ($res) {
+        $disp = "display: hidden";
+        $dialog = "<h3>Password Updated Successfully, Please <a style='font-size:20px;' href='login.php'>Login</a></h3>";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +35,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
 
-    <title> Login - ReachMe </title>
+    <title> Set New Password - ReachMe </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <style>
         * {
@@ -34,9 +57,7 @@
         }
 
         .reg {
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
+            width: 600px;
             background-color: #ffffff;
             box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
             margin: 100px auto;
@@ -47,14 +68,15 @@
             text-align: center;
             color: #0e1116;
             font-size: 24px;
-            padding: 40px 0 20px 0;
+            padding: 20px 0 20px 0;
+            border-bottom: 1px solid #080803;
         }
 
         .reg form {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding-top: 0;
+            padding-top: 20px;
         }
 
         .reg form label {
@@ -81,8 +103,10 @@
             padding: 0 15px;
         }
 
+
+
         .reg form input[type="submit"] {
-            width: 50%;
+            width: 100%;
             padding: 15px;
             margin-top: 20px;
             background-color: #08101b;
@@ -109,21 +133,27 @@
     <a href="index.php">
         <img src="files/logo/rm.png" height="70px" width="70px" style="margin-top: 30px;">
     </a>
-
     <div class="reg">
-        <h3> Welcome </h3>
-        <form name="myform" method="POST" action='subdir/logsub.php' onsubmit="return checkForm()">
-
-            <input type="text" name="emailusername" placeholder="User Name or Email" required>
+        <h3> Recover Account - New Password Set </h3>
+        <?= $dialog ?>
+        <form name="myform" align="center" method="POST" action='set_new_pass.php' onsubmit="return checkForm()">
 
             <input type="password" name="pass" placeholder="Password" id="pass" required>
 
-            <input type="submit" name="submit" value="Login">
+            <input type="password" name="cpass" placeholder="Confirm Password" id="cpass" required>
+
+            <?php
+            if (isset($_GET['id']) && isset($_GET['vcode'])) {
+                $id = $_GET['id'];
+                $vcode = $_GET['vcode'];
+            }
+            ?>
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="vcode" value="<?= $vcode ?>">
+
+            <input type="submit" name="submit" value="Change">
 
         </form>
-
-        <br><a href="forgot_pass.php">Forgot Password?</a>
-
     </div>
 
 
@@ -131,13 +161,10 @@
         function checkForm() {
             let x = document.forms["myform"]["pass"].value;
 
-            let y = document.forms["myform"]["emailusername"].value;
+            let y = document.forms["myform"]["cpass"].value;
 
-            if (x == "") {
-                alert("Please Fill The Name or Email Field!");
-                return false;
-            } else if (y == "") {
-                alert("Please Fill The Password Field!");
+            if (x != y) {
+                alert("Passwords doesn't Match!");
                 return false;
             }
             return true;

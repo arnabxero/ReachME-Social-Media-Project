@@ -143,10 +143,10 @@ span {
 }
 
 .home-dg-bt {
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: #faffaf;
   color: black;
-  padding: 20px;
+  padding: 10px;
   text-decoration: none;
   font-weight: bold;
   font-size: 20px;
@@ -280,7 +280,7 @@ span {
 .up-file-btn {
   width: 100%;
   padding: 5px;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   background-color: #ff8e8e;
   box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: var(--transition-speed);
@@ -309,4 +309,15 @@ span {
   color: rgb(255, 255, 255);
   background-color: rgb(3, 82, 0);
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.small-btn {
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  border-radius: 3px;
+  font-size: 20px;
+  font-weight: bold;
 }
