@@ -321,3 +321,74 @@ span {
   font-size: 20px;
   font-weight: bold;
 }
+
+.main-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.updt-lbl {
+  margin-left: -340px;
+}
+
+@media only screen and (max-width: 600px) {
+  .update-pro-label {
+    font-size: 12px;
+    margin-right: 0px;
+    margin-top: 20px;
+  }
+
+  .updt-lbl {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  body {
+    font-size: 12px;
+  }
+
+  .main-title {
+    font-size: 16px;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+
+  .profile-details-param,
+  .profile-details {
+    font-size: 12px;
+  }
+
+  .cdp-btn {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    text-align: center;
+    width: 40%;
+  }
+  .pro-btn,
+  .pro-btn-dropup {
+    font-size: 12px;
+    padding: 5px;
+    display: block;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .cdp-form {
+    margin-top: 5px;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+}

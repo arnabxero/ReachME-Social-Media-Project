@@ -395,7 +395,7 @@ class post_card_creation
     <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
         <!-- Promotional Content -->
-        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
+        <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promoted Content</h3>
             <?php
             // $gen_post_list = new post_card_creation();
@@ -414,7 +414,7 @@ class post_card_creation
         </div>
 
         <!-- Alert Type Content -->
-        <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
+        <div class="col-sm-3 hide-in-mobile" style="overflow-y:scroll;" id="home3">
             <h3 style="text-align:center;">Alerts</h3>
             <?php
             // $gen_post_list = new post_card_creation();

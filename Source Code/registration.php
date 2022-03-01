@@ -107,6 +107,12 @@
             background-color: #2868c7;
             transition: background-color 0.2s;
         }
+
+        @media only screen and (max-width: 600px) {
+            .reg {
+                width: 95%;
+            }
+        }
     </style>
 
 
@@ -121,34 +127,37 @@
     </a>
     <div class="reg">
         <h3> Welcome </h3>
-        <form name="myform" align="center" method="POST" action='subdir/regsub.php' onsubmit="return checkPass()">
+
+        <div class="row">
+            <div class="col-12">
+                <form name="myform" align="center" method="POST" action='subdir/regsub.php' onsubmit="return checkPass()">
 
 
-            <input type="text" name="fname" placeholder="Full Name" id="fname" required>
+                    <input type="text" name="fname" placeholder="First Name" id="fname" required>
 
-            <input type="text" name="lname" placeholder="Last Name" id="lname" required>
+                    <input type="text" name="lname" placeholder="Last Name" id="lname" required>
 
-            <input type="text" name="uname" placeholder="User Name" id="uname" required>
+                    <input type="text" name="uname" placeholder="User Name" id="uname" required>
 
-            <input type="number" name="mobile" placeholder="Phone No" id="phone" required>
+                    <input type="number" name="mobile" placeholder="Phone No" id="phone" required>
 
-            <input type="email" name="uemail" placeholder="Email" id="email" required>
+                    <input type="email" name="uemail" placeholder="Email" id="email" required>
 
-            <input type="text" name="job" placeholder="Job" id="job">
+                    <input type="text" name="job" placeholder="Job" id="job">
 
-            <input type="text" name="about" placeholder="About" id="about">
+                    <input type="text" name="about" placeholder="About" id="about">
 
-            <input type="password" name="password" placeholder="Password" id="password" required>
+                    <input type="password" name="password" placeholder="Password" id="password" required>
 
-            <input type="password" name="pass" placeholder="Confirm Password" id="pass" required>
+                    <input type="password" name="pass" placeholder="Confirm Password" id="pass" required>
 
-
-
-
-            <input type="submit" name="submit" value="Sign Up">
+                    <input type="submit" name="submit" value="Sign Up">
 
 
-        </form>
+                </form>
+
+            </div>
+        </div>
     </div>
 
 

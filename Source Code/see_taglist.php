@@ -139,7 +139,7 @@ class create_taglist
     <!-- Homepage Content pane start -->
     <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
-        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
+        <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <a href="index.php">
                 <h3 style="text-align:center;">Go To Home</h3>
             </a>
@@ -179,7 +179,7 @@ class create_taglist
             ?>
         </div>
 
-        <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
+        <div class="col-sm-3 hide-in-mobile" style="overflow-y:scroll;" id="home3">
             <a href="view_post.php?pid=<?= $_GET['pid'] ?>">
                 <h3 style="text-align:center;">Go To The Post</h3>
             </a>

@@ -235,6 +235,29 @@ $up_profile->show_profile();
             background-color: #2868c7;
             transition: background-color 0.2s;
         }
+
+        .cng-width {
+            text-align: right;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .reg {
+                width: 95%;
+            }
+
+            .reg form input[type="password"],
+            .reg form input[type="text"],
+            .reg form input[type="email"],
+            .reg form input[type="number"] {
+                font-size: 12px;
+                width: 120%;
+                border: 1px solid #10081a;
+            }
+
+            .cng-width {
+                width: 35%;
+            }
+        }
     </style>
 
 
@@ -247,13 +270,13 @@ $up_profile->show_profile();
     <a href="index.php">
         <img src="files/logo/rm.png" height="70px" width="70px" style="margin-top: 30px;">
     </a>
-    <div class="reg">
+    <div class="reg update-pro">
         <h3> Update Your Profile </h3>
         <form name="myform" align="center" method="POST" action='subdir/update_profile.php'>
 
-            <div style="margin-left: -340px;">
+            <div class="updt-lbl">
                 <div class="row">
-                    <div class="col-sm-6" style="text-align: right;">
+                    <div class="col-6 cng-width">
                         <p class="update-pro-label">
                             First Name :
                         </p><br>
@@ -308,7 +331,7 @@ $up_profile->show_profile();
                         </p><br>
                     </div>
 
-                    <div class="col-sm-6" style="text-align: left;">
+                    <div class="col-6" style="text-align: left;">
                         <input type="text" name="fname" placeholder="First Name" id="fname" value="<?= $up_profile->fname ?>" required>
 
                         <input type="text" name="lname" placeholder="Last Name" id="lname" value="<?= $up_profile->lname ?>" required>

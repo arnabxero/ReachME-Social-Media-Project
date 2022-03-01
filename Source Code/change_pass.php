@@ -89,6 +89,11 @@
             background-color: #2868c7;
             transition: background-color 0.2s;
         }
+        @media only screen and (max-width: 600px) {
+            .reg {
+                width: 95%;
+            }
+        }
     </style>
 
 
@@ -107,11 +112,6 @@
 
 
             <input type="password" name="old_pass" placeholder="Old Password" id="oldpass">
-
-
-
-
-
 
             <input type="submit" name="submit" value="Change">
 

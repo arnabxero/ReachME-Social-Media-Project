@@ -149,7 +149,7 @@ if (isset($_SESSION['logid'])) {
         <img src="files/logo/rm.png" height="70px" width="70px">
     </a>
 
-    <h2 style="text-align:center; font-weight:bold;">Your Profile</h2>
+    <span class="main-title">Your Profile</span>
     <hr>
 
     <div class="container">
@@ -165,9 +165,6 @@ if (isset($_SESSION['logid'])) {
                 <?= $dp_dialog ?>
 
                 <button class="cdp-btn" id="toggle">Change DP <i class="fas fa-caret-square-down"></i></button>
-
-                <span><a href="#"></a></span>
-
                 <div class="cdp-form" id="upl" style="display: none;">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <input class="up-file-dp" type="file" name="image" />
@@ -193,7 +190,7 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
 
                 <span class="profile-details-param"><i class="fas fa-user"></i> Name : </span>
                 <span class="profile-details-param"><i class="fas fa-link"></i> Username : </span>
@@ -203,7 +200,7 @@ if (isset($_SESSION['logid'])) {
 
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
 
                 <span class="profile-details"><?= $name ?></span>
                 <span class="profile-details"><?= $username ?></span>
@@ -217,24 +214,24 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-2">
             </div>
 
-            <div class="col-sm-8" style="text-align:center;">
-                <span class="profile-details-param" style="font-size:24px;">About</span>
+            <div class="col-8" style="text-align:center;">
+                <span class="main-title">About</span>
                 <p class="profile-details"><?= $about ?></p>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-2">
             </div>
         </div>
 
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
 
-                <span class="profile-details-param" style="font-size:24px;">Personal</span>
+                <span class="main-title">Personal</span>
                 <br>
 
                 <span class="profile-details-param"><i class="fas fa-birthday-cake"></i> Date of Birth : </span>
@@ -251,9 +248,9 @@ if (isset($_SESSION['logid'])) {
 
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
 
-                <span class="profile-details-param" style="font-size:24px;">Information</span>
+                <span class="main-title">Information</span>
                 <br>
 
                 <span class="profile-details"><?= $dob ?></span>
@@ -274,11 +271,11 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
                 <span class="profile-details-param"><i class="fas fa-flag"></i> Report Flags : </span>
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
                 <span class="profile-details"><?= $flags ?></span>
             </div>
         </div>
@@ -286,14 +283,13 @@ if (isset($_SESSION['logid'])) {
         <hr>
         <br>
         <div class="row">
-            <div class="col-sm-5" style="text-align:right;">
+            <div class="col-lg-5" style="text-align:right;">
                 <a class="pro-btn" href="your_contents.php">Your Contents</a>
                 <a class="pro-btn" href="friend_list.php">Friend List</a>
             </div>
-            <div class="col-sm-2" style="text-align:center;">
 
 
-
+            <div class="col-lg-2" style="text-align:center;">
                 <div class="btn-group dropup">
                     <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split pro-btn-dropup" data-bs-toggle="dropdown" aria-expanded="false">
                         Update Profile
@@ -310,7 +306,7 @@ if (isset($_SESSION['logid'])) {
 
             </div>
 
-            <div class="col-sm-5" style="text-align:left;">
+            <div class="col-lg-5" style="text-align:left;">
                 <a class="pro-btn" href="subdir/logout.php">Log Out</a>
                 <a class="pro-btn" href="delete_acc.php">Delete Account</a>
             </div>

@@ -190,7 +190,7 @@ class post_card_creation
     <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
         <!-- Promotional Content -->
-        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
+        <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <a href="index.php">
                 <h3 style="text-align:center;">Go To Home</h3>
             </a>
@@ -209,7 +209,7 @@ class post_card_creation
         </div>
 
         <!-- Alert Type Content -->
-        <div class="col-sm-3" style="overflow-y:scroll;" id="home3">
+        <div class="col-sm-3 hide-in-mobile" style="overflow-y:scroll;" id="home3">
             <a href="profile.php">
                 <h3 style="text-align:center;">Go To Profile</h3>
             </a>

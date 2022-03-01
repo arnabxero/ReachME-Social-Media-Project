@@ -121,6 +121,12 @@ if (isset($_SESSION['logid'])) {
             background-color: #2868c7;
             transition: background-color 0.2s;
         }
+
+        @media only screen and (max-width: 600px) {
+            .reg {
+                width: 95%;
+            }
+        }
     </style>
 
 

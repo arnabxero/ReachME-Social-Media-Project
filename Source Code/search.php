@@ -236,7 +236,26 @@ if (isset($_SESSION["logid"])) {
 
 
     <style>
+        .srch-panel {
+            float: left;
+        }
 
+        .textbox {
+            padding: 2%;
+            margin-left: 300px;
+            width: 650px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .srch-panel {
+                text-align: left;
+            }
+            .textbox {
+               margin-left: 0px;
+               width: 270px;
+            }
+           
+        }
     </style>
 </head>
 
@@ -253,9 +272,9 @@ if (isset($_SESSION["logid"])) {
                 <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
             </a>
             <form method="GET" action="search.php">
-                <div class="form-group" style="float:left;">
-                    <div class="input-group" style="padding: 2%; margin-left:300px; width: 650px;">
-                        <input type="search" name="q" class="form-control" placeholder="Search..." value="<?= $search_string ?>" />
+                <div class="form-group srch-panel">
+                    <div class="input-group textbox">
+                        <input type="search" name="q" class="form-control tbox" placeholder="Search..." value="<?= $search_string ?>" />
                         <button type="submit" class="btn btn-primary" style="background-color: #6c6d30;">
                             <i class="fas fa-search"></i>
                         </button>
@@ -281,7 +300,7 @@ if (isset($_SESSION["logid"])) {
     <div class="row" style="background-color:aliceblue;">
 
         <!-- Promotional Content -->
-        <div class="col-sm-3 home1" style="overflow-y:scroll;" id="home1">
+        <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promotional</h3>
             <hr>
 

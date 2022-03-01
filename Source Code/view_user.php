@@ -20,6 +20,10 @@ $rstat = "Undefined";
 $bg = "Undefined";
 $nat = "Undefined";
 $addr = "Undefined";
+$gen = "Undefined";
+$pol = "Undefined";
+$spo = "Undefined";
+$hobb = "Undfined";
 
 $id = -99;
 
@@ -50,6 +54,10 @@ if (isset($_SESSION['logid'])) {
         $bg = $row['blood'];
         $nat = $row['nation'];
         $addr = $row['address'];
+        $gen = $row['gender'];
+        $pol = $row['politics'];
+        $spo = $row['sports'];
+        $hobb = $row['hobby'];
     }
 } else {
     header('Location: logreg.php');
@@ -108,7 +116,7 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
 
                 <span class="profile-details-param"><i class="fas fa-user"></i> Name : </span>
                 <span class="profile-details-param"><i class="fas fa-link"></i> Username : </span>
@@ -118,7 +126,7 @@ if (isset($_SESSION['logid'])) {
 
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
 
                 <span class="profile-details"><?= $name ?></span>
                 <span class="profile-details"><?= $username ?></span>
@@ -132,22 +140,22 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-2">
             </div>
 
-            <div class="col-sm-8" style="text-align:center;">
+            <div class="col-8" style="text-align:center;">
                 <span class="profile-details-param" style="font-size:24px;">About</span>
                 <p class="profile-details"><?= $about ?></p>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-2">
             </div>
         </div>
 
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
 
                 <span class="profile-details-param" style="font-size:24px;">Personal</span>
                 <br>
@@ -159,10 +167,14 @@ if (isset($_SESSION['logid'])) {
                 <span class="profile-details-param"><i class="fas fa-ambulance"></i> Blood Group : </span>
                 <span class="profile-details-param"><i class="fas fa-globe"></i> Nationality : </span>
                 <span class="profile-details-param"><i class="fas fa-map-marker-alt"></i> Address : </span>
+                <span class="profile-details-param"><i class="fas fa-venus-mars"></i> Gender : </span>
+                <span class="profile-details-param"><i class="fas fa-landmark"></i> Political View : </span>
+                <span class="profile-details-param"><i class="fas fa-running"></i> Sports : </span>
+                <span class="profile-details-param"><i class="fas fa-code"></i> Hobby : </span>
 
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
 
                 <span class="profile-details-param" style="font-size:24px;">Information</span>
                 <br>
@@ -174,6 +186,10 @@ if (isset($_SESSION['logid'])) {
                 <span class="profile-details"><?= $bg ?></span>
                 <span class="profile-details"><?= $nat ?></span>
                 <span class="profile-details"><?= $addr ?></span>
+                <span class="profile-details"><?= $gen ?></span>
+                <span class="profile-details"><?= $pol ?></span>
+                <span class="profile-details"><?= $spo ?></span>
+                <span class="profile-details"><?= $hobb ?></span>
 
             </div>
         </div>
@@ -181,11 +197,11 @@ if (isset($_SESSION['logid'])) {
         <hr>
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:right;">
+            <div class="col-6" style="text-align:right;">
                 <span class="profile-details-param"><i class="fas fa-flag"></i> Report Flags : </span>
             </div>
 
-            <div class="col-sm-6" style="text-align:left;">
+            <div class="col-6" style="text-align:left;">
                 <span class="profile-details"><?= $flags ?></span>
             </div>
         </div>
