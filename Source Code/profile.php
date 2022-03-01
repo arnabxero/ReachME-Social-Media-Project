@@ -92,6 +92,8 @@ if (isset($_SESSION['logid'])) {
 
         $extensions = array("jpeg", "jpg", "png");
 
+        push_profile_photo_string_to_db($id, $new_file_name);
+
         if (in_array($file_ext, $extensions) === false) {
             $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
             $dp_dialog = "<p style='Color: red; font-weight: bold;'>extension not allowed, please choose a JPEG or PNG file.</p>";
@@ -105,7 +107,6 @@ if (isset($_SESSION['logid'])) {
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, "ext-files/user/" . $new_file_name);
             $dp_dialog = "<p style='Color: green; font-weight: bold;'>Profile Picture Updated</p>";
-            push_profile_photo_string_to_db($id, $new_file_name);
         } else {
             $dp_dialog = $dp_dialog . "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
         }
@@ -170,7 +171,7 @@ if (isset($_SESSION['logid'])) {
                 <div class="cdp-form" id="upl" style="display: none;">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <input class="up-file-dp" type="file" name="image" />
-                        <input class="up-file-btn" type="submit" value="Change Profile Photo" />
+                        <input class="up-file-btn" type="submit" name="submit" value="Change Profile Photo" />
                     </form>
                 </div>
                 <br>
