@@ -327,8 +327,91 @@ span {
   font-weight: bold;
 }
 
+.create-post-form {
+  text-align: center;
+}
+
 .updt-lbl {
   margin-left: -340px;
+}
+
+.select-btn {
+  padding: 5px;
+  color: rgb(255, 251, 191);
+  background-color: rgb(28, 1, 105);
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5px;
+  border: 0px;
+  transition: var(--transition-speed);
+}
+
+.select-btn:hover {
+  color: rgb(28, 1, 105);
+  background-color: rgb(255, 250, 176);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.emoji-btn {
+  padding: 5px;
+  color: rgb(255, 250, 173);
+  background-color: rgb(65, 65, 65);
+  border-radius: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5px;
+  transition: var(--transition-speed);
+}
+
+.emoji-btn:hover {
+  color: rgb(65, 65, 65);
+  background-color: rgb(255, 250, 176);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.post-btn {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgb(255, 255, 155);
+  border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: var(--transition-speed);
+}
+
+
+.post-btn:hover {
+  color: rgb(255, 255, 155);
+  background-color: rgb(73, 73, 73);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.post-btn-home {
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  margin-left: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgb(255, 255, 155);
+  border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: var(--transition-speed);
+}
+
+
+.post-btn-home:hover {
+  color: rgb(255, 255, 155);
+  background-color: rgb(73, 73, 73);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
 @media only screen and (max-width: 600px) {

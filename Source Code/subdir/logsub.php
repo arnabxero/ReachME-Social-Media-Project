@@ -16,7 +16,7 @@ class ulogin
         $password = mysqli_real_escape_string($con, $password);
 
 
-        $sql = "SELECT * FROM users WHERE uname = '$emailusername' or email = '$emailusername' and pass = '$password'";
+        $sql = "SELECT * FROM users WHERE (uname = '$emailusername' OR email = '$emailusername') AND pass = '$password'";
 
         $result = mysqli_query($con, $sql);
 

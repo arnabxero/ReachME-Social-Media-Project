@@ -4,6 +4,7 @@ include('include/connection.php');
 
 $username = "Guest";
 $display = " ";
+$display2 = "display: none;";
 
 $own_profile_link = "logreg.php";
 $loguser_propic = "ext-files/user/default.jpg";
@@ -47,6 +48,7 @@ function get_uname($aid)
 
 if (isset($_SESSION["logid"])) {
     $display = "display:none;";
+    $display2 = "";
     $own_profile_link = "profile.php";
     $ulogid = $_SESSION["logid"];
 
@@ -321,9 +323,9 @@ class post_card_creation
         <div class="row">
             <!--Search Bar Start-->
             <div class="col-sm-4">
-
-                <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
-
+                <a href="index.php">
+                    <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
+                </a>
                 <form method="GET" action="search.php">
                     <div class="form-group" style="float:left;">
                         <div class="input-group" style="padding: 2%; margin-top:2%;">
@@ -382,6 +384,7 @@ class post_card_creation
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><a class="dropdown-item" href="edit_profile.php">Update Profile</a></li>
                             <li><a class="dropdown-item" href="delete_acc.php">Disable Account</a></li>
+                            <li><a class="dropdown-item" href="subdir/logout.php">Logout Account</a></li>
                         </ul>
                     </div>
                 </div>
@@ -397,15 +400,22 @@ class post_card_creation
         <!-- Promotional Content -->
         <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promoted Content</h3>
+            <hr>
             <?php
-            // $gen_post_list = new post_card_creation();
-            // $gen_post_list->get_con($con);
-            // $gen_post_list->generate_card('promoted');
+            $gen_post_list = new post_card_creation();
+            $gen_post_list->get_con($con);
+            $gen_post_list->generate_card('promoted', $ulogid);
             ?>
         </div>
 
         <!-- Personalized Content -->
         <div class="col-sm-6" style="overflow-y:scroll;" id="home2">
+            <a style="text-decoration:none;" href="create_post.php">
+                <div class="post-btn-home" style="<?= $display2 ?>">
+                    Create A New Post
+                </div>
+            </a>
+            <hr>
             <?php
             $gen_post_list = new post_card_creation();
             $gen_post_list->get_con($con);
@@ -416,10 +426,11 @@ class post_card_creation
         <!-- Alert Type Content -->
         <div class="col-sm-3 hide-in-mobile" style="overflow-y:scroll;" id="home3">
             <h3 style="text-align:center;">Alerts</h3>
+            <hr>
             <?php
-            // $gen_post_list = new post_card_creation();
-            // $gen_post_list->get_con($con);
-            // $gen_post_list->generate_card('alert');
+            $gen_post_list = new post_card_creation();
+            $gen_post_list->get_con($con);
+            $gen_post_list->generate_card('alert', $ulogid);
             ?>
         </div>
 

@@ -2,7 +2,218 @@
 include('include/connection.php');
 session_start();
 
+if(!isset($_SESSION['logid'])){
+    header('Location: logreg.php');
+}
 
+class post_card_creation
+{
+    public $class_con;
+
+    function get_con($con)
+    {
+        $this->class_con = $con;
+    }
+
+    function get_author_propic($aid)
+    {
+        $apic = "ext-files/user/default.jpg";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            if (!(empty($class_arow['pro_pic']))) {
+                $apic = "ext-files/user/" . $class_arow['pro_pic'];
+            }
+        }
+
+        return $apic;
+    }
+
+    function get_authorname($aid)
+    {
+        $aname = "Undefined";
+
+        $asql = "SELECT * FROM users WHERE id = '$aid'";
+
+        $ares = mysqli_query($this->class_con, $asql);
+
+        while ($class_arow = mysqli_fetch_assoc($ares)) {
+            $aname = $class_arow['fname'] . " " . $class_arow['lname'];
+        }
+
+        return $aname;
+    }
+
+    //Function to check logged in user is in post author's friendlist in the case of a friends only post
+    function check_friendlist($lid, $pid)
+    {
+        $return_value = false;
+
+        $fsql = "SELECT * FROM friend_list WHERE sid = '$lid' AND rid = '$pid' AND stat = 'a'";
+        $fresult = mysqli_query($this->class_con, $fsql);
+        $fcount = mysqli_num_rows($fresult);
+        if ($fcount > 0) {
+            $return_value = true;
+        }
+
+
+        $f2sql = "SELECT * FROM friend_list WHERE sid = '$pid' AND rid = '$lid' AND stat = 'a'";
+        $f2result = mysqli_query($this->class_con, $f2sql);
+        $f2count = mysqli_num_rows($f2result);
+        if ($f2count > 0) {
+            $return_value = true;
+        }
+
+        return $return_value;
+    }
+
+    function generate_card($htype, $ulogid)
+    {
+        $class_logid = $ulogid;
+
+        $class_home_type = $htype;
+
+        $sql = "SELECT * FROM posts WHERE privacy = 'p'";
+
+        if ($class_logid != -99) {
+            $sql = "SELECT * FROM posts";
+        }
+
+        $res = mysqli_query($this->class_con, $sql);
+        $type = "none";
+
+        while ($class_row = mysqli_fetch_assoc($res)) {
+            $type = $class_row['category'];
+            $id = $class_row['id'];
+            $auth_id = $class_row['authorid'];
+            $media_tag = 'img';
+            $time = $class_row['time'];
+            $privacy_show = "Undefined";
+            $height = "auto";
+            $propic_link = $this->get_author_propic($class_row['authorid']);
+
+            $authorname = $this->get_authorname($class_row['authorid']);
+            $show_or_not = false;
+
+            $priv = $class_row['privacy'];
+
+            if ($priv == 'p') {
+                $privacy_show = '<i class="fas fa-globe-americas"></i> Public';
+                $show_or_not = true;
+            } else {
+                $privacy_show = '<i class="fas fa-user-friends"></i> Friends';
+                if ($this->check_friendlist($auth_id, $class_logid)) {
+                    $show_or_not = true;
+                }
+            }
+
+            if ($show_or_not == true) {
+
+
+                if ($class_home_type == 'all') {
+                    if ($type == 'photo') {
+                        $media_tag = 'img';
+                    } else if ($type == 'video') {
+                        $media_tag = 'iframe';
+                        $height = "400";
+                    }
+
+                    echo '<div class="card-main">
+    
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
+    
+                    <div class="dropdown" style="float: right; margin-top: -60px;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
+                    </ul>
+                    </div>
+            
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                    </div>
+    
+                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=share" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+                } else {
+                    if ($type == $class_home_type) {
+                        if ($type == 'photo') {
+                            $media_tag = 'img';
+                        } else if ($type == 'video') {
+                            $media_tag = 'iframe';
+                            $height = "400";
+                        }
+
+                        echo '<div class="card-main">
+    
+                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
+                        
+                        <div class="dropdown" style="float: right; margin-top: -60px;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="post-text">
+                        <span>' . $class_row['content'] . '</span>
+                    </div>
+    
+                    <div style="margin-bottom: 30px;">
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                    </div>
+    
+                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
+                        <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See More <i class="fas fa-expand-alt"></i></div>
+                    </a>
+    
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
+                        <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
+                        <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
+                        <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                    </a>
+                    <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=share" title="Share">
+                        <div class="card-button"><i class="fas fa-share-square"></i></div>
+                    </a>
+    
+                </div>';
+                    }
+                }
+            }
+        }
+    }
+}
 class search_result_generation
 {
     public $class_search_string;
@@ -92,6 +303,7 @@ class search_result_generation
             $class_logid = $_SESSION['logid'];
             $time = $class_row['time'];
             $privacy_show = "Undefined";
+            $height = "auto";
 
 
             $propic_link = $this->get_author_propic($class_row['authorid']);
@@ -101,6 +313,7 @@ class search_result_generation
 
             if ($class_row['category'] == 'video') {
                 $media_tag = 'iframe';
+                $height = '400';
             }
 
             if ($class_row['privacy'] == 'p') {
@@ -125,7 +338,7 @@ class search_result_generation
                     </div>
     
                     <div style="margin-bottom: 30px;">
-                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="auto" width="100%" controlsList="nodownload"></' . $media_tag . '>
+                        <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="'.$height.'" width="100%" controlsList="nodownload"></' . $media_tag . '>
                     </div>
     
                     <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
@@ -281,7 +494,7 @@ if (isset($_SESSION["logid"])) {
                     </div>
                 </div>
                 <label for="type">Filter Category</label><br>
-                <select id="type" name="type">
+                <select class="select-btn" id="type" name="type">
                     <option value="all" <?= $all_active ?>>ALL TYPE</option>
                     <option value="text" <?= $text_active ?>>TEXT</option>
                     <option value="photo" <?= $photo_active ?>>PHOTO</option>
@@ -302,6 +515,11 @@ if (isset($_SESSION["logid"])) {
         <!-- Promotional Content -->
         <div class="col-sm-3 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
             <h3 style="text-align:center;">Promotional</h3>
+            <?php
+            $gen_post_list = new post_card_creation();
+            $gen_post_list->get_con($con);
+            $gen_post_list->generate_card('promoted', $_SESSION['logid']);
+            ?>
             <hr>
 
         </div>
