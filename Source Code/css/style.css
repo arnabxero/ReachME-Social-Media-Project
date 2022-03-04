@@ -61,6 +61,36 @@
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
+.commentbox {
+  text-align: justify;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.commentbox:hover {
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.commentnow {
+  width: 30%;
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 30px;
+  color: black;
+  float: left;
+  background-color: rgb(255, 255, 155);
+  border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: var(--transition-speed);
+}
+
 .profile-pic-home-post {
   border-radius: 50px;
   height: 50px;

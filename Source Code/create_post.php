@@ -179,7 +179,7 @@ if (isset($_SESSION["logid"])) {
 
 
 
-                <form class="create-post-form" method="POST" action="post_now.php">
+                <form class="create-post-form" method="POST" action="subdir/post_now.php">
                     <a title="View User Profile" class="unformatted-link homepage-poster-name" href="profile.php">
                         <img class="profile-pic-home-post" src="<?= $loguser_propic ?>">
                         <?= $username ?>
@@ -208,7 +208,7 @@ if (isset($_SESSION["logid"])) {
                                 <div class="hidden" id="filebox">
                                     <label>Attach A File</label>
                                     <div class="create-post-file">
-                                        <input class="up-file-dp" type="file" name="image" />
+                                        <input class="up-file-dp" type="file" name="file" />
                                     </div>
                                 </div>
 

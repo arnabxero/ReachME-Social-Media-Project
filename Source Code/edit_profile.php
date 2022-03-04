@@ -1,6 +1,10 @@
 <?php
+include('include/connection.php');
+session_start();
 
-
+if(!isset($_SESSION['logid'])){
+    header('Location: logreg.php');
+}
 
 class update_profile
 {
@@ -27,7 +31,6 @@ class update_profile
     {
 
         include('include/connection.php');
-        session_start();
 
         $user =  $_SESSION["logUname"];
         $uemail = $_SESSION["logEmail"];

@@ -172,7 +172,7 @@ class post_card_creation
             $authorname = $this->get_authorname($class_row['authorid']);
             $show_or_not = false;
 
-            $menulink = "subdir/modify_post.php?pid=".$id."&getback=true";
+            $menulink = "subdir/modify_post.php?pid=" . $id . "&getback=true";
 
             $priv = $class_row['privacy'];
 
@@ -189,8 +189,10 @@ class post_card_creation
                 }
             }
 
-            if ($_SESSION['logid'] == $auth_id) {
-                $show_or_not = true;
+            if (isset($_SESSION['logid'])) {
+                if ($_SESSION['logid'] == $auth_id) {
+                    $show_or_not = true;
+                }
             }
 
             if ($show_or_not == true) {
@@ -208,9 +210,10 @@ class post_card_creation
     
                     <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>';
 
+                    if (isset($_SESSION['logid'])) {
 
-                    if ($_SESSION['logid'] == $auth_id) {
-                        echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                        if ($_SESSION['logid'] == $auth_id) {
+                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bars"></i>
                             </button>
@@ -221,8 +224,8 @@ class post_card_creation
                                 <li><a class="dropdown-item" href="' . $menulink . '&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
                             </ul>
                         </div>';
-                    } else {
-                        echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                        } else {
+                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bars"></i>
                             </button>
@@ -230,6 +233,7 @@ class post_card_creation
                             <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
                             </ul>
                         </div>';
+                        }
                     }
 
                     echo '
@@ -271,9 +275,10 @@ class post_card_creation
                         echo '<div class="card-main">
     
                         <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>';
+                        if (isset($_SESSION['logid'])) {
 
-                        if ($_SESSION['logid'] == $auth_id) {
-                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                            if ($_SESSION['logid'] == $auth_id) {
+                                echo '<div class="dropdown" style="float: right; margin-top: -60px;">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-bars"></i>
                                 </button>
@@ -284,8 +289,8 @@ class post_card_creation
                                     <li><a class="dropdown-item" href="' . $menulink . '&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
                                 </ul>
                             </div>';
-                        } else {
-                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                            } else {
+                                echo '<div class="dropdown" style="float: right; margin-top: -60px;">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-bars"></i>
                                 </button>
@@ -293,6 +298,7 @@ class post_card_creation
                                 <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
                                 </ul>
                             </div>';
+                            }
                         }
 
 

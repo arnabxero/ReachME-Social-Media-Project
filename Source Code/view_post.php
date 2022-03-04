@@ -199,7 +199,7 @@ class view_post
                 $media_tag = "img";
                 $media_link = "";
                 $height = "auto";
-                $menulink = "subdir/modify_post.php?pid=".$id."&getback=true";
+                $menulink = "subdir/modify_post.php?pid=" . $id . "&getback=true";
 
                 if ($row['category'] == "video") {
                     $media_tag = "iframe";
@@ -393,11 +393,18 @@ class view_post
             <h3 style="text-align:center;">Comments</h3>
             <hr>
 
+            <form action="subdir/commentnow.php" method="POST">
+                <textarea name="content" class="one" rows="3" cols="51" placeholder="What do you want to share...?"></textarea><br>
+                <button type="button" class="emoji-btn"><i class="fas fa-grin"></i> Emojies <i class="fas fa-grin-beam"></i></button>
+                
+                <button type="submit" class="commentnow" value="submit">Post Comment</button>
+            </form>
+
+            <hr>
             <?php
             $cobj = new comment_card_creation();
             $cobj->get_con();
             $cobj->generate_card($pid);
-
             ?>
         </div>
 
@@ -416,7 +423,7 @@ class view_post
         <script>
             new EmojiPicker({
                 trigger: [{
-                    selector: ' .emoji-btn',
+                    selector: '.emoji-btn',
                     insertInto: ['.one', '.two']
                 }],
                 closeButton: true,
