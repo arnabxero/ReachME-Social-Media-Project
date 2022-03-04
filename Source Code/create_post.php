@@ -58,30 +58,6 @@ if (isset($_SESSION["logid"])) {
     $loguser_propic = get_propic($ulogid);
 }
 
-$home_type = 'all';
-
-$all_active = '';
-$text_active = '';
-$photo_active = '';
-$video_active = '';
-
-if (isset($_GET['type'])) {
-    $home_type = $_GET['type'];
-}
-
-if ($home_type == 'text') {
-    $text_active = 'active';
-} else if ($home_type == 'photo') {
-    $photo_active = 'active';
-} else if ($home_type == 'video') {
-    $video_active = 'active';
-} else if ($home_type == 'sell') {
-    $sell_active = 'active';
-} else {
-    $all_active = 'active';
-}
-
-
 
 ?>
 
@@ -104,6 +80,9 @@ if ($home_type == 'text') {
     <style>
 
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -216,31 +195,36 @@ if ($home_type == 'text') {
                         <div class="row">
                             <div class="col-4" style="float:right;">
                                 <label for="type">Select Category</label><br>
-                                <select class="select-btn" id="type" name="type">
+                                <select name="type" class="select-btn type">
                                     <option value="text">TEXT</option>
-                                    <option id="" value="photo">PHOTO</option>
-                                    <option id="" value="video">VIDEO</option>
+                                    <option value="photo">PHOTO</option>
+                                    <option value="video">VIDEO</option>
                                     <option value="sell">SELL</option>
                                 </select>
                             </div>
+
+
                             <div class="col-4" style="float:left;">
-                                <button type="button" class="cdp-btn" id="toggle">Attach Media File <i class="fas fa-caret-square-down"></i></button>
-                                <div class="create-post-file" id="upl" style="display: none;">
-                                    <input class="up-file-dp" type="file" name="image" />
+                                <div class="hidden" id="filebox">
+                                    <label>Attach A File</label>
+                                    <div class="create-post-file">
+                                        <input class="up-file-dp" type="file" name="image" />
+                                    </div>
                                 </div>
 
                                 <script>
-                                    const targetDiv = document.getElementById("upl");
-                                    const btn = document.getElementById("toggle");
-                                    btn.onclick = function() {
-                                        if (targetDiv.style.display !== "none") {
-                                            targetDiv.style.display = "none";
+                                    $('.type').change(function() {
+                                        var responseID = $(this).val();
+                                        if (responseID == "photo" || responseID == "video" || responseID == "sell") {
+                                            $('#filebox').removeClass("hidden");
+                                            $('#filebox').addClass("show");
                                         } else {
-                                            targetDiv.style.display = "block";
+                                            $('#filebox').removeClass("show");
+                                            $('#filebox').addClass("hidden");
                                         }
-                                    };
+                                        console.log(responseID);
+                                    });
                                 </script>
-
                             </div>
                             <div class="col-4" style="float:left;">
                                 <label for="type">Select Privacy</label><br>
@@ -265,16 +249,6 @@ if ($home_type == 'text') {
                 <h3 style="text-align:center;">Go To Your Contents</h3>
             </a>
         </div>
-
-
-        <!-- For the login reg dialog box -->
-        <div class="login-dialog" style="<?= $display ?>">
-            <br>
-            <br>
-            <a class="home-dg-bt" href="login.php">Log In</a>
-            <a class="home-dg-bt" href="registration.php">Sign Up</a>
-        </div>
-
 
 
 

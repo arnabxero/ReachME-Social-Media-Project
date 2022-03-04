@@ -172,16 +172,25 @@ class post_card_creation
             $authorname = $this->get_authorname($class_row['authorid']);
             $show_or_not = false;
 
+            $menulink = "subdir/modify_post.php?pid=".$id."&getback=true";
+
             $priv = $class_row['privacy'];
+
+            $cpriv = '<i class="fas fa-globe-americas"></i> Public';
 
             if ($priv == 'p') {
                 $privacy_show = '<i class="fas fa-globe-americas"></i> Public';
+                $cpriv = '<i class="fas fa-user-friends"></i> Friends';
                 $show_or_not = true;
             } else {
                 $privacy_show = '<i class="fas fa-user-friends"></i> Friends';
                 if ($this->check_friendlist($auth_id, $class_logid)) {
                     $show_or_not = true;
                 }
+            }
+
+            if ($_SESSION['logid'] == $auth_id) {
+                $show_or_not = true;
             }
 
             if ($show_or_not == true) {
@@ -197,17 +206,33 @@ class post_card_creation
 
                     echo '<div class="card-main">
     
-                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
-    
-                    <div class="dropdown" style="float: right; margin-top: -60px;">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
-                    </ul>
-                    </div>
-            
+                    <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>';
+
+
+                    if ($_SESSION['logid'] == $auth_id) {
+                        echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="' . $menulink . '&operation=edit"><i class="fas fa-edit"></i> Edit Post</a></li>
+                                <li><a class="dropdown-item" href="' . $menulink . '&operation=cpriv">Change Privacy to ' . $cpriv . '</a></li>
+                                <li><a class="dropdown-item" href="' . $menulink . '&operation=tag"><i class="fas fa-user-tag"></i> Tag Friends</a></li>
+                                <li><a class="dropdown-item" href="' . $menulink . '&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
+                            </ul>
+                        </div>';
+                    } else {
+                        echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
+                            </ul>
+                        </div>';
+                    }
+
+                    echo '
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>
@@ -245,17 +270,34 @@ class post_card_creation
 
                         echo '<div class="card-main">
     
-                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>
-                        
-                        <div class="dropdown" style="float: right; margin-top: -60px;">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
-                    </ul>
-                    </div>
+                        <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row['authorid'] . '"><img class="profile-pic-home-post" src="' . $propic_link . '">&nbsp' . $authorname . '<p class="timestamp-home" title="Timestamp & Privacy">' . $time . ' &nbsp&nbsp&nbsp ' . $privacy_show . '</p></a>';
 
+                        if ($_SESSION['logid'] == $auth_id) {
+                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="' . $menulink . '&operation=edit"><i class="fas fa-edit"></i> Edit Post</a></li>
+                                    <li><a class="dropdown-item" href="' . $menulink . '&operation=cpriv">Change Privacy to ' . $cpriv . '</a></li>
+                                    <li><a class="dropdown-item" href="' . $menulink . '&operation=tag"><i class="fas fa-user-tag"></i> Tag Friends</a></li>
+                                    <li><a class="dropdown-item" href="' . $menulink . '&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
+                                </ul>
+                            </div>';
+                        } else {
+                            echo '<div class="dropdown" style="float: right; margin-top: -60px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="see_taglist.php?pid=' . $id . '"><i class="fas fa-user-tag"></i> See Tagged Users</a></li>
+                                </ul>
+                            </div>';
+                        }
+
+
+
+                        echo '
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
                     </div>

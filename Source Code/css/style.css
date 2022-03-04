@@ -108,6 +108,15 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-overflow: ellipsis;
+  text-align: justify;
+}
+
+.post-text-view-post {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: justify;
 }
 
 span {
@@ -383,7 +392,6 @@ span {
   transition: var(--transition-speed);
 }
 
-
 .post-btn:hover {
   color: rgb(255, 255, 155);
   background-color: rgb(73, 73, 73);
@@ -407,11 +415,17 @@ span {
   transition: var(--transition-speed);
 }
 
-
 .post-btn-home:hover {
   color: rgb(255, 255, 155);
   background-color: rgb(73, 73, 73);
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
 }
 
 @media only screen and (max-width: 600px) {

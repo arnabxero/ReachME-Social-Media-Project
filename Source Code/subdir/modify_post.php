@@ -45,7 +45,11 @@ if (isset($_SESSION["logid"])) {
 
             $rresult = mysqli_query($con, $ssql);
 
-            header('Location: ../your_contents.php');
+            if(isset($_GET['getback'])){
+                header('Location: ../view_post.php?pid='.$pid.'');
+            } else {
+                header('Location: ../your_contents.php');
+            }
         } else {
             header('Location: ../index.php');
         }
