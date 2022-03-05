@@ -179,7 +179,7 @@ if (isset($_SESSION["logid"])) {
 
 
 
-                <form class="create-post-form" method="POST" action="subdir/post_now.php">
+                <form class="create-post-form" action="subdir/post_now.php" method="POST" enctype="multipart/form-data">
                     <a title="View User Profile" class="unformatted-link homepage-poster-name" href="profile.php">
                         <img class="profile-pic-home-post" src="<?= $loguser_propic ?>">
                         <?= $username ?>
@@ -196,7 +196,7 @@ if (isset($_SESSION["logid"])) {
                             <div class="col-4" style="float:right;">
                                 <label for="type">Select Category</label><br>
                                 <select name="type" class="select-btn type">
-                                    <option value="text">TEXT</option>
+                                    <option value="text" selected>TEXT</option>
                                     <option value="photo">PHOTO</option>
                                     <option value="video">VIDEO</option>
                                     <option value="sell">SELL</option>
@@ -208,7 +208,7 @@ if (isset($_SESSION["logid"])) {
                                 <div class="hidden" id="filebox">
                                     <label>Attach A File</label>
                                     <div class="create-post-file">
-                                        <input class="up-file-dp" type="file" name="file" />
+                                        <input class="up-file-dp" type="file" name="image" />
                                     </div>
                                 </div>
 
@@ -229,8 +229,8 @@ if (isset($_SESSION["logid"])) {
                             <div class="col-4" style="float:left;">
                                 <label for="type">Select Privacy</label><br>
                                 <select class="select-btn" id="type" name="privacy">
-                                    <option value="public">Public</option>
-                                    <option value="friends">Friends</option>
+                                    <option value="p">Public</option>
+                                    <option value="f">Friends</option>
                                 </select>
                             </div>
                         </div>

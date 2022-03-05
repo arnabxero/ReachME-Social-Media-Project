@@ -80,7 +80,7 @@ class post_now
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, $directory . $new_file_name);
         } else {
-            return false;
+            
         }
 
         return $dirname . $new_file_name;
@@ -108,61 +108,33 @@ class post_now
         $today = new DateTime("now", new DateTimeZone('Asia/Dhaka'));
         $saveTime =  $today->format('h:i A|Y/m/d');
 
-        $post_sub = true;
 
         if (!($category == 'text')) {
 
             $hold_tmp = explode('.', $_FILES['image']['name']);
             $file_ext = strtolower(end($hold_tmp));
-
             if ($file_ext != "") {
-                if ($category != 'sell') {
-                    //check file type and redefine post type if user does any mistake in file selection
-                    $vid_exts = array("mp4", "mov", "wmv", "flv", "avi", "webm", "mkv");
-                    $img_ext = array("jpeg", "jpg", "png", "bmp", "gif", "webp");
 
-                    if (in_array($file_ext, $vid_exts) === true) {
-                        $category = "video";
-                    }
-                    if (in_array($file_ext, $img_ext) === true) {
-                        $category = "photo";
-                    }
+                if ($file_size = $_FILES['image']['size']) {
+                    $media_name = $this->generate_filename();
+
+                    $media_name_with_dir = $this->push_file($media_name);
                 }
-                //check file type and set cat end
 
-
-                $media_name = $this->generate_filename();
-
-                $media_name_with_dir = $this->push_file($media_name);
-
-                if ($media_name_with_dir == false) {
-                    $post_sub = false;
-                }
             } else {
                 $category = "text";
             }
         }
-
-        if ($post_sub == true) {
-            echo "<h1>Post Success</h1>";
-
-            $this->push_post($media_name_with_dir, $content, $category, $privacy, $authorid, $authorname, $saveTime);
-        } else {
-            echo "<h1>File format or size error</h1>";
-        }
+        $this->push_post($media_name_with_dir, $content, $category, $privacy, $authorid, $authorname, $saveTime);
     }
 }
 
 
 if (isset($_SESSION['logid'])) {
-    if ($_POST['content'] != "" || $_FILES['image']['name'] != "") {
-        $obj = new post_now();
-        $obj->create_post();
-        header('Refresh: 5; URL=../your_contents.php');
-    } else {
-        echo "<h1>Post Failed</h1>";
-        header('Refresh: 3; URL=../index.php');
-    }
+    $obj = new post_now();
+    $obj->create_post();
+
+    header('Location: ../your_contents.php');
 } else {
-    header('Location: ../logreg.php');
+    header('Location: logreg.php');
 }

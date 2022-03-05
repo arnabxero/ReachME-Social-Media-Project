@@ -50,40 +50,39 @@ class post_now
     function push_file($media_name)
     {
         $errors = array();
+        //$file_name = $_FILES['image']['name'];
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
+        //$file_type = $_FILES['image']['type'];
 
-        $directory = "../ext-files/photo/";
-        $dirname = "ext-files/photo/";
+        $new_file_name = $media_name;
+        $directory = "ext-files/photo/";
 
         $hold_tmp = explode('.', $_FILES['image']['name']);
         $file_ext = strtolower(end($hold_tmp));
-
-        $new_file_name = $media_name . '.' . $file_ext;
-
-        $extensions = array("jpeg", "jpg", "png", "bmp", "gif", "webp", "mp4", "mov", "wmv", "flv", "avi", "webm", "mkv");
-        $vid_exts = array("mp4", "mov", "wmv", "flv", "avi", "webm", "mkv");
+        $extensions = array("jpeg", "jpg", "png", "mp4");
 
         if (in_array($file_ext, $extensions) === false) {
-            $errors[] = "extension not allowed, please choose a proper image or video file.";
+            if ($file_ext == "mp4") {
+                $directory = "ext-files/video/";
+            }
+            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+            //$dp_dialog = "<p style='Color: red; font-weight: bold;'>extension not allowed, please choose a JPEG or PNG file.</p>";
         }
 
-        if (in_array($file_ext, $vid_exts) === true) {
-            $directory = "../ext-files/video/";
-            $dirname = "ext-files/video/";
-        }
-
-        if ($file_size > 2000000000) {
-            $errors[] = 'File size must be excately 250 MB';
+        if ($file_size > 2097152) {
+            $errors[] = 'File size must be excately 2 MB';
+            //$dp_dialog = '<p style="Color: red; font-weight: bold;">File size must be excately 2 MB</p>';
         }
 
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, $directory . $new_file_name);
+            //$dp_dialog = "<p style='Color: green; font-weight: bold;'>Profile Picture Updated</p>";
         } else {
-            return false;
+            //$dp_dialog = $dp_dialog . "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
         }
 
-        return $dirname . $new_file_name;
+        return $directory.$new_file_name;
     }
 
     function push_post($media_name_with_dir, $content, $category, $privacy, $authorid, $authorname, $saveTime)
@@ -108,61 +107,20 @@ class post_now
         $today = new DateTime("now", new DateTimeZone('Asia/Dhaka'));
         $saveTime =  $today->format('h:i A|Y/m/d');
 
-        $post_sub = true;
 
-        if (!($category == 'text')) {
+        if (isset($_POST['image'])) {
+            echo "File Found";
+            $media_name = $this->generate_filename();
 
-            $hold_tmp = explode('.', $_FILES['image']['name']);
-            $file_ext = strtolower(end($hold_tmp));
-
-            if ($file_ext != "") {
-                if ($category != 'sell') {
-                    //check file type and redefine post type if user does any mistake in file selection
-                    $vid_exts = array("mp4", "mov", "wmv", "flv", "avi", "webm", "mkv");
-                    $img_ext = array("jpeg", "jpg", "png", "bmp", "gif", "webp");
-
-                    if (in_array($file_ext, $vid_exts) === true) {
-                        $category = "video";
-                    }
-                    if (in_array($file_ext, $img_ext) === true) {
-                        $category = "photo";
-                    }
-                }
-                //check file type and set cat end
-
-
-                $media_name = $this->generate_filename();
-
-                $media_name_with_dir = $this->push_file($media_name);
-
-                if ($media_name_with_dir == false) {
-                    $post_sub = false;
-                }
-            } else {
-                $category = "text";
-            }
-        }
-
-        if ($post_sub == true) {
-            echo "<h1>Post Success</h1>";
-
-            $this->push_post($media_name_with_dir, $content, $category, $privacy, $authorid, $authorname, $saveTime);
-        } else {
-            echo "<h1>File format or size error</h1>";
+            $media_name_with_dir = $this->push_file($media_name);
         }
     }
 }
 
 
 if (isset($_SESSION['logid'])) {
-    if ($_POST['content'] != "" || $_FILES['image']['name'] != "") {
-        $obj = new post_now();
-        $obj->create_post();
-        header('Refresh: 5; URL=../your_contents.php');
-    } else {
-        echo "<h1>Post Failed</h1>";
-        header('Refresh: 3; URL=../index.php');
-    }
+    $obj = new post_now();
+    $obj->create_post();
 } else {
-    header('Location: ../logreg.php');
+    header('Location: logreg.php');
 }

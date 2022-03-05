@@ -23,8 +23,8 @@ $addr = "Undefined";
 $gen = "Undefined";
 $pol = "Undefined";
 $spo = "Undefined";
-$hobb = "Undfined";
-
+$hobb = "Undefined";
+$ulname = "Undefined";
 $id = -99;
 
 
