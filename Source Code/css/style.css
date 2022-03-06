@@ -91,6 +91,12 @@
   transition: var(--transition-speed);
 }
 
+.commentnow:hover {
+  color: rgb(255, 255, 155);
+  background-color: black;
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
 .profile-pic-home-post {
   border-radius: 50px;
   height: 50px;
@@ -458,7 +464,50 @@ span {
   display: block;
 }
 
+.textbox {
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.textbox:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.view-in-mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
+  .view-in-mobile {
+    display: block;
+  }
+
+  /*Scrollbar on phone*/
+
+  /* Works on Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: #a2ad00 #faffaf;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(248, 255, 186);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(164, 182, 0);
+    border-radius: 20px;
+    border: 3px solid rgb(254, 255, 170);
+  }
+
+  /*Scrollbar ends here*/
+
   .update-pro-label {
     font-size: 12px;
     margin-right: 0px;

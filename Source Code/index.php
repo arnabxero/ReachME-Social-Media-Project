@@ -378,7 +378,7 @@ class post_card_creation
                     <div class="form-group" style="float:left;">
                         <div class="input-group" style="padding: 2%; margin-top:2%;">
                             <input type="hidden" value="all" name="type" />
-                            <input type="search" name="q" class="form-control" placeholder="Search..." />
+                            <input type="search" name="q" class="form-control hide-in-mobile" placeholder="Search..." />
                             <button type="submit" class="btn btn-primary" style="background-color: green;">
                                 <i class="fas fa-search"></i>
                             </button>

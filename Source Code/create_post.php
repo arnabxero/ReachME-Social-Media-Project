@@ -186,7 +186,7 @@ if (isset($_SESSION["logid"])) {
                         <hr><br>
                     </a>
 
-                    <textarea name="content" class="one" rows="10" cols="90" placeholder="What do you want to share...?"></textarea><br>
+                    <textarea name="content" class="one textbox" rows="10" cols="90" placeholder="What do you want to share...?"></textarea><br>
                     <button type="button" class="emoji-btn"><i class="fas fa-grin"></i> Add Emojies <i class="fas fa-grin-beam"></i></button>
 
                     <hr>

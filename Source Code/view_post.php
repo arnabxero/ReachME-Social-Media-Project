@@ -17,6 +17,7 @@ $ulogid = -99;
 $pid = $_GET['pid'];
 
 
+
 function get_propic($aid)
 {
     include('include/connection.php');
@@ -300,7 +301,7 @@ class view_post
 
         <div class="row">
             <!--Search Bar Start-->
-            <div class="col-sm-4">
+            <div class="col-4">
 
                 <a href="index.php">
                     <img src="files/logo/rm.png" height="50px" width="50px" style="float:left; margin-top:5px;margin-left:20px;">
@@ -309,7 +310,7 @@ class view_post
                     <div class="form-group" style="float:left;">
                         <div class="input-group" style="padding: 2%; margin-top:2%;">
                             <input type="hidden" value="all" name="type" />
-                            <input type="search" name="q" class="form-control" placeholder="Search..." />
+                            <input type="search" name="q" class="form-control hide-in-mobile" placeholder="Search..." />
                             <button type="submit" class="btn btn-primary" style="background-color: green;">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -321,7 +322,7 @@ class view_post
 
 
             <!--Home Nevigation Start-->
-            <div class="col-sm-4">
+            <div class="col-4 hide-in-mobile">
                 <div class="myTab" style="margin: 2%; text-align:center;">
                     <h1>View Post</h1>
                 </div>
@@ -330,8 +331,8 @@ class view_post
 
 
             <!--Profile, User Menu, Message, Logout Start-->
-            <div class="col-sm-4 userpane">
-                <div style="float:right; margin-top: 2%; margin-right: 10%;">
+            <div class="col-4 userpane">
+                <div class="hide-in-mobile" style="float:right; margin-top: 2%; margin-right: 10%;">
                     <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat.php">
                         <i class="fas fa-comment"></i>
                     </a>
@@ -394,9 +395,10 @@ class view_post
             <hr>
 
             <form action="subdir/commentnow.php" method="POST">
-                <textarea name="content" class="one" rows="3" cols="51" placeholder="What do you want to share...?"></textarea><br>
+                <textarea name="comment" class="one textbox" rows="3" cols="51" placeholder="What do you want to share...?"></textarea><br>
                 <button type="button" class="emoji-btn"><i class="fas fa-grin"></i> Emojies <i class="fas fa-grin-beam"></i></button>
-                
+                <input type="hidden" name="pid" value="<?= $_GET['pid'] ?>">
+
                 <button type="submit" class="commentnow" value="submit">Post Comment</button>
             </form>
 
