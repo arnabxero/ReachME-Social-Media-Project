@@ -144,6 +144,62 @@ class comment_card_creation
 
 class view_post
 {
+    public $class_con;
+    public $like_color = "color: #4d4d4d;";
+    public $dis_color = "color: #4d4d4d;";
+
+    function get_con()
+    {
+        include('include/connection.php');
+
+        $this->class_con = $con;
+    }
+
+    function count_likes($post_id)
+    {
+        $cnt = 0;
+
+        $sql = "SELECT * FROM votes WHERE post_id = '$post_id' AND stat = 'u'";
+        $res = mysqli_query($this->class_con, $sql);
+
+        while ($row = mysqli_fetch_assoc($res)) {
+            $cnt++;
+            if ($row['user_id'] == $_SESSION['logid']) {
+                $this->like_color = "color: #0d6efd;";
+            }
+        }
+
+        return $cnt;
+    }
+
+    function count_dislikes($post_id)
+    {
+        $cnt = 0;
+
+        $sql = "SELECT * FROM votes WHERE post_id = '$post_id' AND stat = 'd'";
+        $res = mysqli_query($this->class_con, $sql);
+
+        while ($row = mysqli_fetch_assoc($res)) {
+            $cnt++;
+            if ($row['user_id'] == $_SESSION['logid']) {
+                $this->dis_color = "color: #0d6efd;";
+            }
+        }
+
+        return $cnt;
+    }
+
+    function count_comments($post_id)
+    {
+        $count = 0;
+
+        $sql = "SELECT * FROM comments WHERE post_id = '$post_id'";
+        $res = mysqli_query($this->class_con, $sql);
+        $count = mysqli_num_rows($res);
+
+        return $count;
+    }
+
     function get_authorpic($aid)
     {
         include('include/connection.php');
@@ -176,6 +232,8 @@ class view_post
 
     function display_post($pid)
     {
+        $this->get_con();
+
         include('include/connection.php');
         $sql = "SELECT * FROM posts WHERE id = '$pid'";
         $result = mysqli_query($con, $sql);
@@ -183,6 +241,14 @@ class view_post
 
         if ($count == 1) {
             while ($row = mysqli_fetch_assoc($result)) {
+
+                $likes = $this->count_likes($row['id']);
+
+                $dislikes = $this->count_dislikes($row['id']);
+
+                $commnt_count = $this->count_comments($row['id']);
+
+
                 $authorid = $row['authorid'];
                 $authorname = $this->get_authorname($authorid);
                 $authorpic = $this->get_authorpic($authorid);
@@ -202,7 +268,7 @@ class view_post
                 $height = "auto";
                 $menulink = "subdir/modify_post.php?pid=" . $id . "&getback=true";
 
-                if ($row['category'] == "video") {
+                if ($row['category'] == "video"  || $row['category'] == 'sell') {
                     $media_tag = "iframe";
                     $height = "450";
                 }
@@ -246,18 +312,19 @@ class view_post
 
                 <hr>
 
-                <a href="subdir/post_inter.php?pid=' . $id . '&oper=like" title="Upvote">
-                    <div class="card-button"><i class="fas fa-thumbs-up"></i></div>
+                <a href="subdir/post_inter.php?pid=' . $row['id'] . '&oper=like" title="Upvote">
+                <div class="card-button" style="' . $this->like_color . '"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>
                 </a>
-                <a href="subdir/post_inter.php?pid=' . $id . '&oper=dislike" title="Downvote">
-                    <div class="card-button"><i class="fas fa-thumbs-down"></i></div>
+                <a href="subdir/post_inter.php?pid=' . $row['id'] . '&oper=dislike" title="Downvote">
+                    <div class="card-button" style="' . $this->dis_color . '"><i class="fas fa-thumbs-down"></i> ' . $dislikes . '</div>
                 </a>
-                <a href="subdir/post_inter.php?pid=' . $id . '&oper=comment" title="Comment">
-                    <div class="card-button"><i class="fas fa-comment-alt"></i></div>
+                <a href="view_post.php?pid=' . $row['id'] . '&oper=comment" title="Comment">
+                    <div class="card-button"><i class="fas fa-comment-alt"></i> ' . $commnt_count . '</div>
                 </a>
-                <a href="subdir/post_inter.php?pid=' . $id . '&oper=share" title="Share">
+                <a href="subdir/post_inter.php?pid=' . $row['id'] . '&oper=share" title="Share">
                     <div class="card-button"><i class="fas fa-share-square"></i></div>
                 </a>
+    
 
             ';
             }
@@ -395,7 +462,7 @@ class view_post
             <hr>
 
             <form action="subdir/commentnow.php" method="POST">
-                <textarea name="comment" class="one textbox" rows="3" cols="51" placeholder="What do you want to share...?"></textarea><br>
+                <textarea name="comment" class="one textbox" rows="3" cols="49" placeholder="What do you want to share...?"></textarea><br>
                 <button type="button" class="emoji-btn"><i class="fas fa-grin"></i> Emojies <i class="fas fa-grin-beam"></i></button>
                 <input type="hidden" name="pid" value="<?= $_GET['pid'] ?>">
 

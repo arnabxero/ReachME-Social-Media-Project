@@ -12,7 +12,7 @@ if (isset($_SESSION["logid"])) {
     $oper = $_GET['operation'];
 
     $edlnk = 'Location: ../edit_post.php?pid=' . $pid;
-    $dlink = 'Location: ../delete_post.php?pid=' . $pid;
+    $dlink = 'Location: delete_post.php?pid=' . $pid;
     $tlink = 'Location: ../tag.php?pid=' . $pid;
 
     if ($oper == 'edit') {
