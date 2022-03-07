@@ -304,13 +304,16 @@ class view_post
 
 
                 echo '
-                <p class="post-text-view-post">' . $content . '</p>
+                <p class="post-text-view-post">' . $content . '</p>';
 
-                <div style="margin-bottom: 30px;">
-                    <' . $media_tag . ' src="' . $media_link . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
-                </div>
+                if ($row['media_link'] != "" || !is_null($row['media_link'])) {
+                    echo '
+            <div style="margin-bottom: 30px;">
+                <' . $media_tag . ' src="' . $row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
+            </div>';
+                }
 
-                <hr>
+                echo '<hr>
 
                 <a href="subdir/post_inter.php?pid=' . $row['id'] . '&oper=like" title="Upvote">
                 <div class="card-button" style="' . $this->like_color . '"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>

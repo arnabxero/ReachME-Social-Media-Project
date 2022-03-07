@@ -96,7 +96,7 @@ class post_card_creation
         $cnt = 0;
         $lgid = -99;
 
-        if(isset($_SESSION['logid'])){
+        if (isset($_SESSION['logid'])) {
             $lgid = $_SESSION['logid'];
         }
 
@@ -118,7 +118,7 @@ class post_card_creation
         $cnt = 0;
         $lgid = -99;
 
-        if(isset($_SESSION['logid'])){
+        if (isset($_SESSION['logid'])) {
             $lgid = $_SESSION['logid'];
         }
 
@@ -306,21 +306,24 @@ class post_card_creation
                     echo '
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
-                    </div>
-    
+                    </div>';
+
+                    if ($class_row['media_link'] != "" || !is_null($class_row['media_link'])) {
+                        echo '
                     <div style="margin-bottom: 30px;">
                         <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
-                    </div>
-    
-                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
+                    </div>';
+                    }
+
+                    echo '<a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
                         <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See Post <i class="fas fa-expand-alt"></i></div>
                     </a>
     
                     <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
-                        <div class="card-button" style="'.$this->like_color.'"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>
+                        <div class="card-button" style="' . $this->like_color . '"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>
                     </a>
                     <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
-                        <div class="card-button" style="'.$this->dis_color.'"><i class="fas fa-thumbs-down"></i> ' . $dislikes . '</div>
+                        <div class="card-button" style="' . $this->dis_color . '"><i class="fas fa-thumbs-down"></i> ' . $dislikes . '</div>
                     </a>
                     <a href="view_post.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
                         <div class="card-button"><i class="fas fa-comment-alt"></i> ' . $commnt_count . '</div>
@@ -373,21 +376,24 @@ class post_card_creation
                         echo '
                     <div class="post-text">
                         <span>' . $class_row['content'] . '</span>
-                    </div>
-    
+                    </div>';
+
+                        if ($class_row['media_link'] != "" || !is_null($class_row['media_link'])) {
+                            echo '
                     <div style="margin-bottom: 30px;">
                         <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
-                    </div>
-    
-                    <a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
+                    </div>';
+                        }
+
+                        echo '<a class="unformatted-link" href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=view" title="See More">
                         <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See Post <i class="fas fa-expand-alt"></i></div>
                     </a>
     
                     <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=like" title="Upvote">
-                        <div class="card-button" style="'.$this->like_color.'"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>
+                        <div class="card-button" style="' . $this->like_color . '"><i class="fas fa-thumbs-up"></i> ' . $likes . '</div>
                     </a>
                     <a href="subdir/post_inter.php?pid=' . $class_row['id'] . '&oper=dislike" title="Downvote">
-                        <div class="card-button" style="'.$this->dis_color.'"><i class="fas fa-thumbs-down"></i> ' . $dislikes . '</div>
+                        <div class="card-button" style="' . $this->dis_color . '"><i class="fas fa-thumbs-down"></i> ' . $dislikes . '</div>
                     </a>
                     <a href="view_post.php?pid=' . $class_row['id'] . '&oper=comment" title="Comment">
                         <div class="card-button"><i class="fas fa-comment-alt"></i> ' . $commnt_count . '</div>

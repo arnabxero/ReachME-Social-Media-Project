@@ -162,13 +162,16 @@ class post_card_creation
 
             <div class="post-text">
                 <span>' . $class_row['content'] . '</span>
-            </div>
+            </div>';
 
-            <div style="margin-bottom: 30px;">
-                <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
-            </div>
+            if ($class_row['media_link'] != "" || !is_null($class_row['media_link'])) {
+                echo '
+        <div style="margin-bottom: 30px;">
+            <' . $media_tag . ' src="' . $class_row['media_link'] . '" height="' . $height . '" width="100%" controlsList="nodownload"></' . $media_tag . '>
+        </div>';
+            }
 
-            <a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
+            echo '<a class="unformatted-link" href="view_post.php?pid=' . $class_row['id'] . '" title="See More">
                 <div class="card-button-see-more"><i class="fas fa-expand-alt"></i> See Post <i class="fas fa-expand-alt"></i></div>
             </a>
 

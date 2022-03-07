@@ -67,7 +67,12 @@ $pid = $_GET['pid'];
         }
 
 
-        header("Location: ../your_contents.php");
+        echo '<progress class="loading-bar" value="0" max="10" id="progressBar"></progress>
+
+        <div class="loading-text">Loading - <div class="loading-text" id="ptext"></div> Seconds Left...</div>';
+
+        $goto = 'Refresh: 3; URL=../your_contents.php';
+        header($goto);
     }
     ?>
 
@@ -76,6 +81,28 @@ $pid = $_GET['pid'];
     </form>
     <br><br><a class="pro-btn" href="../view_post.php?pid=<?= $pid ?>">No</a>
 
-    </head>
+
+
+
+
+
+
+    <script>
+            var timeleft = 30;
+    
+            var downloadTimer = setInterval(function() {
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                }
+                document.getElementById("progressBar").value = 10 - timeleft;
+    
+                if (timeleft % 10 == 0) {
+                    document.getElementById("ptext").textContent = timeleft / 10;
+                }
+    
+                timeleft -= 1;
+            }, 100);
+        </script>
+</body>
 
 </html>
