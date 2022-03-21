@@ -24,5 +24,5 @@ if (isset($_SESSION['logid'])) {
         header('Refresh: 2; URL=../view_post.php?pid=' . $pid . '');
     }
 } else {
-    header('Location: logreg.php');
+    header('Location: ../logreg.php');
 }

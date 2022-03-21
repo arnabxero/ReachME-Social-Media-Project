@@ -52,3 +52,5 @@ class send_mail
 
 $obj = new send_mail();
 $obj->sendit();
+
+?>

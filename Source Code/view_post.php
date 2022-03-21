@@ -108,7 +108,7 @@ class comment_card_creation
             $authorname = $this->get_authorname($class_row['authorid']);
             $time = $class_row['time'];
             $propic_link = $this->get_author_propic($class_row['authorid']);
-            $menulink = "subdir/modify_comment.php?cid=" . $id;
+            $menulink = "subdir/modify_comment.php?cid=" . $id . "&pid=".$pid;
 
 
             echo '

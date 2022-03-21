@@ -93,7 +93,7 @@ if ($res) {
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
-    <title>ReachMe - New Post</title>
+    <title>ReachMe - Edit Post</title>
     <link rel="shortcut icon" type="image/x-icon" href="rm.ico" />
 
 
