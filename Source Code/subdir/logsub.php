@@ -32,6 +32,9 @@ class ulogin
                 $_SESSION["logUname"] = $row['uname'];
                 $_SESSION["logEmail"] = $row['email'];
                 $_SESSION["propic_link"] = $row['pro_pic'];
+                $lgid = $row['id'];
+                $sql1 = "UPDATE users SET status ='Active' WHERE id = $lgid";
+                $rs = mysqli_query($con, $sql1);
                 echo "<h1> Login Successful<br>Loading Your Profile</h1>";
                 header('Location: ../index.php');
             } else {

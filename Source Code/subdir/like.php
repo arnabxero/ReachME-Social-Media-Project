@@ -10,17 +10,14 @@ if (!isset($_SESSION['logid'])) {
 $pid = $_GET['pid'];
 $uid = $_SESSION['logid'];
 
-//check if user already liked it or not
 $liked = 0;
 
-//start
 $sql = "SELECT * FROM votes WHERE user_id = $uid AND post_id = $pid AND stat = 'u'";
 $res = mysqli_query($con, $sql);
 $count = mysqli_num_rows($res);
 if ($count > 0) {
     $liked = 1;
 }
-//end
 
 
 if ($liked == 0) {
