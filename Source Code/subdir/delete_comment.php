@@ -62,7 +62,7 @@ $pid = $_GET['pid'];
 
         <div class="loading-text">Loading - <div class="loading-text" id="ptext"></div> Seconds Left...</div>';
 
-        $goto = 'Refresh: 3; URL=../view_post.php?pid=' . $ptid;
+        $goto = 'Refresh: 1; URL=../view_post.php?pid=' . $ptid;
         header($goto);
     }
     ?>
@@ -79,7 +79,7 @@ $pid = $_GET['pid'];
 
 
     <script>
-        var timeleft = 30;
+        var timeleft = 10;
 
         var downloadTimer = setInterval(function() {
             if (timeleft <= 0) {
@@ -87,9 +87,7 @@ $pid = $_GET['pid'];
             }
             document.getElementById("progressBar").value = 10 - timeleft;
 
-            if (timeleft % 10 == 0) {
                 document.getElementById("ptext").textContent = timeleft / 10;
-            }
 
             timeleft -= 1;
         }, 100);

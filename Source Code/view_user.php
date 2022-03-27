@@ -28,6 +28,7 @@ $ulname = "Undefined";
 $id = -99;
 
 
+
 if (isset($_SESSION['logid'])) {
     $id = $_GET['uid'];
 
@@ -62,6 +63,48 @@ if (isset($_SESSION['logid'])) {
 } else {
     header('Location: logreg.php');
 }
+
+
+
+
+$myid = $_SESSION['logid'];
+$uid = $_GET['uid'];
+
+$frnd_bt = "Add Friend";
+$frnd_op_link = "subdir/friendop.php?sid=" . $myid . "&rid=" . $uid . "&op=add";
+$frnd_bt2 = "See Friendship";
+$frnd_op_link2 = "";
+$custom_style = "";
+$custom_style2 = "";
+$frnd_bt_dialog = "Send Friend Request?";
+
+$sql = "SELECT * FROM friend_list WHERE ((sid = $myid AND rid = $uid AND stat = 'a') OR (sid = $uid AND rid = $myid AND stat = 'a'))";
+$res = mysqli_query($con, $sql);
+$count = mysqli_num_rows($res);
+if ($count == 1) {
+    $frnd_bt = "Friends";
+    $frnd_op_link = "subdir/friendop.php?sid=" . $myid . "&rid=" . $uid . "&op=rem";
+    $frnd_bt2 = "Message";
+    $frnd_op_link2 = "chat.php";
+    $frnd_bt_dialog = "Unfriend User?";
+    $custom_style = "background-color: green;";
+}
+
+$sql2 = "SELECT * FROM friend_list WHERE sid = $myid AND rid = $uid AND stat = 'r'";
+$res2 = mysqli_query($con, $sql2);
+$count2 = mysqli_num_rows($res2);
+if ($count2 == 1) {
+    $frnd_bt = "Requested";
+    $frnd_op_link = "subdir/friendop.php?sid=" . $myid . "&rid=" . $uid . "&op=canc";
+    $frnd_bt_dialog = "Cancel Friend Request?";
+    $custom_style = "background-color: gray;";
+}
+
+
+
+
+
+
 
 
 ?>
@@ -138,6 +181,17 @@ if (isset($_SESSION['logid'])) {
         </div>
 
         <hr>
+        <div class="row">
+            <div class="col-6">
+                <a class="pro-btn" style="float: right; margin-right: 50px;<?= $custom_style ?>" href="<?= $frnd_op_link ?>" 
+                onclick="if (confirm('<?= $frnd_bt_dialog ?>')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title"><?= $frnd_bt ?></a>
+            </div>
+
+            <div class="col-6">
+                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>"><?= $frnd_bt2 ?></a>
+            </div>
+        </div>
+        <hr>
 
         <div class="row">
             <div class="col-2">
@@ -210,14 +264,11 @@ if (isset($_SESSION['logid'])) {
         <br>
         <div class="row">
             <div class="col-sm-5" style="text-align:right;">
-                <a class="pro-btn" href="addfriend.php">Add Friend</a>
             </div>
             <div class="col-sm-2" style="text-align:center;">
-                <a class="pro-btn" href="msg.php">Send Message</a>
-            </div>
-
-            <div class="col-sm-5" style="text-align:left;">
                 <a class="pro-btn" href="subdir/logout.php">Log Out</a>
+            </div>
+            <div class="col-sm-5" style="text-align:left;">
             </div>
         </div>
         <br>

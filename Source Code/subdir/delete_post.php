@@ -88,21 +88,19 @@ $pid = $_GET['pid'];
 
 
     <script>
-            var timeleft = 30;
-    
-            var downloadTimer = setInterval(function() {
-                if (timeleft <= 0) {
-                    clearInterval(downloadTimer);
-                }
-                document.getElementById("progressBar").value = 10 - timeleft;
-    
-                if (timeleft % 10 == 0) {
-                    document.getElementById("ptext").textContent = timeleft / 10;
-                }
-    
-                timeleft -= 1;
-            }, 100);
-        </script>
+        var timeleft = 10;
+
+        var downloadTimer = setInterval(function() {
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+            }
+            document.getElementById("progressBar").value = 10 - timeleft;
+
+                document.getElementById("ptext").textContent = timeleft / 10;
+
+            timeleft -= 1;
+        }, 100);
+    </script>
 </body>
 
 </html>
