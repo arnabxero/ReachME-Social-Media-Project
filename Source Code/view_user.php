@@ -100,6 +100,17 @@ if ($count2 == 1) {
     $custom_style = "background-color: gray;";
 }
 
+$sql3 = "SELECT * FROM friend_list WHERE sid = $uid AND rid = $myid AND stat = 'r'";
+$res3 = mysqli_query($con, $sql3);
+$count3 = mysqli_num_rows($res3);
+if ($count3 == 1) {
+    $frnd_bt = "Accept";
+    $frnd_op_link = "subdir/friendop.php?sid=" . $uid . "&rid=" . $myid . "&op=acc";
+    $frnd_bt_dialog = "Accept Friend Request?";
+    $custom_style = "background-color: gray;";
+    $frnd_bt2 = "Reject";
+    $frnd_op_link2 = "subdir/friendop.php?sid=" . $uid . "&rid=" . $myid . "&op=reject";
+}
 
 
 
@@ -184,7 +195,7 @@ if ($count2 == 1) {
         <div class="row">
             <div class="col-6">
                 <a class="pro-btn" style="float: right; margin-right: 50px;<?= $custom_style ?>" href="<?= $frnd_op_link ?>" 
-                onclick="if (confirm('<?= $frnd_bt_dialog ?>')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title"><?= $frnd_bt ?></a>
+                onclick="if (confirm('<?= $frnd_bt_dialog ?>')){return true;}else{event.stopPropagation(); event.preventDefault();};" title=""><?= $frnd_bt ?></a>
             </div>
 
             <div class="col-6">

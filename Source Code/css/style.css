@@ -479,6 +479,60 @@ span {
   display: none;
 }
 
+.cancel-btn {
+  border-radius: 5%;
+  border: 2px solid black;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 5px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  background-color: red;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cancel-btn:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(80, 0, 0);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.accept-btn {
+  border-radius: 5%;
+  border: 2px solid black;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 5px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 110, 37);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.accept-btn:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 44, 10);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.msg-btn {
+  border-radius: 5%;
+  border: 2px solid black;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 5px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(119, 0, 255);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.msg-btn:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 2, 99);
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
 @media only screen and (max-width: 600px) {
   .view-in-mobile {
     display: block;
