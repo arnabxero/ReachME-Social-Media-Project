@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 07:27 PM
+-- Generation Time: Mar 30, 2022 at 05:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -50,7 +50,7 @@ INSERT INTO `comments` (`id`, `authorid`, `content`, `time`, `post_id`) VALUES
 (13, 2, 'wow nice video, how is this even possible?😳😱😮', '03:31 PM|2022/03/06', 8),
 (15, 2, 'dummy comment 🎎', '06:52 PM|2022/03/06', 3),
 (19, 2, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '07:53 PM|2022/03/06', 3),
-(20, 2, 'nice project😀best of luck😁rtyuio', '01:55 PM|2022/03/09', 2),
+(20, 2, '😀nice project😀best of luck😁rtyuio😀😀', '01:55 PM|2022/03/09', 2),
 (21, 2, 'well done', '01:55 PM|2022/03/09', 2),
 (22, 6, 'wow nice', '01:55 PM|2022/03/09', 2),
 (23, 6, 'hello', '01:55 PM|2022/03/09', 2),
@@ -60,7 +60,11 @@ INSERT INTO `comments` (`id`, `authorid`, `content`, `time`, `post_id`) VALUES
 (27, 2, '.................', '09:10 AM|2022/03/21', 11),
 (31, 2, 'qrhilfqilq34t24w5', '02:09 PM|2022/03/21', 6),
 (32, 2, 'weretyuioi', '02:09 PM|2022/03/21', 6),
-(36, 2, 'haha very funny', '09:54 PM|2022/03/22', 127);
+(36, 2, 'haha very funny', '09:54 PM|2022/03/22', 127),
+(42, 2, '......................😃', '08:11 PM|2022/03/24', 10),
+(43, 2, 'oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo', '08:11 PM|2022/03/24', 10),
+(44, 2, 'nice🙂🙂🙂', '08:17 PM|2022/03/24', 23),
+(45, 2, 'hi🙂', '01:57 PM|2022/03/28', 9);
 
 -- --------------------------------------------------------
 
@@ -80,12 +84,27 @@ CREATE TABLE `friend_list` (
 --
 
 INSERT INTO `friend_list` (`id`, `sid`, `rid`, `stat`) VALUES
-(4, 2, 3, 'a'),
 (5, 2, 4, 'a'),
-(6, 2, 5, 'a'),
-(8, 2, 7, 'a'),
 (13, 6, 2, 'a'),
-(16, 6, 3, 'r');
+(16, 6, 3, 'r'),
+(35, 3, 2, 'a'),
+(43, 9, 2, 'a'),
+(44, 5, 2, 'a'),
+(49, 26, 2, 'r'),
+(50, 27, 2, 'r'),
+(51, 28, 2, 'r'),
+(52, 29, 2, 'r'),
+(53, 30, 2, 'r'),
+(54, 2, 31, 'r'),
+(55, 2, 32, 'r'),
+(56, 2, 33, 'r'),
+(57, 2, 34, 'r'),
+(58, 2, 35, 'r'),
+(59, 2, 36, 'r'),
+(60, 2, 37, 'r'),
+(61, 2, 38, 'r'),
+(62, 39, 2, 'r'),
+(63, 42, 2, 'r');
 
 -- --------------------------------------------------------
 
@@ -131,7 +150,20 @@ INSERT INTO `messages` (`msg_id`, `receiver`, `sender`, `msg`) VALUES
 (48, 2, 6, 'nice'),
 (49, 6, 2, 'hello'),
 (50, 2, 6, 'hey'),
-(51, 6, 2, 'got it');
+(51, 6, 2, 'got it'),
+(52, 6, 2, 'hi again'),
+(53, 2, 6, 'hello'),
+(54, 6, 2, 'hello'),
+(55, 2, 6, 'hi'),
+(56, 6, 2, 'nice profile'),
+(57, 6, 2, 'hi'),
+(58, 2, 6, 'hello'),
+(59, 2, 6, 'hiiii'),
+(60, 6, 2, 'hiiiiiiiiiiiiiiiiii'),
+(61, 2, 6, 'nice'),
+(62, 2, 6, 'kjkjkjkjkj'),
+(63, 6, 2, 'jjjjjjjjjjjj'),
+(64, 6, 2, 'hi');
 
 -- --------------------------------------------------------
 
@@ -211,7 +243,9 @@ INSERT INTO `posts` (`id`, `authorid`, `title`, `content`, `time`, `category`, `
 (25, 9, 'snowstorm', 'There was a havy snowfall last night in LA:', '09:00:00 AM', 'alert', 'ext-files/photo/10.jpg', 0, 0, 'p', 'nusrat'),
 (123, 2, '', 'Nice Video🤣', '09:35 AM|2022/03/07', 'video', 'ext-files/video/RlKPKKcsJYlREQw1HiWw2.mp4', 0, 0, 'p', 'Iftekhar Ahmed Arnab'),
 (124, 2, '', 'This is text😃😃', '08:21 AM|2022/03/21', 'text', '', 0, 0, 'f', 'Iftekhar Ehtimum'),
-(127, 2, '', 'this is video🤗', '09:54 PM|2022/03/22', 'video', 'ext-files/video/X9qajAF8JQ2GbNQWbGz82.mp4', 0, 0, 'p', 'Iftekhar Arnab');
+(127, 2, '', 'this is video🤗', '09:54 PM|2022/03/22', 'video', 'ext-files/video/X9qajAF8JQ2GbNQWbGz82.mp4', 0, 0, 'p', 'Iftekhar Arnab'),
+(137, 2, '', 'text', '01:33 PM|2022/03/23', 'text', '', 0, 0, 'p', 'Iftekhar Arnab'),
+(138, 2, '', 'tuyioipjopjo😃', '08:01 PM|2022/03/24', 'text', '', 0, 0, 'p', 'Iftekhar Arnab');
 
 -- --------------------------------------------------------
 
@@ -244,7 +278,10 @@ INSERT INTO `tag_list` (`id`, `post_id`, `tag_id`) VALUES
 (56, 115, 5),
 (60, 2, 3),
 (61, 2, 5),
-(62, 2, 6);
+(65, 2, 6),
+(66, 138, 4),
+(67, 138, 5),
+(68, 138, 3);
 
 -- --------------------------------------------------------
 
@@ -291,11 +328,26 @@ INSERT INTO `users` (`fname`, `lname`, `uname`, `email`, `phone`, `job`, `about`
 ('Ehtimum Rashed', 'Chy', 'ehtimumrashed', 'ehtimum.r@gmail.com', '01922837421', 'Web Developer', 'Welcome to my profile. I am a passionate web developer, graphics designer and gamer.', 'ehtimum', 3, 'Y', 0, 0, '3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
 ('Farjana', 'Rahman', 'farjanarah', 'farjana.rah@gmail.com', '01372637427', 'Front End Developer', 'Hello I am a front end developer and software tester.', 'farjana', 4, 'Y', 0, 0, '4.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
 ('Swdhin', 'Ghosh', 'sghosh', 'sadhin.g@gmail.com', '01637474723', 'Cyber Security Specialist', 'I am a cyber security specialist.', 'swadhin', 5, 'Y', 0, 0, '5.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
-('Laboni', 'Jannat', 'ljannat', 'laboni22@gmail.com', '01453272742', 'Student', 'Welcome to my profile.', 'laboni', 6, 'Y', 0, 0, '6.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
+('Laboni', 'Jannat', 'ljannat', 'laboni22@gmail.com', '01453272742', 'Student', 'Welcome to my profile.', 'laboni', 6, 'Y', 0, 0, '6.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Active'),
 ('Abida', 'Akhter', 'abidaak', 'abida.ak@gmail.com', '01827231436', 'Data Scientist', 'I am a data scientist.', 'abida', 7, 'Y', 0, 0, '7.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
 ('Humayra', 'Begum', 'humobg', 'humayra.bg@gmail.com', '01922565643', 'Student', 'Hello I am an HSC student.', 'humayra', 8, 'Y', 0, 0, '8.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
 ('Nusrat', 'Amy', 'nusratamy', 'nusrat.amy@gmail.com', '01594332175', 'Student', 'Hello I am an SSC student.', 'nusrat', 9, 'Y', 0, 0, '9.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
-('Nipa', 'Talukder', 'nipatk', 'nipa.tk@gmail.com', '01202354563', 'Student', 'Hello I am an High School Student.', 'nipatk', 10, 'Y', 0, 0, '10.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline');
+('Nipa', 'Talukder', 'nipatk', 'nipa.tk@gmail.com', '01202354563', 'Student', 'Hello I am an High School Student.', 'nipatk', 10, 'Y', 0, 0, '10.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline'),
+('Shahnaz', 'Begum', 'shanazbg', 'shahnaz.bg@gmail.com', '2349823905732', 'dnojadaasd', 'wert4wyer', 'shabg', 26, 'Y', 0, 0, '26.jpg', NULL, '1999/24/03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'offline'),
+('Muntasir', 'Arafat', 'mnarafat', 'mnarafat224@gmail.com', '213024935879', 'erfsd', 'wefascawcfa', 'mnarafat', 27, 'Y', 0, 0, '27.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Shahin', 'Ibrahim', 'shibrahim', 'shibrahim@gmail.com', '2324354231', 'wdcascsc', 'asdfascsc', 'shibrahim', 28, 'Y', 0, 0, '28.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Rahim', 'Khan', 'rhkhan', 'rhkhan@gmail.com', '3048763751639', 'dadfrwccfawfc', 'wfawcwfvaerfwf', 'rhkhan', 29, 'Y', 0, 0, '29.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Yasir', 'Arafat', 'yarafat', 'yarafat@gmail.com', '45623456745', 'sdajfnwaejawfcaw', 'wfawrfawfasdfc', 'yarafat', 30, 'Y', 0, 0, '30.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Jesmin', 'Akter', 'jsakter', 'jsakter@gmail.com', '2343524654323', 'wedfaervwafawc', 'wcasvwEFSFCSDC', 'jsakter', 31, 'Y', 0, 0, '31.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Fahim', 'Mahmud', 'fhmahmud', 'fhmahmud@gmail.com', '23243562434234', 'frvaefvsf', 'awfawvaeva', '2132435342312', 32, 'Y', 0, 0, '32.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Jonaki', 'Thakur', 'jkthakur', 'jkthakur@gmail.com', '2324356746231', 'fwncjaknlfwo', 'wfcawniofiwr', 'jkthakur', 33, 'Y', 0, 0, '33.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Ismail', 'Chy', 'ischy', 'ischy@gmail.com', '1345423322145', 'acwiodfmwefkl', 'edaweffwoenfl', 'ischy', 34, 'Y', 0, 0, '34.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Israt', 'Jahan', 'isjahan', 'isjahan@gmail.com', '134935873891', 'qcioajnkw', 'fwocnkweocnl', 'isjahan', 35, 'Y', 0, 0, '35.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Jashim', 'khan', 'jskhan', 'jskhan@gmail.com', '20495783841', 'fwnocoajclsndc', 'awdcawjnawviuofvl', 'jskhan', 36, 'Y', 0, 0, '36.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Mahfuz', 'Ullah', 'mfullah', 'mfullah@gmail.com', '12093781248102', 'wfcjnawsasfc', 'awfcwdawef', 'mfullah', 37, 'Y', 0, 0, '37.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Salma', 'Begum', 'sbegum', 'sbegum@gmail.com', '320984712813', 'wfcaswrfcw', 'wfcwefawrvawr', 'ischy2', 38, 'Y', 0, 0, '38.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Rosie', 'Mahmud', 'rsmahmud', 'rsmahmud@gmail.com', '245346312454', 'sgvaerqaf', 'aeverfvavae', 'rsmahmud', 39, 'Y', 0, 0, '39.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Ishikha', 'Chy', 'ischy2', 'ischy2@gmail.com', '134567657453', 'sdfawefwf', 'wafcawfw', 'ischy32', 42, 'Y', 0, 0, '42.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -326,11 +378,15 @@ INSERT INTO `votes` (`id`, `post_id`, `user_id`, `stat`) VALUES
 (29, 3, 2, 'u'),
 (37, 2, 2, 'u'),
 (40, 6, 2, 'd'),
-(41, 9, 2, 'd'),
 (43, 4, 2, 'd'),
 (46, 5, 2, 'd'),
 (47, 5, 2, 'u'),
-(49, 127, 2, 'u');
+(49, 127, 2, 'u'),
+(51, 23, 2, 'u'),
+(54, 25, 2, 'd'),
+(55, 9, 2, 'u'),
+(56, 10, 2, 'u'),
+(57, 138, 2, 'u');
 
 --
 -- Indexes for dumped tables
@@ -395,19 +451,19 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `nonver_users`
@@ -419,25 +475,25 @@ ALTER TABLE `nonver_users`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `tag_list`
 --
 ALTER TABLE `tag_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

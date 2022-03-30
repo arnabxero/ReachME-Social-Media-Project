@@ -82,7 +82,7 @@ class create_friendlist
                 <a title="View User Profile" class="unformatted-link homepage-poster-name" href="view_user.php?uid=' . $class_row_pro['id'] . '">
                     <img class="profile-pic-home-post" src="' . $propic_link_prores . '">
                 &nbsp' . $class_row_pro['fname'] . ' ' . $class_row_pro['lname'] . '</a>
-                <a href="" style="float:right;" class="msg-btn">Message</a>
+                <a href="chat/chatbox.php?user_id=' . $propicid . '" style="float:right;" class="msg-btn">Message</a>
                 <a onclick="if (confirm(' . $dg2 . ')){return true;}else{event.stopPropagation(); event.preventDefault();};"
                 href="subdir/friendop.php?sid=' . $propicid . '&rid=' . $uid . '&op=rem&getback=friends" style="float:right;" class="cancel-btn">Unfriend</a>
                             </div>';
@@ -224,7 +224,7 @@ class create_sentlist
                     <img class="profile-pic-home-post" src="' . $propic_link_prores . '">
                 &nbsp' . $class_row_pro['fname'] . ' ' . $class_row_pro['lname'] . '</a>
                 <a onclick="if (confirm(' . $dg2 . ')){return true;}else{event.stopPropagation(); event.preventDefault();};"
-                href="subdir/friendop.php?rid=' . $propicid . '&sid=' . $uid . '&op=canc&getback=friends" style="float:right;" class="cancel-btn">Reject</a>
+                href="subdir/friendop.php?rid=' . $propicid . '&sid=' . $uid . '&op=canc&getback=friends" style="float:right;" class="cancel-btn">Cancel</a>
                             </div>';
             }
         }
@@ -326,6 +326,9 @@ class create_sentlist
                 </script>
             </div>
 
+            <br>
+            <br>
+            <hr>
             <?php
             $gen = new create_friendlist();
             $gen->get_con();

@@ -480,7 +480,7 @@ class post_card_creation
             <!--Profile, User Menu, Message, Logout Start-->
             <div class="col-sm-4 userpane">
                 <div style="float:right; margin-top: 2%; margin-right: 10%;">
-                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat.php">
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat">
                         <i class="fas fa-comment"></i>
                     </a>
 

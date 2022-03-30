@@ -199,7 +199,8 @@ if ($count3 == 1) {
             </div>
 
             <div class="col-6">
-                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>"><?= $frnd_bt2 ?></a>
+                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>"
+                onclick=" window.alert('You Are Not Friends!');"><?= $frnd_bt2 ?></a>
             </div>
         </div>
         <hr>
