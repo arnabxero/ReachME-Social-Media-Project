@@ -27,6 +27,7 @@ $hobb = "Undefined";
 $ulname = "Undefined";
 $id = -99;
 
+$vcheck = "hidden";
 
 
 if (isset($_SESSION['logid'])) {
@@ -59,6 +60,10 @@ if (isset($_SESSION['logid'])) {
         $pol = $row['politics'];
         $spo = $row['sports'];
         $hobb = $row['hobby'];
+
+        if ($row['s_verified'] == 'YES') {
+            $vcheck = "";
+        }
     }
 } else {
     header('Location: logreg.php');
@@ -182,7 +187,7 @@ if ($count3 == 1) {
 
             <div class="col-6" style="text-align:left;">
 
-                <span class="profile-details"><?= $name ?></span>
+                <span class="profile-details"><?= $name ?> &nbsp<img src="files/logo/verified.png" height="25px" width="25px" title="User Identity Verified" <?= $vcheck ?> onclick=" window.alert('User is Identity Verified!');"></span>
                 <span class="profile-details"><?= $username ?></span>
                 <span class="profile-details"><?= $email ?></span>
                 <span class="profile-details"><?= $phone ?></span>
@@ -194,13 +199,11 @@ if ($count3 == 1) {
         <hr>
         <div class="row">
             <div class="col-6">
-                <a class="pro-btn" style="float: right; margin-right: 50px;<?= $custom_style ?>" href="<?= $frnd_op_link ?>" 
-                onclick="if (confirm('<?= $frnd_bt_dialog ?>')){return true;}else{event.stopPropagation(); event.preventDefault();};" title=""><?= $frnd_bt ?></a>
+                <a class="pro-btn" style="float: right; margin-right: 50px;<?= $custom_style ?>" href="<?= $frnd_op_link ?>" onclick="if (confirm('<?= $frnd_bt_dialog ?>')){return true;}else{event.stopPropagation(); event.preventDefault();};" title=""><?= $frnd_bt ?></a>
             </div>
 
             <div class="col-6">
-                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>"
-                onclick=" window.alert('You Are Not Friends!');"><?= $frnd_bt2 ?></a>
+                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>" onclick=" window.alert('You Are Not Friends!');"><?= $frnd_bt2 ?></a>
             </div>
         </div>
         <hr>

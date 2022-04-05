@@ -27,6 +27,27 @@ class ulogin
         if ($count == 1) {
 
             if ($row['temp_id'] == 1 || is_null($row['temp_id'])) {
+                //Admin or not check//
+                $rank = "user";
+                $adminck = false;
+
+                $id = $row['id'];
+                $user = $row['uname'];
+
+                $adminsql = "SELECT * FROM admin_list WHERE uid = '$id' AND username = '$user'";
+                $adminres = mysqli_query($con, $adminsql);
+
+                while($adminrow = mysqli_fetch_array($adminres)){
+                    $adminck = true;
+                    $rank = $adminrow['rank'];
+                }
+
+                if($adminck){
+                    $_SESSION["admin"] = "YES";
+                }
+                //admin or not check//
+
+                $_SESSION["rank"] = $rank;
                 $_SESSION["logid"] = $row['id'];
                 $_SESSION["logname"] = $row['fname'] . ' ' . $row['lname'];
                 $_SESSION["logUname"] = $row['uname'];

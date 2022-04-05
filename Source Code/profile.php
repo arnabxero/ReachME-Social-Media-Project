@@ -22,6 +22,9 @@ $bg = "Undefined";
 $nat = "Undefined";
 $addr = "Undefined";
 
+$vcheck = "hidden";
+$sverified = false;
+
 $id = -99;
 
 
@@ -58,6 +61,11 @@ if (isset($_SESSION['logid'])) {
         $pol = $row['politics'];
         $spo = $row['sports'];
         $hobb = $row['hobby'];
+
+        if ($row['s_verified'] == 'YES') {
+            $vcheck = "";
+            $sverified = true;
+        }
     }
 
 
@@ -111,6 +119,26 @@ if (isset($_SESSION['logid'])) {
             $dp_dialog = $dp_dialog . "<p style='Color: red; font-weight: bold;'>Profile Picture Upload Failed</p>";
         }
     }
+
+    $sver_vis = "hidden";
+    //Check verification eligibility//
+    $p_count = 0;
+
+    $vsql = "SELECT * FROM posts WHERE authorid = $id";
+    $vres = mysqli_query($con, $vsql);
+    while ($vrow = mysqli_fetch_array($vres)) {
+        $p_count++;
+    }
+
+    if ($p_count > 5) {
+        $sver_vis = "";
+    }
+    //Check verification eligibility//
+
+    if($sverified){
+        $sver_vis = "hidden";
+    }
+
 } else {
     header('Location: logreg.php');
 }
@@ -156,7 +184,10 @@ if (isset($_SESSION['logid'])) {
 
         <div class="row">
             <div class="col-sm-4">
+                <a style="float:right; visibility:<?= $sver_vis ?>;" class="cdp-btn" href="admin/application.php">Apply For Identity Verification</a>
             </div>
+
+
             <div class="col-sm-4" style="text-align:center;">
                 <img class="profile-picture" src="<?= $propic ?>"></img>
             </div>
@@ -202,7 +233,7 @@ if (isset($_SESSION['logid'])) {
 
             <div class="col-6" style="text-align:left;">
 
-                <span class="profile-details"><?= $name ?></span>
+                <span class="profile-details"><?= $name ?> &nbsp<img src="files/logo/verified.png" height="25px" width="25px" title="User Identity Verified" <?= $vcheck ?> onclick=" window.alert('You are An Identity Verified User');"></span>
                 <span class="profile-details"><?= $username ?></span>
                 <span class="profile-details"><?= $email ?></span>
                 <span class="profile-details"><?= $phone ?></span>
