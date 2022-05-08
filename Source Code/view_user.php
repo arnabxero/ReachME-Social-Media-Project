@@ -90,7 +90,7 @@ if ($count == 1) {
     $frnd_bt = "Friends";
     $frnd_op_link = "subdir/friendop.php?sid=" . $myid . "&rid=" . $uid . "&op=rem";
     $frnd_bt2 = "Message";
-    $frnd_op_link2 = "chat.php";
+    $frnd_op_link2 = 'chat/chatbox.php?user_id='.$uid;
     $frnd_bt_dialog = "Unfriend User?";
     $custom_style = "background-color: green;";
 }
@@ -203,7 +203,7 @@ if ($count3 == 1) {
             </div>
 
             <div class="col-6">
-                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>" onclick=" window.alert('You Are Not Friends!');"><?= $frnd_bt2 ?></a>
+                <a class="pro-btn" style="float: left; margin-left: 50px;<?= $custom_style2 ?>" href="<?= $frnd_op_link2 ?>"><?= $frnd_bt2 ?></a>
             </div>
         </div>
         <hr>

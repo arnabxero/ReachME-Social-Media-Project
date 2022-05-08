@@ -625,7 +625,7 @@ class post_card_creation
                         <i class="fas fa-comment"></i>
                     </a>
 
-                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notification.php">
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notice/">
                         <i class="fas fa-bell"></i>
                     </a>
 

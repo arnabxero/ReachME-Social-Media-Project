@@ -534,6 +534,19 @@ span {
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
+.notice-box {
+  margin-left: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.notice-box:hover {
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
 @media only screen and (max-width: 600px) {
   .view-in-mobile {
     display: block;

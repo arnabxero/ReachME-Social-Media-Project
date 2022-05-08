@@ -101,7 +101,7 @@ class post_card_creation
     }
     function generate_card($uid)
     {
-        $sql = "SELECT * FROM posts WHERE authorid = '$uid'";
+        $sql = "SELECT * FROM posts WHERE authorid = '$uid' ORDER BY id DESC";
 
         $res = mysqli_query($this->class_con, $sql);
         $type = "none";
@@ -273,9 +273,11 @@ class post_card_creation
 
         </div>';
 
+        //////////////////////
             if ($shared) {
                 echo '</div>';
             }
+        //////////////////////
         }
     }
 }
