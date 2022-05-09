@@ -99,7 +99,7 @@ class comment_card_creation
     }
     function generate_card($pid)
     {
-        $sql = "SELECT * FROM comments WHERE post_id = '$pid'";
+        $sql = "SELECT * FROM comments WHERE post_id = '$pid' ORDER BY id DESC";
 
         $res = mysqli_query($this->class_con, $sql);
 

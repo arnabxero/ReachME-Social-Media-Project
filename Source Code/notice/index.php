@@ -25,7 +25,7 @@ $cat_req = "";
 $cat_tags = "";
 $cat_warnings = "";
 
-$cat = "alerts";
+$cat = "likes";
 
 
 if (isset($_GET['size'])) {
@@ -70,6 +70,9 @@ if (isset($_GET['cat'])) {
         $cat_warnings = "selected";
         $cat = "warnings";
     }
+} else {
+    $cat_likes = "selected";
+    $cat = "likes";
 }
 ?>
 
@@ -164,13 +167,14 @@ if (isset($_GET['cat'])) {
     <div class="row" style="background-color:aliceblue; width: 99.9%;">
 
         <div class="col-sm-4 home1 hide-in-mobile" style="overflow-y:scroll;" id="home1">
-            <h3 style="text-align:center;">Part - 1</h3>
+            <h3 style="text-align:center;">Disaster Alerts</h3>
+            <hr>
             <?php
             include('notification_collector.php');
 
             $obj = new notice_bucket();
 
-            //$obj->alert_posts(10);
+            $obj->alert_posts($sz, $logid);
 
             ?>
         </div>
@@ -198,14 +202,20 @@ if (isset($_GET['cat'])) {
                     $obj->warnings($sz, $logid);
                 }
             } else {
-                $obj->alert_posts($sz, $logid);
+                $obj->got_likes($sz, $logid);
             }
             ?>
         </div>
 
         <div class="col-sm-4 hide-in-mobile" style="overflow-y:scroll;" id="home3">
-            <h3 style="text-align:center;">Part - 3</h3>
+            <h3 style="text-align:center;">New Friend Requests</h3>
+            <hr>
+            <?php
+            
+            $obj->got_friend_req($sz, $logid);
 
+
+            ?>
         </div>
 
         <script>

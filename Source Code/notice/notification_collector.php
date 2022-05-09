@@ -268,13 +268,111 @@ class notice_bucket
             echo "<p>No Notifications in this category.</p>";
         }
     }
-    function got_friend_req()
+    function got_friend_req($limit, $uid)
     {
+        include('../include/connection.php');
+
+        $sql = "SELECT * FROM friend_list WHERE rid = '$uid' AND stat = 'r' ORDER BY id DESC";
+        $res = mysqli_query($con, $sql);
+        $count = 0;
+
+        while ($row = mysqli_fetch_assoc($res)) {
+
+            $user_id = $row['sid'];
+
+            $name = $this->get_name($row['sid']);
+            $link = '../view_user.php?uid=' . $row['sid'];
+
+            echo '<div class="notice-box">
+                    <a href="' . $link . '" style="text-decoration: none; color: black;">
+                        <div class="row">
+                            <div class="col-2">
+                                <img style="margin-left: 10px; margin-top: 5px;" src="../files/logo/freq.png" height="40px" width="40px">
+                            </div>
+                            <div class="col-10">
+                                <p><strong>
+                                ' . $name . '</strong> sent you a friend request.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>';
+            $count = $count + 1;
+
+
+            if ($count == $limit) {
+                break;
+            }
+        }
+
+        if ($count <= 0) {
+            echo "<p>No Notifications in this category.</p>";
+        }
     }
-    function got_tagged()
+    function get_content($pid)
     {
+        include('../include/connection.php');
+
+        $content = "No Content";
+
+        $sql = "SELECT * FROM posts WHERE id = '$pid'";
+        $res = mysqli_query($con, $sql);
+
+        while ($row = mysqli_fetch_assoc($res)) {
+            $content = $row['content'];
+        }
+
+        return $content;
+    }
+    function got_tagged($limit, $uid)
+    {
+        include('../include/connection.php');
+
+        $sql = "SELECT * FROM tag_list WHERE tag_id = '$uid' ORDER BY id DESC";
+        $res = mysqli_query($con, $sql);
+        $count = 0;
+
+        while ($row = mysqli_fetch_assoc($res)) {
+
+            $pid = $row['post_id'];
+
+            $link = '../view_post.php?pid=' . $row['post_id'];
+            $content = $this->get_content($pid);
+            $content = substr($content, 0, 15);
+
+            echo '<div class="notice-box">
+                    <a href="' . $link . '" style="text-decoration: none; color: black;">
+                        <div class="row">
+                            <div class="col-2">
+                                <img style="margin-left: 10px; margin-top: 5px;" src="../files/logo/tag.png" height="40px" width="40px">
+                            </div>
+                            <div class="col-5">
+                                <p><strong>
+                                You have been tagged in a Post.
+                                </strong></p>
+                            </div>
+                            <div class="col-5">
+                                <p>
+                                ' . $content . '
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>';
+            $count = $count + 1;
+
+
+            if ($count == $limit) {
+                break;
+            }
+        }
+
+        if ($count <= 0) {
+            echo "<p>No Notifications in this category.</p>";
+        }
     }
     function warnings()
     {
+        echo '<h3>Warning/User Reporting system is not built yet</h1>';
     }
 }
