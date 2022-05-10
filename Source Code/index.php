@@ -551,6 +551,32 @@ class post_card_creation
     }
 }
 
+$total_notice = 0;
+
+function get_notif_num($uid)
+{
+    $api_link = "http://localhost/pw2/notice/notif_counter.php";
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $api_link . '?uid=' . $uid,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    return $response;
+}
+
+$total_notice = get_notif_num($ulogid);
+
 ?>
 
 
@@ -621,16 +647,16 @@ class post_card_creation
             <!--Profile, User Menu, Message, Logout Start-->
             <div class="col-sm-4 userpane">
                 <div style="float:right; margin-top: 2%; margin-right: 10%;">
-                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat">
-                        <i class="fas fa-comment"></i>
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="chat" style="position: relative;">
+                        <i title="Text Message" class="fas fa-comment"></i>
                     </a>
 
                     <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notice/">
-                        <i class="fas fa-bell"></i>
+                        <i title="Notifications" class="fas fa-bell"></i> <span class="num"><?= $total_notice ?></span>
                     </a>
 
                     <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="subdir/logout.php">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i title="Log Out" class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
 
@@ -644,7 +670,7 @@ class post_card_creation
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li style="display:<?= $adminship_menu?>;"><a class="dropdown-item" href="admin/admin.php">Admin Dashboard</a></li>
+                            <li style="display:<?= $adminship_menu ?>;"><a class="dropdown-item" href="admin/admin.php">Admin Dashboard</a></li>
                             <li><a class="dropdown-item" href="edit_profile.php">Update Profile</a></li>
                             <li><a class="dropdown-item" href="delete_acc.php">Disable Account</a></li>
                             <li><a class="dropdown-item" href="subdir/logout.php">Logout Account</a></li>
@@ -673,11 +699,18 @@ class post_card_creation
 
         <!-- Personalized Content -->
         <div class="col-sm-6" style="overflow-y:scroll;" id="home2">
-            <a style="text-decoration:none;" href="create_post.php">
-                <div class="post-btn-home" style="<?= $display2 ?>">
-                    Create A New Post
-                </div>
-            </a>
+            <div style="text-align:center;">
+                <a style="text-decoration:none; display:inline-block; width:48%;" href="create_post.php">
+                    <div class="post-btn-home" style="<?= $display2 ?>">
+                        <i class="fas fa-edit"></i> Create A New Post
+                    </div>
+                </a>
+                <a style="text-decoration:none; display:inline-block; width:48%;" href="create_post_alert.php">
+                    <div class="post-btn-home" style="<?= $display2 ?> ">
+                        <i class="fas fa-exclamation-triangle"></i> Alert or Seek Blood <i class="fas fa-notes-medical"></i>
+                    </div>
+                </a>
+            </div>
             <hr>
             <?php
             $gen_post_list = new post_card_creation();

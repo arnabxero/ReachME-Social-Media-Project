@@ -337,6 +337,35 @@ class view_post
     }
 }
 
+
+
+$total_notice = 0;
+
+function get_notif_num($uid)
+{
+    $api_link = "http://localhost/pw2/notice/notif_counter.php";
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $api_link . '?uid=' . $uid,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    return $response;
+}
+
+$total_notice = get_notif_num($ulogid);
+
+
 ?>
 
 
@@ -407,8 +436,8 @@ class view_post
                         <i class="fas fa-comment"></i>
                     </a>
 
-                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notification.php">
-                        <i class="fas fa-bell"></i>
+                    <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="notice/">
+                        <i title="Notifications" class="fas fa-bell"></i> <span class="num"><?= $total_notice ?></span>
                     </a>
 
                     <a type="button" class=" home-rbtn btn btn-primary btn-rounded btn-icon" href="subdir/logout.php">

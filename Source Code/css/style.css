@@ -547,6 +547,18 @@ span {
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
+span.num {
+  position: absolute;
+  font-size: 0.7em;
+  top: 0px;
+  color: #fff;
+  left: 1410px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: red;
+}
+
 @media only screen and (max-width: 600px) {
   .view-in-mobile {
     display: block;
