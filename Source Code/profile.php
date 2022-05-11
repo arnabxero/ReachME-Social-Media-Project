@@ -139,6 +139,7 @@ if (isset($_SESSION['logid'])) {
         $sver_vis = "hidden";
     }
 
+    
 } else {
     header('Location: logreg.php');
 }

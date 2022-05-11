@@ -65,6 +65,7 @@ include('../Admin/approval_queue.php');
     <link rel="stylesheet" href="../css/admin_style.css?v=<?php echo time(); ?>">
 
 
+    <link rel="stylesheet" href="../css/style.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
@@ -187,7 +188,7 @@ include('../Admin/approval_queue.php');
         </nav>
 
 
-        <div class="ver-list" style="display: none;">
+        <div class="ver-list" style="display: none; margin-left: -1154px;">
 
             <?php echo $ver_approve->out ?>
 

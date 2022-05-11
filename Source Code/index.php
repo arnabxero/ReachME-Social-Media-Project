@@ -670,10 +670,11 @@ $total_notice = get_notif_num($ulogid);
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li style="display:<?= $adminship_menu ?>;"><a class="dropdown-item" href="admin/admin.php">Admin Dashboard</a></li>
+                            <li style="display:<?= $adminship_menu ?>;"><a class="dropdown-item" href="admin/admin.php">Admin Dashboard - Ehtimum</a></li>
                             <li><a class="dropdown-item" href="edit_profile.php">Update Profile</a></li>
                             <li><a class="dropdown-item" href="delete_acc.php">Disable Account</a></li>
                             <li><a class="dropdown-item" href="subdir/logout.php">Logout Account</a></li>
+                            <li style="display:<?= $adminship_menu ?>;"><a class="dropdown-item" href="admin_dashboard/index.php">Admin Dashboard - Arnab</a></li>
                         </ul>
                     </div>
                 </div>

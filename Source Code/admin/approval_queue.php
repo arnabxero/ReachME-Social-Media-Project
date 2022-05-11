@@ -44,39 +44,48 @@ class ver_request
                 $two = "2.pdf";
 
                 $output .= '<div class="list">
-                <div class="container-fluid">
+                <div class="container-fluid card-main" style="margin-left: -100px; width: 99%;">
                     <div class="row">
                         <div class="col-sm-1" id="rat">
-                        <img src="../ext-files/user/'. $cheakpic . '" alt="">
+                        <img src="../ext-files/user/' . $cheakpic . '" alt="">
                         </div>
 
 
                         <div class="col-sm-1" id="same1">
-                            <p>'.$row['user_id'].'</p>
+                            <p>' . $row['user_id'] . '</p>
                         </div>
+
+                        <div class="col-sm-1.5" id="same1">
+                        <a href="../view_user.php?uid=' . $row['user_id'] . '">View Profile</a>
+                        </div>
+
+                        <div class="col-sm-1.5" id="same1">
+                        <p>' . $row2['fname'] . ' ' . $row2['lname'] . '</p>
+                        </div>
+
                         <div class="col-sm-1" id="same1">
 
-                            <p>'.$row['user_name'].'</p>
+                            <p>' . $row['user_name'] . '</p>
                         </div>
 
 
                         <div class="col-sm-1" id="same2">
 
                             
-                            <a target="_blank" href="'.$strature.'/'.$one.'" id="file">View File 1</a>
+                            <a target="_blank" href="' . $strature . '/' . $one . '" id="file">View File 1</a>
                             
                         </div>
                         <div class="col-sm-1" id="same2">
-                            <a target="_blank" href="'.$strature.'/'.$two.'"id="file">View File 1</a>
+                            <a target="_blank" href="' . $strature . '/' . $two . '"id="file">View File 1</a>
 
                         </div>
 
                         <div class="col-sm-1" id="same3">
-                            <a href="accept.php?user_id='. $row['user_id'] .'" style="background-color: rgb(7, 194, 23);padding-left:25px;">Accept</a>
+                            <a href="accept.php?user_id=' . $row['user_id'] . '" style="background-color: rgb(7, 194, 23);padding-left:25px;">Accept</a>
                         </div>
                         <div class="col-sm-1" id="same3">
                             
-                            <a href="reject.php?user_id='. $row['user_id'] .'" style="background-color: rgb(230, 71, 71); padding-left:30px;">Reject</a>
+                            <a href="reject.php?user_id=' . $row['user_id'] . '" style="background-color: rgb(230, 71, 71); padding-left:30px;">Reject</a>
 
                         </div>
 
@@ -89,10 +98,7 @@ class ver_request
         $this->out = $output;
         $this->count = $count;
     }
-
-    
 }
 
 $ver_approve = new ver_request();
 $ver_approve->req();
-
