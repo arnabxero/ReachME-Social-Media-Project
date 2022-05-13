@@ -577,7 +577,6 @@ span.num {
   background-color: red;
 }
 
-
 .vert-navbar {
   text-align: center;
   width: 100%;
@@ -592,14 +591,13 @@ span.num {
   transition: var(--transition-speed);
 }
 
-
 .vert-navbar:hover {
   background-color: rgb(101, 101, 101);
   color: rgb(138, 226, 255);
   box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
-.active-vbar{
+.active-vbar {
   background-color: rgb(52, 52, 52);
   color: rgb(138, 226, 255);
 }

@@ -4,8 +4,21 @@ session_start();
 include('../include/connection.php');
 include('backend.php');
 
+$add_admin_vis = "display: none;";
+$add_mod_vis = "display: none;";
+
+
 if (!(isset($_SESSION['logid']) and isset($_SESSION['admin']))) {
     header('Location: ../logreg.php');
+} else {
+    if ($_SESSION["rank"] == 'super_admin') {
+        $add_admin_vis = "";
+        $add_mod_vis = "";
+    } else if ($_SESSION["rank"] == 'admin') {
+        $add_mod_vis = "";
+    } else if ($_SESSION["rank"] == 'moderator') {
+        //nothing
+    }
 }
 
 $admin_opt1 = "";
@@ -59,9 +72,9 @@ if (isset($_GET['size'])) {
     } else if ($_GET['size'] == 20) {
         $selected_20 = "selected";
         $sz = 20;
-    } else if ($_GET['size'] == 100) {
+    } else if ($_GET['size'] == 99999) {
         $selected_100 = "selected";
-        $sz = 100;
+        $sz = 99999;
     }
 }
 
@@ -115,10 +128,38 @@ if (isset($_GET['subtype'])) {
                 </a>
             </div>
             <!--Search Bar End-->
+            <div class="col-sm-1">
+
+                <div class="find-friend" style="text-align: center; margin-top: 10px;">
+                    <form id=f1 name="f1" action="" onSubmit="if(this.t1.value!=null && this.t1.value!='')findString(this.t1.value);return false">
+                        <input type="text" id="t1" name="t1" value="" size=6 style="padding:2px; float:left; margin-left: -30px; margin-top: 20px;">
+                        <input class="" style=" background-color:blueviolet; float: left; margin-top: 22px; margin-left: 0px;" type="submit" name="b1" value="Find">
+                    </form>
+
+                    <script language="JavaScript">
+                        var TRange = null;
+
+                        function findString(str) {
+
+                            var strFound;
+
+                            if (window.find) {
+                                strFound = self.find(str);
+
+                                if (!strFound) {
+                                    strFound = self.find(str, 0, 1);
+                                    while (self.find(str, 0, 1)) continue;
+                                }
+                            }
+                            return true;
+                        }
+                    </script>
+                </div>
+            </div>
 
 
             <!--Home Nevigation Start-->
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <div class="myTab" style="margin: 2%;">
                     <nav class="nav nav-pills nav-fill">
                         <a class="nav-link <?= $admin_opt1 ?>" href="admin_dashboard.php?type=overview&size=<?= $sz ?>">Overview</a>
@@ -140,7 +181,7 @@ if (isset($_GET['subtype'])) {
                             <option value="admin_dashboard.php?type=<?= $cat ?>&size=5&subtype=<?= $subtype ?>" <?= $selected_5 ?>>5</option>
                             <option value="admin_dashboard.php?type=<?= $cat ?>&size=10&subtype=<?= $subtype ?>" <?= $selected_10 ?>>10</option>
                             <option value="admin_dashboard.php?type=<?= $cat ?>&size=20&subtype=<?= $subtype ?>" <?= $selected_20 ?>>20</option>
-                            <option value="admin_dashboard.php?type=<?= $cat ?>&size=100&subtype=<?= $subtype ?>" <?= $selected_100 ?>>100</option>
+                            <option value="admin_dashboard.php?type=<?= $cat ?>&size=99999&subtype=<?= $subtype ?>" <?= $selected_100 ?>>All</option>
                         </select>
                         Entries
                     </label>
@@ -172,7 +213,7 @@ if (isset($_GET['subtype'])) {
                         } else if ($_GET['type'] == "post") {
                             $subtype = $vertbar_obj->post($cat, $sz, $subtype);
                         } else if ($_GET['type'] == "admin") {
-                            $subtype = $vertbar_obj->admin($cat, $sz, $subtype);
+                            $subtype = $vertbar_obj->admin($cat, $sz, $subtype, $add_admin_vis, $add_mod_vis);
                         } else if ($_GET['type'] == "extraopt") {
                             $subtype = $vertbar_obj->extra($cat, $sz, $subtype);
                         }
@@ -187,9 +228,12 @@ if (isset($_GET['subtype'])) {
 
 
                     if ($cat == 'overview') {
+                        //Nothing 
                     } else if ($cat == 'pending') {
                         if ($subtype == 'op1') {
                             $body_obj->create_pending_verlist($sz);
+                        } else if ($subtype == 'op2') {
+                            $body_obj->create_reported_postlist($sz);
                         }
                     } else if ($cat == 'user') {
                         if ($subtype == 'op1') {
@@ -202,6 +246,32 @@ if (isset($_GET['subtype'])) {
                     } else if ($cat == 'post') {
                         if ($subtype == 'op1') {
                             $body_obj->create_all_postlist($sz);
+                        } else if ($subtype == 'op2') {
+                            echo '<div style="text-align: center;" id="scanbox">
+                                    <div class="loading-text"><div style="display: inline-block;" class="loading-text" id="ptext2">0</div>% Completed</div>
+
+                                    <progress class="loading-bar" value="0" max="10" id="progressBar"></progress>
+
+                                    <div class="loading-text">Scanning Posts - <div style="display: inline-block;" class="loading-text" id="ptext">X</div> Seconds Left...</div>
+                                    
+                                    <button onclick="start_scan()">Start Scanning</button>
+                                </div>';
+
+                            $body_obj->create_post_scanner($sz);
+                        } else if ($subtype == 'op3') {
+                            $body_obj->create_reported_postlist($sz);
+                        }
+                    } else if ($cat == 'admin') {
+                        if ($subtype == 'op1' and isset($_GET['subtype'])) {
+                            $body_obj->make_adminlist($sz);
+                        } else if ($subtype == 'op2' and isset($_GET['subtype'])) {
+                            $body_obj->make_moderatorlist($sz);
+                        } else if ($subtype == 'op3') {
+                            //Nothing
+                        } else if ($subtype == 'op4') {
+                            $body_obj->create_adminlist($sz);
+                        } else if ($subtype == 'op5') {
+                            $body_obj->create_moderatorlist($sz);
                         }
                     }
 
@@ -210,6 +280,29 @@ if (isset($_GET['subtype'])) {
                 </div>
 
 
+                <script>
+                    var timeleft = 10;
+
+                    function start_scan() {
+                        var downloadTimer = setInterval(function() {
+                            if (timeleft <= 0) {
+                                clearInterval(downloadTimer);
+                            }
+                            document.getElementById("progressBar").value = 10 - timeleft;
+
+                            document.getElementById("ptext2").textContent = (100 - timeleft);
+
+                            document.getElementById("ptext").textContent = timeleft / 10;
+
+                            timeleft -= 1;
+
+                            if ((100 - timeleft) == 100) {
+                                document.getElementById('scanresult').style.display = '';
+                                document.getElementById('scanbox').style.display = 'none';
+                            }
+                        }, 100);
+                    }
+                </script>
 
                 <script>
                     let h = (screen.height) - 190;
