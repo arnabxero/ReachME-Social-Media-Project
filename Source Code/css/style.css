@@ -606,6 +606,13 @@ span.num {
   text-decoration: none;
 }
 
+.topic-box {
+  padding: 10px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
 @media only screen and (max-width: 600px) {
   .view-in-mobile {
     display: block;
@@ -694,5 +701,7 @@ span.num {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
+
+    color:#ffa1a1
   }
 }

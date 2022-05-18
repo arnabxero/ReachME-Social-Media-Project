@@ -31,6 +31,17 @@ $vcheck = "hidden";
 
 
 if (isset($_SESSION['logid'])) {
+    function get_flag_count($user_id)
+    {
+        include('include/connection.php');
+        $count = 0;
+        $sql = "SELECT * FROM flaglist WHERE user_id = '$user_id'";
+        $res = mysqli_query($con, $sql);
+        $count = mysqli_num_rows($res);
+
+        return $count;
+    }
+
     $id = $_GET['uid'];
 
     $sql = "SELECT * FROM users WHERE id = '$id'";
@@ -45,7 +56,7 @@ if (isset($_SESSION['logid'])) {
         $phone = $row['phone'];
         $job = $row['job'];
         $about = $row['about'];
-        $flags = $row['flag'];
+        $flags = get_flag_count($row['id']);
         $propic = "ext-files/user/" . $row['pro_pic'];
 
 

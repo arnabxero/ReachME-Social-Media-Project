@@ -207,7 +207,7 @@ if (isset($_GET['subtype'])) {
                         if ($_GET['type'] == "overview") {
                             $subtype = $vertbar_obj->overview($cat, $sz, $subtype);
                         } else if ($_GET['type'] == "pending") {
-                            $subtype = $vertbar_obj->pending($cat, $sz, $subtype);
+                            $subtype = $vertbar_obj->pending($cat, $sz, $subtype, $add_admin_vis, $add_mod_vis);
                         } else if ($_GET['type'] == "user") {
                             $subtype = $vertbar_obj->user($cat, $sz, $subtype);
                         } else if ($_GET['type'] == "post") {
@@ -215,7 +215,7 @@ if (isset($_GET['subtype'])) {
                         } else if ($_GET['type'] == "admin") {
                             $subtype = $vertbar_obj->admin($cat, $sz, $subtype, $add_admin_vis, $add_mod_vis);
                         } else if ($_GET['type'] == "extraopt") {
-                            $subtype = $vertbar_obj->extra($cat, $sz, $subtype);
+                            $subtype = $vertbar_obj->extra($cat, $sz, $subtype, $add_admin_vis, $add_mod_vis);
                         }
                     }
                     ?>
@@ -234,6 +234,10 @@ if (isset($_GET['subtype'])) {
                             $body_obj->create_pending_verlist($sz);
                         } else if ($subtype == 'op2') {
                             $body_obj->create_reported_postlist($sz);
+                        } else if ($subtype == 'op3') {
+                            $body_obj->create_promote_list($sz);
+                        } else if ($subtype == 'op4') {
+                            $body_obj->create_flagged_userlist($sz);
                         }
                     } else if ($cat == 'user') {
                         if ($subtype == 'op1') {
@@ -267,11 +271,17 @@ if (isset($_GET['subtype'])) {
                         } else if ($subtype == 'op2' and isset($_GET['subtype'])) {
                             $body_obj->make_moderatorlist($sz);
                         } else if ($subtype == 'op3') {
-                            //Nothing
+                            $body_obj->create_ban_list($sz);
                         } else if ($subtype == 'op4') {
-                            $body_obj->create_adminlist($sz);
+                            $body_obj->create_adminlist($sz, $add_mod_vis, $add_admin_vis);
                         } else if ($subtype == 'op5') {
-                            $body_obj->create_moderatorlist($sz);
+                            $body_obj->create_moderatorlist($sz, $add_mod_vis);
+                        }
+                    } else if ($cat == 'extraopt') {
+                        if ($subtype == 'op1') {
+                            $body_obj->create_admin_token_form($sz, $_SESSION['logid'], $_SESSION['logUname']);
+                        } else if ($subtype == 'op2') {
+                            $body_obj->create_admin_tokenlist($sz);
                         }
                     }
 

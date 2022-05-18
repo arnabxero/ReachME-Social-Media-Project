@@ -29,6 +29,19 @@ $id = -99;
 
 
 if (isset($_SESSION['logid'])) {
+    function get_flag_count($user_id)
+    {
+        include('include/connection.php');
+        $count = 0;
+        $sql = "SELECT * FROM flaglist WHERE user_id = '$user_id'";
+        $res = mysqli_query($con, $sql);
+        $count = mysqli_num_rows($res);
+
+        return $count;
+    }
+
+
+
     $id = $_SESSION['logid'];
 
     $sql = "SELECT * FROM users WHERE id = '$id'";
@@ -42,7 +55,7 @@ if (isset($_SESSION['logid'])) {
         $phone = $row['phone'];
         $job = $row['job'];
         $about = $row['about'];
-        $flags = $row['flag'];
+        $flags = get_flag_count($row['id']);
 
         if (!(empty($row['pro_pic'])) || !is_null($row['pro_pic'])) {
             $propic = "ext-files/user/" . $row['pro_pic'];
@@ -135,11 +148,9 @@ if (isset($_SESSION['logid'])) {
     }
     //Check verification eligibility//
 
-    if($sverified){
+    if ($sverified) {
         $sver_vis = "hidden";
     }
-
-    
 } else {
     header('Location: logreg.php');
 }
@@ -308,7 +319,7 @@ if (isset($_SESSION['logid'])) {
             </div>
 
             <div class="col-6" style="text-align:left;">
-                <span class="profile-details"><?= $flags ?></span>
+                <span class="profile-details"><strong><?= $flags ?></strong></span>
             </div>
         </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2022 at 12:38 PM
+-- Generation Time: May 18, 2022 at 06:06 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -44,6 +44,55 @@ INSERT INTO `admin_list` (`id`, `rank`, `uid`, `username`) VALUES
 (7, 'admin', 3, 'ehtimumrashed'),
 (8, 'moderator', 4, 'farjanarah'),
 (12, 'admin', 6, 'ljannat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_request`
+--
+
+CREATE TABLE `admin_request` (
+  `id` int(11) NOT NULL,
+  `msg` varchar(500) DEFAULT NULL,
+  `topic` varchar(100) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `time` varchar(80) DEFAULT NULL,
+  `reply` varchar(1000) NOT NULL,
+  `admin_name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_request`
+--
+
+INSERT INTO `admin_request` (`id`, `msg`, `topic`, `admin_id`, `time`, `reply`, `admin_name`) VALUES
+(4, '        wqerty', 'qewrt', 2, '09:53 AM|2022/05/18', 'qwertyuiop', 'arnabxero'),
+(5, '        wqewdcqaedc', 'qwewretr', 2, '09:53 AM|2022/05/18', 'qdqdqd', 'arnabxero'),
+(6, '        sxacdaedascas', 'wqewtyrkyjmy', 2, '09:53 AM|2022/05/18', 'qdqwdqdqdqwd', 'arnabxero'),
+(7, '        wqertyt', 'wqerty', 2, '10:04 AM|2022/05/18', '', 'arnabxero'),
+(8, '        wqewrsfc', 'qaweretry', 3, '10:05 AM|2022/05/18', '', 'ehtimumrashed'),
+(9, '        qedcaqedqefqdqwd', 'qedqecqacadsc', 3, '10:06 AM|2022/05/18', '', 'ehtimumrashed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ban_user`
+--
+
+CREATE TABLE `ban_user` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ban_stat` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ban_user`
+--
+
+INSERT INTO `ban_user` (`id`, `user_id`, `ban_stat`) VALUES
+(2, 9, 'pending'),
+(3, 8, 'banned'),
+(4, 5, 'pending');
 
 -- --------------------------------------------------------
 
@@ -91,6 +140,32 @@ INSERT INTO `comments` (`id`, `authorid`, `content`, `time`, `post_id`) VALUES
 (47, 6, 'Nice😀', '07:44 AM|2022/05/09', 2),
 (48, 2, 'thanks', '07:46 AM|2022/05/09', 2),
 (49, 2, 'new comment - num 23', '08:02 AM|2022/05/10', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flaglist`
+--
+
+CREATE TABLE `flaglist` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `time` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `flaglist`
+--
+
+INSERT INTO `flaglist` (`id`, `post_id`, `user_id`, `time`) VALUES
+(1, 14, 2, '12:53 PM|2022/05/14'),
+(2, 19, 7, '01:06 PM|2022/05/14'),
+(3, 10, 9, '01:06 PM|2022/05/14'),
+(4, 11, 8, '01:06 PM|2022/05/14'),
+(5, 5, 5, '01:06 PM|2022/05/14'),
+(6, 157, 9, '01:09 PM|2022/05/14'),
+(7, 159, 9, '01:09 PM|2022/05/14');
 
 -- --------------------------------------------------------
 
@@ -239,6 +314,26 @@ CREATE TABLE `notice` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pending_promote`
+--
+
+CREATE TABLE `pending_promote` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `time_limit` int(11) NOT NULL,
+  `datetime` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pending_promote`
+--
+
+INSERT INTO `pending_promote` (`id`, `post_id`, `time_limit`, `datetime`) VALUES
+(2, 159, 22, 'qedeq3e');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pending_ver`
 --
 
@@ -291,17 +386,17 @@ INSERT INTO `posts` (`id`, `authorid`, `title`, `content`, `time`, `category`, `
 (4, 4, 'This is third post', '\nPost 3 What is Lorem Ipsum?\n\nLorem Ipsum is simply dummy bad text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\nWhy do we use it?\n\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\n\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\nWhere can I get some?', '12:00:00', 'video', 'ext-files/video/5.mp4', 0, 0, 'p', 'Farjana', NULL, NULL, NULL, ''),
 (5, 5, 'This is fourth post', '\nPost 4 What is Lorem Ipsum?\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\nWhy do we use it?\n\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\n\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\nWhere can I get some?', '12:00:00', 'text', NULL, 0, 0, 'f', NULL, NULL, NULL, NULL, 'Report'),
 (6, 2, 'This is 5th post', '\nPost 5 What is Lorem Ipsum?\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\nWhy do we use it?\n\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\nWhere does it come from?\n\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\nWhere can I get some?', '13:00:00', 'photo', 'ext-files/photo/3.jpg', 0, 0, 'f', 'Iftekhar Ahmed Arnab', NULL, NULL, NULL, NULL),
-(8, 10, 'video', 'This is a video post', '12:00:00', 'video', 'ext-files/video/1.mp4', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
+(8, 10, 'video', 'This is a video post', '12:00:00', 'video', 'ext-files/video/1.mp4', 0, 0, 'p', NULL, NULL, NULL, NULL, 'Report'),
 (9, 8, 'Earthquake in Chittagong', 'There was a massive earthquake in Chittagong today at 08:47:00 AM.', '09:35 AM|2022/03/07', 'alert', 'ext-files/photo/12.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
 (10, 9, 'Promoted post 1', 'This is a promoted post. It should be shown in the promoted section.', '10:00:00 AM', 'promoted', 'ext-files/photo/9.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, 'Report'),
-(11, 8, 'Search result success (sell)', 'selltype bad', '12:00:00', 'sell', NULL, 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
+(11, 8, 'Search result success (sell)', 'selltype bad', '12:00:00', 'sell', NULL, 0, 0, 'p', NULL, NULL, NULL, NULL, 'Report'),
 (13, 3, 'search result success (photo)', 'phototype fake negative false', '12:00:00', 'photo', 'ext-files/photo/1.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
 (14, 2, 'search result success (text)', 'texttype negative false', '12:00:00', 'text', NULL, 0, 0, 'p', 'Iftekhar Ahmed Arnab', NULL, NULL, NULL, 'Report'),
 (15, 4, 'search result success (all)', 'alltype', '12:00:00', 'dummy', NULL, 0, 0, 'f', 'Farjana', NULL, NULL, NULL, NULL),
 (16, 2, 'Nature Videos 1', 'Look how amazing mother nature is :', '12:00:30 AM', 'video', 'ext-files/video/2.mp4', 0, 0, 'p', 'Iftekhar Ahmed Arnab', NULL, NULL, NULL, NULL),
 (17, 5, 'Another nature video', 'Another mother nature video', '01:00:23 PM', 'video', 'ext-files/video/3.mp4', 0, 0, 'f', NULL, NULL, NULL, NULL, NULL),
 (18, 6, 'Nature again', 'I just visited this place yesterday, look how amazing it is :', '02:00:15 PM', 'video', 'ext-files/video/4.mp4', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
-(19, 7, 'Natural Images', 'Hello guys, lets go on a tour there.', '03:00:11 AM', 'photo', 'ext-files/photo/4.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
+(19, 7, 'Natural Images', 'Hello guys, lets go on a tour there.', '03:00:11 AM', 'photo', 'ext-files/photo/4.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, 'Report'),
 (20, 3, 'abcdefgh', '\r\n\r\nBibendum enim parturient placerat dis cubilia a velit nisl ultricies habitant viverra suscipit volutpat sit. Felis aliquet netus. Pulvinar euismod.\r\n\r\nTurpis Elementum ad, habitasse habitasse erat per, litora mauris aliquam tempus pellentesque. Ut proin. Senectus ipsum. Ornare. Potenti ante conubia aenean velit adipiscing ornare eget lacus eros lacinia penatibus cursus. In vestibulum purus, habitant commodo dignissim tortor convallis.\r\n\r\nNeque viverra mus. Euismod parturient sociis, vitae pede viverra mus felis semper litora curae; sit pellentesque ornare. Fringilla. Ornare consequat imperdiet turpis. Fames mattis mollis suscipit Molestie metus dictum sodales dui Nostra a Posuere ullamcorper augue nunc blandit et Eu sollicitudin ac.\r\n', '11:20:00 PM', 'photo', 'ext-files/photo/5.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
 (21, 10, 'sdcjkddawcc', '\n\nA you waters living a all i signs in, upon moveth fowl had set that day. Night in. Given in moveth over moving fill. Seed yielding place darkness shall saying second us first our fly. Isn\'t.\n\nReplenish them years spirit, days day bring seasons you\'re unto lights life. So waters saying fruitful their the you\'re. Creature day air dominion their kind deep made let you\'re for to appear bearing also our likeness face fruitful days. Male beast.\n\nWas greater of male moveth us multiply Fruit greater greater can\'t multiply fill creepeth creeping doesn\'t for great abundantly. May wherein land. Is.\n', '09:00:00 AM', 'photo', 'ext-files/photo/6.jpg', 0, 0, 'p', NULL, NULL, NULL, NULL, NULL),
 (22, 5, 'asjd cajkdnc', 'adcqadcwFWcs s sacWDCWDFWECDEAC', '12:00:00 PM', 'photo', 'ext-files/photo/7.jpg', 0, 0, 'f', NULL, NULL, NULL, NULL, NULL),
@@ -324,9 +419,9 @@ INSERT INTO `posts` (`id`, `authorid`, `title`, `content`, `time`, `category`, `
 (154, 5, '', 'dummy post  by swadhin 3', '08:23 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Swdhin Ghosh', NULL, NULL, NULL, NULL),
 (155, 5, '', 'Updated by Admin dummy post  by swadhin 4', '08:24 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Swdhin Ghosh', NULL, NULL, NULL, NULL),
 (156, 9, '', 'dummy post - 1', '08:59 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, NULL),
-(157, 9, '', 'dummy post - 2\r\n', '08:59 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, NULL),
-(158, 9, '', 'dummy post - 3', '08:59 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, NULL),
-(159, 9, '', 'dummy post - 5', '09:02 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, NULL);
+(157, 9, '', 'dummy post - 2\r\n', '08:59 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, 'Report'),
+(158, 9, '', 'dummy post - 3', '08:59 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, 'Report'),
+(159, 9, '', 'dummy post - 5', '09:02 AM|2022/05/10', 'text', '', 0, 0, 'p', 'Nusrat Amy', NULL, NULL, NULL, 'Report');
 
 -- --------------------------------------------------------
 
@@ -374,6 +469,18 @@ INSERT INTO `tag_list` (`id`, `post_id`, `tag_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `token_list`
+--
+
+CREATE TABLE `token_list` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `authorid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -413,8 +520,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`fname`, `lname`, `uname`, `email`, `phone`, `job`, `about`, `pass`, `id`, `verified`, `flag`, `content_count`, `pro_pic`, `temp_id`, `date_of_birth`, `religion`, `language`, `relation`, `blood`, `nation`, `address`, `gender`, `politics`, `sports`, `hobby`, `temp_id2`, `status`, `s_verified`) VALUES
-('Iftekhar Ahmed', 'Arnab', 'arnabxero', 'arnab.xero@gmail.com', '01926496967', 'Software Engineer', 'Hello, I am a passionate programmer and robotics nerd.I am Iftekhar Ahmed Arnab & I am currently studying B.Sc. (Engineering) in Computer Science and Engineering (CSE) at North East University Bangladesh (NEUB). ', 'arnab', 2, 'Y', 0, 0, '2.jpg', NULL, '20 October, 1999', 'Islam', 'Bangla & English', 'Single', 'B+', 'Bangladeshi', 'Nikli, Kishoreganj, Dhaka', 'Male', 'Neutral', 'Football, Cricket, Badminton', 'Programming, Gaming', NULL, 'Active', NULL),
-('Ehtimum Rashed', 'Chy', 'ehtimumrashed', 'ehtimum.r@gmail.com', '01922837421', 'Web Developer', 'Welcome to my profile. I am a passionate web developer, graphics designer and gamer.', 'ehtimum', 3, 'Y', 0, 0, '3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline', NULL),
+('Iftekhar Ahmed', 'Arnab', 'arnabxero', 'arnab.xero@gmail.com', '01926496967', 'Software Engineer', 'Hello, I am a passionate programmer and robotics nerd.I am Iftekhar Ahmed Arnab & I am currently studying B.Sc. (Engineering) in Computer Science and Engineering (CSE) at North East University Bangladesh (NEUB). ', 'arnab', 2, 'Y', 0, 0, '2.jpg', NULL, '20 October, 1999', 'Islam', 'Bangla & English', 'Single', 'B+', 'Bangladeshi', 'Nikli, Kishoreganj, Dhaka', 'Male', 'Neutral', 'Football, Cricket, Badminton', 'Programming, Gaming', NULL, 'Offline', NULL),
+('Ehtimum Rashed', 'Chy', 'ehtimumrashed', 'ehtimum.r@gmail.com', '01922837421', 'Web Developer', 'Welcome to my profile. I am a passionate web developer, graphics designer and gamer.', 'ehtimum', 3, 'Y', 0, 0, '3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Active', NULL),
 ('Farjana', 'Rahman', 'farjanarah', 'farjana.rah@gmail.com', '01372637427', 'Front End Developer', 'Hello I am a front end developer and software tester.', 'farjana', 4, 'Y', 0, 0, '4.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline', NULL),
 ('Swdhin', 'Ghosh', 'sghosh', 'sadhin.g@gmail.com', '01637474723', 'Cyber Security Specialist', 'I am a cyber security specialist.', 'swadhin', 5, 'Y', 0, 0, '5.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline', NULL),
 ('Laboni', 'Jannat', 'ljannat', 'laboni22@gmail.com', '01453272742', 'Student', 'Welcome to my profile.', 'laboni', 6, 'Y', 0, 0, '6.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Offline', 'YES'),
@@ -492,9 +599,27 @@ ALTER TABLE `admin_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `admin_request`
+--
+ALTER TABLE `admin_request`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ban_user`
+--
+ALTER TABLE `ban_user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `flaglist`
+--
+ALTER TABLE `flaglist`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -522,6 +647,12 @@ ALTER TABLE `notice`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pending_promote`
+--
+ALTER TABLE `pending_promote`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pending_ver`
 --
 ALTER TABLE `pending_ver`
@@ -537,6 +668,12 @@ ALTER TABLE `posts`
 -- Indexes for table `tag_list`
 --
 ALTER TABLE `tag_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `token_list`
+--
+ALTER TABLE `token_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -565,10 +702,28 @@ ALTER TABLE `admin_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `admin_request`
+--
+ALTER TABLE `admin_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ban_user`
+--
+ALTER TABLE `ban_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `flaglist`
+--
+ALTER TABLE `flaglist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `friend_list`
@@ -595,6 +750,12 @@ ALTER TABLE `notice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `pending_promote`
+--
+ALTER TABLE `pending_promote`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `pending_ver`
 --
 ALTER TABLE `pending_ver`
@@ -613,6 +774,12 @@ ALTER TABLE `tag_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
+-- AUTO_INCREMENT for table `token_list`
+--
+ALTER TABLE `token_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -622,7 +789,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
