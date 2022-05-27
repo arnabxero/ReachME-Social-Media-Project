@@ -115,6 +115,9 @@ class admin_dash
             }
         }
     }
+
+    /////////////////////////////////////////
+    ////////////////// FFFFFF ///////////////
     function user_isin_flaglist($uid)
     {
         include('../include/connection.php');
@@ -231,6 +234,8 @@ class admin_dash
             }
         }
     }
+    /////////////////////////////////
+    /////////////////////////////////
     function create_verified_userlist($sz)
     {
         echo '<hr><div class="row" style="margin-left:30px; text-align:center;">
@@ -919,7 +924,7 @@ class admin_dash
                 <div class="col-sm-1">
                     <strong>Post ID</strong>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <strong>Author</strong>
                 </div>
                 <div class="col-sm-1">
@@ -931,7 +936,7 @@ class admin_dash
                 <div class="col-sm-2">
                     <strong>Time</strong>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <strong>Action</strong>
                 </div>
             </div><hr>';
@@ -994,7 +999,7 @@ class admin_dash
                                     <select style="color: black; background-color:#ffa1a1;" title="Selecting an option will automatically submit a promotion token for the post" onchange="location = this.value;" name="example_length" aria-controls="example" class="form-select form-select-sm arnab-dropdown">
                                         <option value="#">Select</option>
     
-                                        <option value="promote_post.php?pid=' . $row['id'] . '&time=2">2 Hours</option>
+                                        <option value="promote_post.php?pid=' . $row['id'] . '&time=testtime">1 Minute [Test]</option>
                                         <option value="promote_post.php?pid=' . $row['id'] . '&time=4">4 Hours</option>
                                         <option value="promote_post.php?pid=' . $row['id'] . '&time=6">6 Hours</option>
                                         <option value="promote_post.php?pid=' . $row['id'] . '&time=10">10 Hours</option>
@@ -1095,6 +1100,9 @@ class admin_dash
             }
         }
     }
+
+    ///////////////////////////////////
+    ///////// ffffffffffff ///////////////
     function check_restlist($user_id)
     {
         include('../include/connection.php');
@@ -1189,6 +1197,12 @@ class admin_dash
             }
         }
     }
+    //////////////////////////////
+    //////////////////////////
+
+
+    /////////////////////////////////
+    ///////// fffffffffff////////////////
     function create_admin_token_form($sz, $id, $uname)
     {
         echo '<form name="myform" method="POST" action="submit_admin_token.php" style="text-align:center;">
@@ -1363,6 +1377,8 @@ class admin_dash
             }
         }
     }
+    ////////////////////////
+    //////////////////////
 }
 
 

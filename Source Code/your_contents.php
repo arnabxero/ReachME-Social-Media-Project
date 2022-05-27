@@ -227,6 +227,7 @@ class post_card_creation
                     <li><a class="dropdown-item" href="' . $menulink . '&operation=cpriv">Change Privacy to ' . $cpriv . '</a></li>
                     <li><a class="dropdown-item" href="' . $menulink . '&operation=tag"><i class="fas fa-user-tag"></i> Tag Friends</a></li>
                     <li><a class="dropdown-item" href="' . $menulink . '&operation=del"><i class="fas fa-trash-alt"></i> Delete Post</a></li>
+                    <li><a class="dropdown-item" href="subdir/promote_submit.php?pid=' . $class_row['id'] . '"><i class="fas fa-bullhorn"></i> Submit for Promotion</a></li>
                 </ul>
             </div>';
             } else {
@@ -273,11 +274,11 @@ class post_card_creation
 
         </div>';
 
-        //////////////////////
+            //////////////////////
             if ($shared) {
                 echo '</div>';
             }
-        //////////////////////
+            //////////////////////
         }
     }
 }
