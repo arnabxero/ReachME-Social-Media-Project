@@ -1,2 +1,0 @@
-Bootstrap version - 5.1.3-dist
-Fontawesome version - 5.15.4-web-free
