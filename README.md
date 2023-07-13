@@ -36,14 +36,6 @@ This project is a web application that provides a comprehensive set of features 
 - Fontawesome 5: Icon and logo library.
 - Bootstrap 5: Mobile-first framework for responsive design.
 
-## Installation
-
-1. Clone the repository: `git clone https://github.com/username/repository.git`
-2. Set up a local development environment with a web server, PHP, and MySQL.
-3. Import the database schema from `database.sql`.
-4. Configure the database connection in `config.php`.
-5. Run the application on your local server.
-
 ## Usage
 
 1. Access the application through your web browser.
